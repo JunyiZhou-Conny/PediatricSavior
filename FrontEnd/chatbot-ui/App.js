@@ -43,6 +43,7 @@ const App = () => {
         <div className="sidebar">
           <SideButton value={'Pideatric Airway Management Assistant'} />
           <SideButton value={'Data Collection Assistant'} />
+          <SideButton value={'Log Out'} />
         </div>
         <div className="chat-container">
           <div className="chat-window" ref={chatWindowRef}>
