@@ -9,8 +9,11 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "jslint": "^0.12.1",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.2.0",
+    "dotenv": "^16.4.5",
     "openai": "^4.28.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
