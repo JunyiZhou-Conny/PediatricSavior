@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
-    // other attributes
+  affliation: String,
+  // other attribtues to be added
 });
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
