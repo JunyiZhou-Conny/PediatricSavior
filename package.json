@@ -1,25 +1,37 @@
 {
-  "name": "pediatricsavior",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "react.dev",
+  "version": "0.0.0",
+  "main": "/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JunyiZhou-Conny/PediatricSavior.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JunyiZhou-Conny/PediatricSavior/issues"
-  },
-  "homepage": "https://github.com/JunyiZhou-Conny/PediatricSavior#readme",
   "dependencies": {
     "express": "^4.18.2",
     "jslint": "^0.12.1",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.2.0"
-  }
+    "mongoose": "^8.2.0",
+    "dotenv": "^16.4.5",
+    "openai": "^4.28.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.0",
+    "web-vitals": "^3.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3001"
+
 }
