@@ -1,36 +1,19 @@
+// React immports
 import React, { useState } from 'react';
 import './styles.css';
-import ChatbotUi from './components/ChatbotUi';
-import DataCollectionPage from './components/DataCollectionPage';
+
+// Component imports
+import SideButton from './components/SideButton/SideButton';
+import DataCollectionPage from './components/DataCollectionPage/DataCollectionPage';
+import ChatbotUi from './components/ChatbotUi/ChatbotUi';
+
+// Authentication/LogIn imports
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from './components/LogIn/LogIn';
+import LogoutButton from './components/LogOut/LogOut';
 
 
 
-// Define a LoginButton component that calls the loginWithRedirect method when clicked
-const LoginButton = () => {
-  const { loginWithRedirect } = useAuth0();
-
-  return <button onClick={() => loginWithRedirect()}>Log In</button>;
-};
-
-//Define a LogoutButton component that calls the logout method when clicked
-const LogoutButton = () => {
-  const { logout } = useAuth0();
-
-  return (
-    <button onClick={() => logout({ returnTo: window.location.origin })}>
-      Log Out
-    </button>
-  );
-};
-
-function SideButton({ value, onClick }) {
-  return (
-    <button className='sideButton' onClick={onClick}>
-      {value}
-    </button>
-  );
-}
 
 
 
