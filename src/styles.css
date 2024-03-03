@@ -102,14 +102,3 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-
-.auth-buttons {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-/* You may want to add some space between the buttons */
-.auth-buttons button {
-  margin-left: 10px;
-}
