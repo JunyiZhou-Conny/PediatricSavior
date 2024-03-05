@@ -1,27 +1,37 @@
-import React, { useState  } from 'react';
+// React immports
+import React, { useState } from 'react';
 import './styles.css';
-import ChatbotUi from './components/ChatbotUi';
-import DataCollectionPage from './components/DataCollectionPage';
 
-function SideButton({ value , onClick}) {
-  return (
-    <button className='sideButton' onClick={onClick}>
-      {value}
-    </button>
-  );
-}
+// Component imports
+import SideButton from './components/SideButton/SideButton';
+import DataCollectionPage from './components/DataCollectionPage/DataCollectionPage';
+import ChatbotUi from './components/ChatbotUi/ChatbotUi';
+
+// Authentication/LogIn imports
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from './components/LogIn/LogIn';
+import LogoutButton from './components/LogOut/LogOut';
+
+
+
+
+
+
 
 const App = () => {
   const [activeInterface, setActiveInterface] = useState('ChatbotUi');
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Pideatric Airway Management Assistant</h2>
+        <h2>Pediatric Airway Management Assistant</h2>
+        <div style={{ marginLeft: 'auto' }}>
+          <LoginButton />
+        </div>
       </header>
       <div className="app-body">
         <div className="sidebar">
-          <SideButton value={'Airway Management Assistant'} onClick={() => setActiveInterface('ChatbotUi')}/>
-          <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')}/>
+          <SideButton value={'Airway Management Assistant'} onClick={() => setActiveInterface('ChatbotUi')} />
+          <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')} />
         </div>
         <div className="chat-container">
           {activeInterface === 'ChatbotUi' ? <ChatbotUi /> : <DataCollectionPage />}

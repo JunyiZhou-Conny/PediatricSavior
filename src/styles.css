@@ -32,12 +32,6 @@ body, html {
   background-color: #f0f0f0;
 }
 
-.sideButton{
-  padding: 20px;
-  margin: 5px;
-  background-color: #282c34;
-}
-
 .app-body {
   display: flex;
 }
