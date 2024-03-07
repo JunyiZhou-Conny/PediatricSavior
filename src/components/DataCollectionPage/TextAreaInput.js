@@ -1,7 +1,15 @@
-import React from 'react';
-import './DataCollectionPage.css'
+const TextAreaInput = ({ size, label, name, value, onChange }) => {
+  let className = 'case-input';
 
-const TextareaInput = ({ label, name, value, onChange }) => {
+  // Determine the class based on the size prop
+  if (size === 'small') {
+    className += ' small';
+  } else if (size === 'medium') {
+    className += ' medium';
+  } else if (size === 'large') {
+    className += ' large';
+  }
+
   return (
     <div className="form-group">
       <label>{label}</label>
@@ -9,11 +17,11 @@ const TextareaInput = ({ label, name, value, onChange }) => {
         name={name}
         value={value}
         onChange={onChange}
-        className="case-input"
+        className={className}
         rows="3"
       ></textarea>
     </div>
   );
 };
 
-export default TextareaInput;
+export default TextAreaInput;
