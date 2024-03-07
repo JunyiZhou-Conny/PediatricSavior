@@ -8,6 +8,7 @@ import DataCollectionPage from './components/DataCollectionPage/DataCollectionPa
 import ChatbotUi from './components/ChatbotUi/ChatbotUi';
 import LogAuthToken from './components/Auth/LogAuthToken/LogAuthToken';
 import { Puff } from 'react-loader-spinner';
+import './styles.css';
 
 const App = () => {
   const [activeInterface, setActiveInterface] = useState('ChatbotUi');
@@ -45,12 +46,14 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h2>Pediatric Airway Management Assistant</h2>
+        <div style={{ marginLeft: 'auto' }}>
           <LogoutButton />
+        </div>
       </header>
       <div className="app-body">
         <div className="sidebar">
           <SideButton value={'Airway Management Assistant'} onClick={() => setActiveInterface('ChatbotUi')} />
-          <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectionPage')} />
+          <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')} />
         </div>
         <div className="chat-container">
           {activeInterface === 'ChatbotUi' ? <ChatbotUi /> : <DataCollectionPage />}

@@ -16,12 +16,8 @@ body, html {
   background-color: #282c34;
   color: white;
   padding: 10px;
-  text-align: center;
+  text-align: center !important;
   font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* if you want to stack the items vertically */
 }
 
 /* Chat window styling */
@@ -41,9 +37,9 @@ body, html {
 }
 
 .sidebar {
-  width: 20%; /* Adjust based on your preference */
-  padding: 20px;
-  border-right: 1px solid #ccc; /* Adds a line between the sidebar and chat */
+  width: 20% !important; /* Adjust based on your preference */
+  padding: 20px !important;
+  border-right: 1px solid #ccc !important; /* Adds a line between the sidebar and chat */
 }
 
 .chat-container {
