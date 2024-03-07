@@ -217,8 +217,8 @@ const App = () => {
     } else if (!showPhase4) {
       setShowPhase4(true);
     } else {
-      console.log('Form Data:', formData);
-      
+      const formDataJSON = JSON.stringify(formData);
+      console.log('Form Data:', formDataJSON);
     }
   };
 
