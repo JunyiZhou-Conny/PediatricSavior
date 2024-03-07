@@ -1,27 +1,32 @@
-const TextAreaInput = ({ size, label, name, value, onChange }) => {
-  let className = 'case-input';
+import React from 'react';
 
-  // Determine the class based on the size prop
-  if (size === 'small') {
-    className += ' small';
-  } else if (size === 'medium') {
-    className += ' medium';
-  } else if (size === 'large') {
-    className += ' large';
-  }
+const TextareaInput = ({ size, label, name, value, onChange, className, placeholder }) => {
+  const getSizeClassName = () => {
+    switch (size) {
+      case 'small':
+        return 'small';
+      case 'medium':
+        return 'medium';
+      case 'large':
+        return 'large';
+      default:
+        return '';
+    }
+  };
 
   return (
-    <div className="form-group">
+    <div className={`form-group ${getSizeClassName()} ${className}`}>
       <label>{label}</label>
       <textarea
         name={name}
-        value={value}
+        value={value} // Use value prop for controlled input
         onChange={onChange}
-        className={className}
+        placeholder={placeholder}
+        className="case-input"
         rows="3"
       ></textarea>
     </div>
   );
 };
 
-export default TextAreaInput;
+export default TextareaInput;

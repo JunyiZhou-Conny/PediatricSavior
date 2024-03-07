@@ -1,103 +1,253 @@
 import React, { useState } from 'react';
-import FormInput from './FormAreaInput';
-import TextareaInput from './TextAreaInput';
-import './DataCollectionPage.css'
+
+import Phase1 from './phase1';
+import Phase2 from './phase2';
+import Phase3 from './phase3';
+import Phase4 from './phase4';
+import Profile from './profile'
+import './DataCollectionPage.css';
+
 
 const App = () => {
   const [formData, setFormData] = useState({
-    objective:'',
-    name: '',
-    age: '',
-    sex: '',
-    weight: '',
-    diagnosis: '',
-    scenerio: '',
-    medicalHistory: '',
-    scenarios: '',
+
+    ScenarioOutline:{
+      casePresentation: '',
+
+      objectives: {
+        objective1: '',
+        objective2: '',
+        objective3: '',
+        objective4: '',
+        objective5: '',
+        },
+
+      patientReport: {
+        basicInformation: {
+          name: '',
+          age: '',
+          sex: '',
+          weight: '',
+          diagnosis: '',
+        },
+
+        history: {
+          symptoms: '',
+          allergies: '',
+          medications: '',
+          pmh: '',
+          lastMeal: '',
+          events: '',
+        },
+
+        PMH:{
+          medicalConditions: '',
+          hospitalizations: '',
+          surgeries: '',
+          allergies: '',
+          medications: '',
+          socialHistory: '',
+          familyHistory: '',
+        },
+        initialExam: {
+          generalAppearance: '',
+          breathing: '',
+          circulation: '',
+          abdomen: '',
+          neuro: '',
+          disability: '',
+        },
+
+        labs:{
+          rvp: '',
+        }
+      }
+    },
+
+    phase1:{
+      initialState: '',
+      vitalSigns: {
+        hr: '',
+        rr: '',
+        temp: '',
+        nibp: '',
+        o2: '',
+        co2: '',
+        airway: '',
+        breathing: '',
+        circulation: '',
+        disability: '',
+      },
+
+      hardStop: {
+        ventilationEquipment: '',
+        ventilationTechnique: '',
+        airwayManagement: '',
+        maskPositioning: '',
+      },
+
+      softStop: {
+
+      }
+    },
+
+    phase2:{
+      
+      vitalSigns: {
+        hr: '',
+        rr: '',
+        temp: '',
+        nibp: '',
+        o2: '',
+        co2: '',
+
+        airway: '',
+        breathing: '',
+        circulation: '',
+        disability: '',
+      },
+
+      hardStop: {
+        ventilationEquipment: '',
+        ventilationTechnique: '',
+        airwayManagement: '',
+        maskPositioning: '',
+      },
+
+      softStop: {
+
+      }
+    },
+
+    phase3:{
+      
+      vitalSigns: {
+        hr: '',
+        rr: '',
+        temp: '',
+        nibp: '',
+        o2: '',
+        co2: '',
+
+        airway: '',
+        breathing: '',
+        circulation: '',
+        disability: '',
+      },
+
+      hardStop: {
+        ventilationEquipment: '',
+        ventilationTechnique: '',
+        airwayManagement: '',
+        maskPositioning: '',
+      },
+
+      softStop: {
+
+      }
+    },
+
+    phase4:{
+      
+      vitalSigns: {
+        hr: '',
+        rr: '',
+        temp: '',
+        nibp: '',
+        o2: '',
+        co2: '',
+
+        airway: '',
+        breathing: '',
+        circulation: '',
+        disability: '',
+      },
+
+      hardStop: {
+        ventilationEquipment: '',
+        ventilationTechnique: '',
+        airwayManagement: '',
+        maskPositioning: '',
+      },
+
+      softStop: {
+
+      }
+    }
+
   });
 
-  const [phaseData, setPhaseData] = useState({
-    hr:'',
-    rr: '',
-    temp: '',
-    nibp: '',
-    o2: '',
-    additional_info: '',
-    hard_stop: '',
-    soft_stop: '',
-  });
-
+  const [showPhase1, setShowPhase1] = useState(false);
   const [showPhase2, setShowPhase2] = useState(false);
+  const [showPhase3, setShowPhase3] = useState(false);
+  const [showPhase4, setShowPhase4] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+    const propertyNames = name.split('.');
+    let formDataCopy = { ...formData };
+    let currentObj = formDataCopy;
+    for (let i = 0; i < propertyNames.length; i++) {
+      const propertyName = propertyNames[i];
 
-  const handlePhaseChange = (e) => {
-    const { name, value } = e.target;
-    setPhaseData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+      if (i === propertyNames.length - 1) {
+        currentObj[propertyName] = value;
+      } else {
+        currentObj[propertyName] = currentObj[propertyName] || {};
+        currentObj = currentObj[propertyName];
+      }
+    }
+    setFormData(formDataCopy);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!showPhase2) {
+    if (!showPhase1) {
+      setShowPhase1(true);
+    } else if (!showPhase2) {
       setShowPhase2(true);
+    } else if (!showPhase3) {
+      setShowPhase3(true);
+      
+    } else if (!showPhase4) {
+      setShowPhase4(true);
     } else {
-      console.log('Form Data:', formData);
-      console.log('Phase Data:', phaseData);
-      // Here, you would typically send both formData and phaseData to your server
+      const formDataJSON = JSON.stringify(formData);
+      console.log('Form Data:', formDataJSON);
     }
   };
-  
-
-
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="scenerioContainer">
-        <TextareaInput label="Objectives- server" name="objective" value={formData.objective} onChange={handleChange} />
-      </form>
-      <form onSubmit={handleSubmit} className="profileContainer">
-        <FormInput label="Name" type="text" name="name" value={formData.name} onChange={handleChange} />
-        <FormInput label="Age" type="number" name="age" value={formData.age} onChange={handleChange} />
-        <FormInput label="Sex" type="text" name="sex" value={formData.sex} onChange={handleChange} />
-        <FormInput label="Weight" type="text" name="weight" value={formData.weight} onChange={handleChange} />
-        <FormInput label="Diagnosis" type="text" name="diagnosis" value={formData.diagnosis} onChange={handleChange} />
-      </form>
+    <Profile formData={formData} handleChange={handleChange} handleSubmit = {handleSubmit} />
 
-      <form onSubmit={handleSubmit} className="scenerioContainer">
-        <TextareaInput label="Scenerio Outline" name="scenerio" value={formData.scenerio} onChange={handleChange} />
-      </form>
-
-      {showPhase2 ? (
-        <>
-          <p>Phase 2</p>
-          <form onSubmit={handleSubmit} className="profileContainer">
-            <FormInput label="HR" type="number" name="hr" value={phaseData.hr} onChange={handlePhaseChange} />
-            <FormInput label="RR" type="number" name="rr" value={phaseData.rr} onChange={handlePhaseChange} />
-            <FormInput label="Temp" type="number" name="temp" value={phaseData.temp} onChange={handlePhaseChange} />
-            <FormInput label="NIBP" type="text" name="nibp" value={phaseData.nibp} onChange={handlePhaseChange} />
-            <FormInput label="O2" type="number" name="o2" value={phaseData.o2} onChange={handlePhaseChange} />
-          </form>
-          <form onSubmit={handleSubmit} className="scenerioContainer">
-            <TextareaInput label="Additional INFO" name="additional_info" value={phaseData.additional_info} onChange={handlePhaseChange} />
-            <TextareaInput label="Hard Stop" name="hard_stop" value={phaseData.hard_stop} onChange={handlePhaseChange} />
-            <TextareaInput label="Soft Stop" name="soft_stop" value={phaseData.soft_stop} onChange={handlePhaseChange} />
-          </form>
-        </>
+      {showPhase1 ? (
+        <Phase1 formData={formData} handleChange={handleChange} handleSubmit = {handleSubmit} />
       ) : null}
 
-  <button type="submit" className="btn btn-primary">{showPhase2 ? "Submit Phase 2" : "Submit"}</button>
+      {showPhase2 ? (
+        <Phase2 formData={formData} handleChange={handleChange} handleSubmit = {handleSubmit} />
+      ) : null}
+
+      {showPhase3 ? (
+        <Phase3 formData={formData} handleChange={handleChange} handleSubmit = {handleSubmit} />
+      ) : null}
+
+      {showPhase4 ? (
+        <Phase4 formData={formData} handleChange={handleChange} handleSubmit = {handleSubmit} />
+        
+      ) : null}
+
+      <div className="btn-container">
+        <button type="button" onClick={handleSubmit} className="btn btn-primary">
+          Submit 
+          {showPhase1 && !showPhase2 && !showPhase3 && !showPhase4 ? ' Phase 1' : null}
+          {showPhase2 && !showPhase3 && !showPhase4 ? ' Phase 2' : null}
+          {showPhase3 && !showPhase4 ? ' Phase 3' : null}
+          {showPhase4 ? ' Phase 4' : null}
+        </button>
+      </div>
     </div>
   );
 };
 
 export default App;
-
