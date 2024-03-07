@@ -16,16 +16,18 @@ const App = () => {
     scenarios: '',
   });
 
-  const [phaseData, setphaseData] = useState({
+  const [phaseData, setPhaseData] = useState({
     hr:'',
     rr: '',
     temp: '',
     nibp: '',
     o2: '',
-    addional_info: '',
+    additional_info: '',
     hard_stop: '',
     soft_stop: '',
   });
+
+  const [showPhase2, setShowPhase2] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +39,7 @@ const App = () => {
 
   const handlePhaseChange = (e) => {
     const { name, value } = e.target;
-    setphaseData(prevState => ({
+    setPhaseData(prevState => ({
       ...prevState,
       [name]: value
     }));
@@ -45,14 +47,22 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    // Here, you would typically send the formData to your server
+    if (!showPhase2) {
+      setShowPhase2(true);
+    } else {
+      console.log('Form Data:', formData);
+      console.log('Phase Data:', phaseData);
+      // Here, you would typically send both formData and phaseData to your server
+    }
   };
+  
+
+
 
   return (
     <div>
       <form onSubmit={handleSubmit} className="scenerioContainer">
-        <TextareaInput label="Objectives" name="objective" value={formData.objectice} onChange={handleChange} />
+        <TextareaInput label="Objectives- server" name="objective" value={formData.objective} onChange={handleChange} />
       </form>
       <form onSubmit={handleSubmit} className="profileContainer">
         <FormInput label="Name" type="text" name="name" value={formData.name} onChange={handleChange} />
@@ -63,24 +73,31 @@ const App = () => {
       </form>
 
       <form onSubmit={handleSubmit} className="scenerioContainer">
-      <TextareaInput label="Scenerio Outline" name="scenerio" value={formData.scenerio} onChange={handleChange} />
+        <TextareaInput label="Scenerio Outline" name="scenerio" value={formData.scenerio} onChange={handleChange} />
       </form>
-      <p>Phase 1</p>
-      <form onSubmit={handleSubmit} className="profileContainer">
-        <FormInput label="HR" type="number" name="hr" value={phaseData.hr} onChange={handlePhaseChange} />
-        <FormInput label="RR" type="number" name="rr" value={phaseData.rr} onChange={handlePhaseChange} />
-        <FormInput label="Temp" type="number" name="temp" value={phaseData.temp} onChange={handlePhaseChange} />
-        <FormInput label="NIBP" type="text" name="nibp" value={phaseData.nibp} onChange={handlePhaseChange} />
-        <FormInput label="O2" type="number" name="o2" value={phaseData.o2} onChange={handlePhaseChange} />
-      </form>
-      <form onSubmit={handleSubmit} className="scenerioContainer">
-          <TextareaInput label="Addional INFO" name="addional_info" value={phaseData.addional_info} onChange={handlePhaseChange} />
-          <TextareaInput label="Hard Stop" name="hard_stop" value={phaseData.hard_stop} onChange={handlePhaseChange} />
-          <TextareaInput label="Soft Stop" name="soft_stop" value={phaseData.soft_stop} onChange={handlePhaseChange} />
-      </form>
-      <button type="submit" className="btn btn-primary">Submit</button>
+
+      {showPhase2 ? (
+        <>
+          <p>Phase 2</p>
+          <form onSubmit={handleSubmit} className="profileContainer">
+            <FormInput label="HR" type="number" name="hr" value={phaseData.hr} onChange={handlePhaseChange} />
+            <FormInput label="RR" type="number" name="rr" value={phaseData.rr} onChange={handlePhaseChange} />
+            <FormInput label="Temp" type="number" name="temp" value={phaseData.temp} onChange={handlePhaseChange} />
+            <FormInput label="NIBP" type="text" name="nibp" value={phaseData.nibp} onChange={handlePhaseChange} />
+            <FormInput label="O2" type="number" name="o2" value={phaseData.o2} onChange={handlePhaseChange} />
+          </form>
+          <form onSubmit={handleSubmit} className="scenerioContainer">
+            <TextareaInput label="Additional INFO" name="additional_info" value={phaseData.additional_info} onChange={handlePhaseChange} />
+            <TextareaInput label="Hard Stop" name="hard_stop" value={phaseData.hard_stop} onChange={handlePhaseChange} />
+            <TextareaInput label="Soft Stop" name="soft_stop" value={phaseData.soft_stop} onChange={handlePhaseChange} />
+          </form>
+        </>
+      ) : null}
+
+  <button type="submit" className="btn btn-primary">{showPhase2 ? "Submit Phase 2" : "Submit"}</button>
     </div>
   );
 };
 
 export default App;
+
