@@ -7,6 +7,7 @@ import SideButton from './components/SideButton/SideButton';
 import DataCollectionPage from './components/DataCollectionPage/DataCollectionPage';
 import ChatbotUi from './components/ChatbotUi/ChatbotUi';
 import LogAuthToken from './components/Auth/LogAuthToken/LogAuthToken';
+import Profile from './components/Auth/Profile/Profile';
 import { Puff } from 'react-loader-spinner';
 import './styles.css';
 
@@ -46,6 +47,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h2>Pediatric Airway Management Assistant</h2>
+        <Profile />
         <div style={{ marginLeft: 'auto' }}>
           <LogoutButton />
         </div>
