@@ -39,6 +39,7 @@ body, html {
 .sidebar {
   width: 20%; /* Adjust based on your preference */
   padding: 20px;
+  background-color: white;
   border-right: 1px solid #ccc; /* Adds a line between the sidebar and chat */
 }
 
