@@ -32,22 +32,23 @@ const App = () => {
         },
 
         history: {
-          symptoms: '',
-          allergies: '',
-          medications: '',
-          pmh: '',
-          lastMeal: '',
-          events: '',
+          symptoms: 'None',
+          allergies: 'None',
+          medications: 'None',
+          pmh: 'None',
+          lastMeal: 'None',
+          events: 'None',
         },
 
         PMH:{
-          medicalConditions: '',
-          hospitalizations: '',
-          surgeries: '',
-          allergies: '',
-          medications: '',
-          socialHistory: '',
-          familyHistory: '',
+          medicalConditions: 'None',
+          hospitalizations: 'None',
+          surgeries: 'None',
+          allergies: 'None',
+          medications: 'None',
+          socialHistory: 'None',
+          vaccinations: 'None',
+          familyHistory: 'None',
         },
         initialExam: {
           generalAppearance: '',
@@ -202,11 +203,27 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!showPhase1) {
+      if(formData.ScenarioOutline.casePresentation.trim() === '' || 
+      (formData.ScenarioOutline.objectives.objective1.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective2.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective3.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective4.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective5.trim() === '') ||
+      formData.ScenarioOutline.patientReport.basicInformation.name.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.age.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.sex.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.weight.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.diagnosis.trim() === '')
+      {
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any required field is empty
+      }
       
       setShowPhase1(true);
 
     } else if (!showPhase2) {
       if (
+        (formData.phase1.initialState.trim() === '') ||
         (formData.phase1.vitalSigns.hr.trim() === '') ||
         (formData.phase1.vitalSigns.rr.trim() === '') ||
         (formData.phase1.vitalSigns.temp.trim() === '') ||

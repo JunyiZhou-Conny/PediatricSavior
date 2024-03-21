@@ -22,18 +22,19 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: var(--font-family);
+  overflow-x: hidden;
 }
 
 .scenarioContainer, .objectivesContainer {
   background-color: var(--primary-color);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  margin-left: 50px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding: 10px;
-  max-width: 1000px;
-  overflow-y: auto; /* For scenario and objectives containers */
+  margin: 2%; /* Responsive margin */
+  padding: 1%; /* Responsive padding */
+  
+  width: 58.5%; /* Responsive width */
+  max-width: 100%; /* Ensures it doesn't exceed the viewport width */
+  overflow-y: auto;
 }
 
 
@@ -47,18 +48,19 @@ body, html {
   margin-left: 475px;
 }
 
+
+
+
 .profileContainer {
-  display: grid; /* Use Grid */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Create as many columns as can fit, with a min-width of 200px */
-  gap: 20px; /* Space between grid items */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
   background-color: var(--primary-color);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  margin-left: 50px;
-  margin-top: 20px;
-  
-  padding: 5px;
-  max-width: 1010px;
+  margin: 2%;
+  padding: .5%;
+  max-width: 60%;
 }
 
 .profileBlock {
@@ -99,14 +101,33 @@ body, html {
   color: var(--primary-color); /* Assuming this is intentional for contrast */
 }
 
+.form-group.small label {
+  text-align: left; /* Aligns the text inside the label to the left */
+  margin-left: 10px;
+  width: 100%; /* Ensures the label takes up the full width of its container */
+  margin-bottom: 5px; /* Provides spacing between the label and the textarea */
+}
+
 /* Layout adjustments */
-.btn-container, .horizontal-input-container {
-  text-align: center; /* Centering button container, could be applied elsewhere if needed */
-  margin-top: 20px;
+.btn-container{
+   /* Centering button container, could be applied elsewhere if needed */
+  margin-top: 5px;
   margin-bottom: 15px;
+  margin-left: 100px;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+  
+}
+
+.horizontal-input-container {
+  /* Centering button container, could be applied elsewhere if needed */
+ margin-top: 5px;
+ margin-bottom: -10px;
+ 
+ margin-left: 15px;
+ display: flex;
+ flex-wrap: wrap;
+ 
 }
 
 .horizontal-input-container > * {
@@ -123,9 +144,10 @@ body, html {
   border-radius: 4px;
 }
 
-.textarea-container {
+.textarea-container, .form-group {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   margin-bottom: 20px; /* Adjust spacing between each TextareaInput */
 }
 
@@ -139,17 +161,18 @@ body, html {
 .textAreaInput.small textarea {
   font-size: large;
   width: 105px;
-  height: 25px;
+  max-height: 25px !important;
 }
 
 .textAreaInput.medium textarea {
   width: 165px;
-  height: 100px;
+  min-height: 100px !important;
+  margin-right: 20px;
 }
 
 .textAreaInput.large textarea {
   width: 350px;
-  height: 160px;
+  min-height: 160px !important;
 }
 
 /* Additional styles for specific input sizes */

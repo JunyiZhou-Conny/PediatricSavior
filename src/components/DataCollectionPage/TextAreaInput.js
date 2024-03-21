@@ -1,4 +1,5 @@
 import React from 'react';
+import "./DataCollectionPage.css"
 
 const TextareaInput = ({ size, label, name, value, onChange, className, placeholder }) => {
   const getSizeClassName = () => {
@@ -19,7 +20,7 @@ const TextareaInput = ({ size, label, name, value, onChange, className, placehol
       <label>{label}</label>
       <textarea
         name={name}
-        value={value} // Use value prop for controlled input
+        value={value}
         onChange={onChange}
         placeholder={placeholder}
         className="case-input"

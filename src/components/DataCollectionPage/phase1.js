@@ -13,7 +13,7 @@ const Phase1 = ({ formData, handleChange, handleSubmit }) => {
 
             
       <TextareaInput
-        label="Initial State"
+        label="Initial State*"
         size = "large"
         className = "textAreaInput large"
         name="phase1.initialState"
