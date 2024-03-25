@@ -1,4 +1,3 @@
-/* General styling */
 body, html {
   height: 100%;
   margin: 0;
@@ -11,16 +10,14 @@ body, html {
   height: 100%;
 }
 
-/* Header styling */
 .App-header {
   background-color: #282c34;
   color: white;
   padding: 10px;
-  text-align: center !important;
+  text-align: center;
   font-size: 12px;
 }
 
-/* Chat window styling */
 .chat-window {
   flex-grow: 1;
   padding: 20px;
@@ -37,9 +34,10 @@ body, html {
 }
 
 .sidebar {
-  width: 20% !important; /* Adjust based on your preference */
-  padding: 20px !important;
-  border-right: 1px solid #ccc !important; /* Adds a line between the sidebar and chat */
+  width: 20%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  background-color: #f9f9f9;
 }
 
 .chat-container {
@@ -47,7 +45,6 @@ body, html {
   display: flex;
   flex-direction: column;
 }
-
 
 .message {
   padding: 10px;
@@ -68,7 +65,6 @@ body, html {
   color: black;
 }
 
-/* Form styling */
 form {
   display: flex;
   padding: 10px;
@@ -95,4 +91,52 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.user-info, .general-info {
+  font-size: 20px;
+  color: white;
+  background-color: black;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sidebar button, .logout-button {
+  width: 100%;
+  text-align: center;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.sidebar button:hover, .logout-button:hover {
+  background-color: #0056b3;
+}
+
+.sidebar button, .logout-button, .user-info, .general-info {
+  border-radius: 0;
+}
+
+.sidebar button, .logout-button {
+  text-align: left;
+  background-color: #f0f0f0;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar button:hover, .logout-button:hover {
+  background-color: #e0e0e0;
+}
+
+.user-info, .general-info {
+  background-color: #e7e7e7;
+  color: #333;
+  border-bottom: 1px solid #ccc;
 }
