@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+:root {
+  --font-size: 30px;
+  --font-family: 'Nunito', sans-serif;
+  --padding-vertical: 10px;
+  --padding-horizontal: 20px;
+  --margin-bottom: 10px;
+  --border-radius: 20px;
+  overflow-y: none;
+
+
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
 body, html {
   height: 100%;
   margin: 0;
@@ -13,9 +29,18 @@ body, html {
 .App-header {
   background-color: #282c34;
   color: white;
-  padding: 10px;
-  text-align: center;
+  padding-right: 20px;
+  padding-left: 10px;
+  
+  
+  display: flex; /* Enables Flexbox layout within this container */
+  align-items: center; /* Vertically centers the items in the container */
+  justify-content: space-between; /* Places space between the child elements, pushing them to opposite ends */
   font-size: 12px;
+}
+
+.App-header h2 {
+  margin-left: 500px;
 }
 
 .chat-window {
@@ -34,10 +59,10 @@ body, html {
 }
 
 .sidebar {
-  width: 20%;
+  width: 15%;
   padding: 20px;
   border-right: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background-color: #388f80;
 }
 
 .chat-container {
@@ -48,7 +73,7 @@ body, html {
 
 .message {
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   max-width: 60%;
   word-wrap: break-word;
 }
@@ -68,7 +93,7 @@ body, html {
 form {
   display: flex;
   padding: 10px;
-  background-color: #fff;
+  background-color: #ffffff;
   box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
@@ -82,7 +107,7 @@ input {
 
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #e97eb0;
   color: white;
   border: none;
   border-radius: 20px;
@@ -94,49 +119,51 @@ button:hover {
 }
 
 .user-info, .general-info {
-  font-size: 20px;
-  color: white;
-  background-color: black;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  border-radius: 20px;
+  font-size: var(--font-size);
+  font-family: 'Nunito', sans-serif;
+  background-color: #388f80;
+  padding: var(--padding-vertical) var(--padding-horizontal);
+  margin-bottom: var(--margin-bottom);
+  border-radius: 15px;
   text-align: center;
   font-weight: bold;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
 }
 
+
 .sidebar button, .logout-button {
+  font-size: 20px;
   width: 100%;
   text-align: center;
-  background-color: black;
+  background-color: rgb(141, 63, 117);
   color: white;
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
   margin-bottom: 10px;
   cursor: pointer;
+  margin-bottom: 100px;
 }
 
 .sidebar button:hover, .logout-button:hover {
   background-color: #0056b3;
 }
 
-.sidebar button, .logout-button, .user-info, .general-info {
-  border-radius: 0;
-}
 
-.sidebar button, .logout-button {
-  text-align: left;
-  background-color: #f0f0f0;
-  color: #333;
-  border-bottom: 1px solid #ccc;
-}
+
+
 
 .sidebar button:hover, .logout-button:hover {
   background-color: #e0e0e0;
 }
 
-.user-info, .general-info {
-  background-color: #e7e7e7;
-  color: #333;
-  border-bottom: 1px solid #ccc;
+.title{
+  color: white;
+  font-size: 25px;
+  margin-left: 50px;
 }
+

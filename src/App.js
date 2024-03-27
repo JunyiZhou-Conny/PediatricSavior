@@ -6,17 +6,24 @@ import SideButton from './components/SideButton/SideButton';
 import DataCollectionPage from './components/DataCollectionPage/DataCollectionPage';
 import ChatbotUi from './components/ChatbotUi/ChatbotUi';
 import { Puff } from 'react-loader-spinner';
+import Profile from './components/Auth/Profile/Profile';
+import ProfileWindow from './components/Auth/Profile/ProfileWindow';
 import './styles.css';
 
 const App = () => {
   const [activeInterface, setActiveInterface] = useState('ChatbotUi');
   const { isAuthenticated, user, isLoading, loginWithRedirect } = useAuth0();
   const [isUserAdmin, setIsUserAdmin] = useState(false);
+  const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
 
   useEffect(() => {
     const roles = user?.['https://your_domain/roles'] || [];
     setIsUserAdmin(roles.includes('admin'));
   }, [user]);
+
+  const toggleProfileModal = () => {
+    setIsProfileModalVisible(!isProfileModalVisible);
+  };
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
@@ -43,8 +50,15 @@ const App = () => {
   return isAuthenticated ? (
     <div className="App">
       <header className="App-header">
-        <h2>Pediatric Airway Management Assistant</h2>
+        <h2 className="title">Pediatric Airway Management Assistant</h2>
+        {/* Profile Picture acting as button */}
+        <img src={user.picture} alt="User" className="profile-avatar" onClick={toggleProfileModal} />
       </header>
+      {isProfileModalVisible && (
+        
+        <ProfileWindow user={user} isUserAdmin={isUserAdmin}/>
+        
+      )}
       <div className="app-body">
         <div className="sidebar">
           <div className="user-info">{isUserAdmin ? 'ADMIN' : 'RESIDENT'}</div>
@@ -53,7 +67,9 @@ const App = () => {
             <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')} />
           )}
           <div className="general-info">GENERAL</div>
+          
           <LogoutButton />
+          
         </div>
         <div className="chat-container">
           {activeInterface === 'ChatbotUi' ? <ChatbotUi /> : isUserAdmin ? <DataCollectionPage /> : null}
