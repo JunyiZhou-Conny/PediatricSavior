@@ -7,11 +7,13 @@ const Phase1 = ({ formData, handleChange, handleSubmit }) => {
   return (
     
       <div className="phase-container">
-          <p>Phase 1</p>
+          <p className = "phase-label">Phase 1</p>
 
           <form onSubmit={handleSubmit} className="scenarioContainer">
+
+            
       <TextareaInput
-        label="Initial State"
+        label="Initial State*"
         size = "large"
         className = "textAreaInput large"
         name="phase1.initialState"
@@ -23,46 +25,49 @@ const Phase1 = ({ formData, handleChange, handleSubmit }) => {
 
           <form onSubmit={handleSubmit} className="profileContainer">
           <div className="horizontal-input-container">
+
+
+            
+        
         <TextareaInput
-          label="HR"
-          type="number"
-          name="phase1.hr"
+          label="HR*"
+          name="phase1.vitalSigns.hr"
           value={formData.phase1.vitalSigns.hr}
           onChange={handleChange}
           size="small"
           className="textAreaInput small"
         />
         <TextareaInput
-          label="RR"
+          label="RR*"
           type="number"
-          name="phase1.rr"
+          name="phase1.vitalSigns.rr"
           value={formData.phase1.vitalSigns.rr}
           onChange={handleChange}
           size="small"
           className="textAreaInput small"
         />
         <TextareaInput
-          label="Temp"
+          label="Temp*"
           type="number"
-          name="phase1.temp"
+          name="phase1.vitalSigns.temp"
           value={formData.phase1.vitalSigns.temp}
           onChange={handleChange}
           size="small"
           className="textAreaInput small"
         />
         <TextareaInput
-          label="NIBP"
+          label="NIBP*"
           type="text"
-          name="phase1.nibp"
+          name="phase1.vitalSigns.nibp"
           value={formData.phase1.vitalSigns.nibp}
           onChange={handleChange}
           size="small"
           className="textAreaInput small"
         />
         <TextareaInput
-          label="O2"
+          label="O2*"
           type="number"
-          name="phase1.o2"
+          name="phase1.vitalSigns.o2"
           value={formData.phase1.vitalSigns.o2}
           onChange={handleChange}
           size="small"
@@ -71,53 +76,55 @@ const Phase1 = ({ formData, handleChange, handleSubmit }) => {
         <TextareaInput
           label="CO2"
           type="number"
-          name="phase1.co2"
+          name="phase1.vitalSigns.co2"
           value={formData.phase1.vitalSigns.co2}
           onChange={handleChange}
           className="textAreaInput small"
         />
       </div>
     </form>
+    <p className = "Hardstop-label">Hard Stops*</p>
     <form onSubmit={handleSubmit} className="objectivesContainer">
-  <TextareaInput
-    size="medium"
-    label="Ventilation Equipment"
-    name="ScenarioOutline.hardStops.ventilationEquipment"
-    value={formData.phase1.hardStop.ventilationEquipment}
-    onChange={handleChange}
-    className="textAreaInput medium"
-    placeholder = "Enter HardStops"
-  />
+    <TextareaInput
+size="medium"
+label="Ventilation Equipment"
+name="phase1.hardStop.ventilationEquipment"
+value={formData.phase1.hardStop.ventilationEquipment}
+onChange={handleChange}
+placeholder = "Enter HardStops"
+className="textAreaInput medium"
+/>
 
-  <TextareaInput
-    size="medium"
-    label="Ventilation Technique"
-    name="ScenarioOutline.hardStops.ventilationTechnique"
-    value={formData.phase1.hardStop.ventilationTechnique}
-    onChange={handleChange}
-    className="textAreaInput medium"
-    placeholder = "Enter HardStops"
-  />
+<TextareaInput
+size="medium"
+label="Ventilation Technique"
+name="phase1.hardStop.ventilationTechnique"
+value={formData.phase1.hardStop.ventilationTechnique}
+onChange={handleChange}
+className="textAreaInput medium"
+placeholder = "Enter HardStops"
+/>
 
-  <TextareaInput
-    size="medium"
-    label="Airway Management"
-    name="ScenarioOutline.hardStops.airwayManagement"
-    value={formData.phase1.hardStop.airwayManagement}
-    onChange={handleChange}
-    className="textAreaInput medium"
-    placeholder = "Enter HardStops"
-  />
+<TextareaInput
+size="medium"
+label="Airway Management"
+name="phase1.hardStop.airwayManagement"
+value={formData.phase1.hardStop.airwayManagement}
+onChange={handleChange}
+className="textAreaInput medium"
+placeholder = "Enter HardStops"
+/>
 
-  <TextareaInput
-    size="medium"
-    label="Mask Positioning"
-    name="ScenarioOutline.hardStops.maskPositioning"
-    value={formData.phase1.hardStop.maskPositioning}
-    onChange={handleChange}
-    className="textAreaInput medium"
-    placeholder = "Enter HardStops"
-  />
+<TextareaInput
+size="medium"
+label="Mask Positioning"
+name="phase1.hardStop.maskPositioning"
+value={formData.phase1.hardStop.maskPositioning}
+onChange={handleChange}
+className="textAreaInput medium"
+placeholder = "Enter HardStops"
+/>
+
 </form>
      
         

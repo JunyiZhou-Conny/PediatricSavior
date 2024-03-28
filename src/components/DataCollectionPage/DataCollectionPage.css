@@ -1,254 +1,190 @@
-/* General resets */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.data-container{
+  background-color: #355997;
+}
+
+
+
+:root {
+  --font-family: 'Nunito', sans-serif;
+  --primary-color: rgb(196, 194, 205); /* Bright yellow */
+  --text-color: #333; /* Dark grey */
+  --background-color: #e5d7d7; /* Light pink, unused due to override */
+  --btn-hover-color: #0056b3; /* Dark blue */
+  --btn-primary-color: #355997; /* Bright blue */
+  --border-radius: 10px;
+  --border: 1px solid #ccc;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 body, html {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
+  overflow-x: hidden;
 }
 
-.profile {
-  size: 10px;
-}
-
-.btn-container {
-  text-align: center; /* Center the button */
-  margin-top: 20px; /* Add margin to separate the button from the forms */
-}
-
-
-/* Container styling */
-.profileContainer {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 20px;
-  margin-left: 50px;
-  max-width: 1000px;
-  padding: 20px;
-  background-color: #e5d7d7;
+.scenarioContainer, .objectivesContainer {
+  background-color: var(--primary-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  resize: none;
+  box-shadow: var(--box-shadow);
+  margin: 2%; /* Responsive margin */
+  padding: 1%; /* Responsive padding */
+  
+  width: 58.5%; /* Responsive width */
+  max-width: 100%; /* Ensures it doesn't exceed the viewport width */
+  overflow-y: auto;
 }
 
-.same-shape-input {
-  width: 100px; /* Adjust width as needed */
-  height: 40px; /* Adjust height as needed */
-  /* Add any other desired styles */
+
+
+/* Button and input styling unified */
+.btn-primary, input[type="text"], input[type="number"], textarea, .medium-input, .small-input, .large-input {
+  padding: 10px;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  resize: none; /* Applicable to textarea and inputs if needed */
+  margin-left: 475px;
 }
 
-/* Form group styling */
-.objectivesForm {
+
+
+
+.profileContainer {
   display: grid;
-  width: 100px;
-  height: 60px;
-  margin-left: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  margin: 2%;
+  padding: .5%;
+  max-width: 60%;
 }
 
-.profile-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+.profileBlock {
+  padding: 10px; /* Inner spacing for content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: if you want individual blocks to stand out */
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Button styling */
 .btn-primary {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: var(--btn-primary-color);
   cursor: pointer;
   font-size: 16px;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-/* Utility classes */
-.hidden {
-  display: none;
-}
-
-.profile-input {
-  width: 50%; /* Responsive width */
-  height: 40px; /* Fixed height */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none;
-}
-
-.textarea-input {
-  margin-bottom: 10px;
-}
-
-.textarea-input label {
-  display: block;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
-/* Define styles for different sizes of text areas */
-.textAreaInput.small textarea {
-  font-size: large; /* Adjust the font size as needed */
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  width: 100px;
-  height: 25px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: none;
+.btn-primary:hover {
+  background-color: var(--btn-hover-color);
 }
 
-.textAreaInput.medium textarea {
-  width: 165px;
-  height: 100px;
+.phase-label, .Hardstop-label {
+  display: block;
+  color: var(--text-color);
+  font-weight: bold;
+  margin-left: 50px;
+  margin-bottom: 5px;
 }
 
-.textAreaInput.large textarea {
-  width: 400px;
-  height: 150px;
+
+
+.phase-label {
+  font-size: 30px;
+  color: white; /* Assuming white is intentional for phase labels */
+  margin-top: 50px; /* Adjusted to be consistent */
 }
 
-/* Default textarea */
-.textarea-input textarea {
-  width: 100%;
-  height: 100px; /* Default height */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+.Hardstop-label {
+  font-size: 15px;
+  color: var(--primary-color); /* Assuming this is intentional for contrast */
 }
 
-.case-input {
-  width: 90%; /* Adjust as needed */
-  height: 150px; /* Fixed height */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none; /* Disables resizing */
-  margin-left: 5px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  flex: 1; /* If using flexbox in the container */
+.form-group.small label {
+  text-align: left; /* Aligns the text inside the label to the left */
+  margin-left: 10px;
+  width: 100%; /* Ensures the label takes up the full width of its container */
+  margin-bottom: 5px; /* Provides spacing between the label and the textarea */
+}
+
+/* Layout adjustments */
+.btn-container{
+   /* Centering button container, could be applied elsewhere if needed */
+  margin-top: 5px;
+  margin-bottom: 15px;
+  margin-left: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  
 }
 
 .horizontal-input-container {
-  display: flex;
-  flex-wrap: wrap;
+  /* Centering button container, could be applied elsewhere if needed */
+ margin-top: 5px;
+ margin-bottom: -10px;
+ 
+ margin-left: 15px;
+ display: flex;
+ flex-wrap: wrap;
+ 
 }
 
 .horizontal-input-container > * {
   flex: 1;
   margin-right: 10px; /* Adjust margin as needed */
+  width: calc(16.666% - 10px); /* Adjust width as needed for fixed-width inputs */
 }
 
-/* Optional: Add this CSS if you want fixed widths for the inputs */
-.horizontal-input-container > * {
-  width: calc(16.666% - 10px); /* Adjust width as needed */
+.textarea {
+  /* Additional styles for your textarea */
+  width: 100%; /* Make textarea fill container */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.scenarioContainer {
-  max-width: 1000px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-left: 50px;
-  padding: 20px;
-  background-color: #e5d7d7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+.textarea-container, .form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px; /* Adjust spacing between each TextareaInput */
+}
+
+.textAreaInput.small textarea, .textAreaInput.medium textarea, .textAreaInput.large textarea {
+  border: var(--border);
+  border-radius: var(--border-radius);
   resize: none;
-}
-
-.objectivesContainer {
-  max-width: 1000px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  margin-left: 50px;
-  padding: 20px;
-  background-color: #e5d7d7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  resize: none;
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: space-between; 
   
 }
 
-.phase-container {
-  margin-top: 20px;
+.textAreaInput.small textarea {
+  font-size: large;
+  width: 105px;
+  max-height: 25px !important;
 }
 
-.horizontal-input-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+.textAreaInput.medium textarea {
+  width: 165px;
+  min-height: 100px !important;
+  margin-right: 20px;
 }
 
-.horizontal-input-container > * {
-  flex: 1;
-  margin-right: 10px;
+.textAreaInput.large textarea {
+  width: 350px;
+  min-height: 160px !important;
 }
 
-.textarea-container textarea {
-  width: 100%;
+/* Additional styles for specific input sizes */
+.medium-input, .small-input, .large-input {
+  width: 100px; /* Standardizing width for simplicity, adjust as necessary */
+  height: 30px;
+}
+
+/* Miscellaneous adjustments */
+.case-input {
+  width: 90%;
   height: 150px;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.textarea-container label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.medium-input {
-  width: 60px; /* Adjust width for medium input */
-  height: 30px; /* Adjust height for medium input */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none;
-}
-
-.small-input {
-  width: 100px; /* Adjust width for medium input */
-  height: 30px; /* Adjust height for medium input */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none;
-}
-
-.large-input {
-  width: 100px; /* Adjust width for medium input */
-  height: 30px; /* Adjust height for medium input */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none;
+  margin: 10px 5px;
+  flex: 1;
 }

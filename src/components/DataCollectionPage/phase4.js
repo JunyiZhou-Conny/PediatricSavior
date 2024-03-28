@@ -5,50 +5,50 @@ import TextareaInput from './TextAreaInput';
 
 const Phase4 = ({ formData, handleChange, handleSubmit }) => {
   return (
-    <div className="phase4-container">
-          <p>Phase 4</p>
+    <div className="phase-container">
+          <p className = "phase-label">Phase 4</p>
           <form onSubmit={handleSubmit} className="profileContainer">
         <div className="horizontal-input-container">
       <TextareaInput
-        label="HR"
+        label="HR*"
         type="number"
-        name="phase4.hr"
+        name="phase4.vitalSigns.hr"
         value={formData.phase4.vitalSigns.hr}
         onChange={handleChange}
         size="small"
         className="textAreaInput small"
       />
       <TextareaInput
-        label="RR"
+        label="RR*"
         type="number"
-        name="phase4.rr"
+        name="phase4.vitalSigns.rr"
         value={formData.phase4.vitalSigns.rr}
         onChange={handleChange}
         size="small"
         className="textAreaInput small"
       />
       <TextareaInput
-        label="Temp"
+        label="Temp*"
         type="number"
-        name="phase4.temp"
+        name="phase4.vitalSigns.temp"
         value={formData.phase4.vitalSigns.temp}
         onChange={handleChange}
         size="small"
         className="textAreaInput small"
       />
       <TextareaInput
-        label="NIBP"
+        label="NIBP*"
         type="text"
-        name="phase4.nibp"
+        name="phase4.vitalSigns.nibp"
         value={formData.phase4.vitalSigns.nibp}
         onChange={handleChange}
         size="small"
         className="textAreaInput small"
       />
       <TextareaInput
-        label="O2"
+        label="O2*"
         type="number"
-        name="phase4.o2"
+        name="phase4.vitalSigns.o2"
         value={formData.phase4.vitalSigns.o2}
         onChange={handleChange}
         size="small"
@@ -57,14 +57,16 @@ const Phase4 = ({ formData, handleChange, handleSubmit }) => {
       <TextareaInput
         label="CO2"
         type="number"
-        name="phase4.co2"
+        name="phase4.vitalSigns.co2"
         value={formData.phase4.vitalSigns.co2}
         onChange={handleChange}
         className="textAreaInput small"
       />
     </div>
   </form>
+  <p className = "Hardstop-label">Hard Stops*</p>
   <form onSubmit={handleSubmit} className="objectivesContainer">
+    
 <TextareaInput
   size="medium"
   label="Ventilation Equipment"

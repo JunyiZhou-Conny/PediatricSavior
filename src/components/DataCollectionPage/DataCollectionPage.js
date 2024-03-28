@@ -32,22 +32,23 @@ const App = () => {
         },
 
         history: {
-          symptoms: '',
-          allergies: '',
-          medications: '',
-          pmh: '',
-          lastMeal: '',
-          events: '',
+          symptoms: 'None',
+          allergies: 'None',
+          medications: 'None',
+          pmh: 'None',
+          lastMeal: 'None',
+          events: 'None',
         },
 
         PMH:{
-          medicalConditions: '',
-          hospitalizations: '',
-          surgeries: '',
-          allergies: '',
-          medications: '',
-          socialHistory: '',
-          familyHistory: '',
+          medicalConditions: 'None',
+          hospitalizations: 'None',
+          surgeries: 'None',
+          allergies: 'None',
+          medications: 'None',
+          socialHistory: 'None',
+          vaccinations: 'None',
+          familyHistory: 'None',
         },
         initialExam: {
           generalAppearance: '',
@@ -202,22 +203,103 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!showPhase1) {
+      if(formData.ScenarioOutline.casePresentation.trim() === '' || 
+      (formData.ScenarioOutline.objectives.objective1.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective2.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective3.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective4.trim() === '' &&
+      formData.ScenarioOutline.objectives.objective5.trim() === '') ||
+      formData.ScenarioOutline.patientReport.basicInformation.name.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.age.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.sex.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.weight.trim() === '' ||
+      formData.ScenarioOutline.patientReport.basicInformation.diagnosis.trim() === '')
+      {
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any required field is empty
+      }
+      
       setShowPhase1(true);
+
     } else if (!showPhase2) {
+      if (
+        (formData.phase1.initialState.trim() === '') ||
+        (formData.phase1.vitalSigns.hr.trim() === '') ||
+        (formData.phase1.vitalSigns.rr.trim() === '') ||
+        (formData.phase1.vitalSigns.temp.trim() === '') ||
+        (formData.phase1.vitalSigns.nibp.trim() === '') ||
+        (formData.phase1.vitalSigns.o2.trim() === '') ||
+        ((formData.phase1.hardStop.ventilationEquipment.trim() === '') &&
+        (formData.phase1.hardStop.ventilationTechnique.trim() === '') &&
+        (formData.phase1.hardStop.airwayManagement.trim() === '') &&
+        (formData.phase1.hardStop.maskPositioning.trim() === '')) 
+      ){
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any required field is empty
+      }
+      
       setShowPhase2(true);
     } else if (!showPhase3) {
+      if (
+        (formData.phase2.vitalSigns.hr.trim() === '') ||
+        (formData.phase2.vitalSigns.rr.trim() === '') ||
+        (formData.phase2.vitalSigns.temp.trim() === '') ||
+        (formData.phase2.vitalSigns.nibp.trim() === '') ||
+        (formData.phase2.vitalSigns.o2.trim() === '') ||
+        ((formData.phase2.hardStop.ventilationEquipment.trim() === '') &&
+        (formData.phase2.hardStop.ventilationTechnique.trim() === '') &&
+        (formData.phase2.hardStop.airwayManagement.trim() === '') &&
+        (formData.phase2.hardStop.maskPositioning.trim() === '')) 
+      ){
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any required field is empty
+      }
+      
       setShowPhase3(true);
       
     } else if (!showPhase4) {
+      if (
+        (formData.phase3.vitalSigns.hr.trim() === '') ||
+        (formData.phase3.vitalSigns.rr.trim() === '') ||
+        (formData.phase3.vitalSigns.temp.trim() === '') ||
+        (formData.phase3.vitalSigns.nibp.trim() === '') ||
+        (formData.phase3.vitalSigns.o2.trim() === '') ||
+        ((formData.phase3.hardStop.ventilationEquipment.trim() === '') &&
+        (formData.phase3.hardStop.ventilationTechnique.trim() === '') &&
+        (formData.phase3.hardStop.airwayManagement.trim() === '') &&
+        (formData.phase3.hardStop.maskPositioning.trim() === '')) 
+      ){
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any required field is empty
+      }
       setShowPhase4(true);
+
     } else {
+
+      if (     
+        (formData.phase4.vitalSigns.hr.trim() === '') ||
+        (formData.phase4.vitalSigns.rr.trim() === '') ||
+        (formData.phase4.vitalSigns.temp.trim() === '') ||
+        (formData.phase4.vitalSigns.nibp.trim() === '') ||
+        (formData.phase4.vitalSigns.o2.trim() === '') ||
+        ((formData.phase4.hardStop.ventilationEquipment.trim() === '') &&
+        (formData.phase4.hardStop.ventilationTechnique.trim() === '') &&
+        (formData.phase4.hardStop.airwayManagement.trim() === '') &&
+        (formData.phase4.hardStop.maskPositioning.trim() === '')) 
+      ) {
+        alert('Please fill in all required fields.');
+        return; // Exit the function if any required field is empty
+      }
+
       const formDataJSON = JSON.stringify(formData);
       console.log('Form Data:', formDataJSON);
     }
   };
 
   return (
-    <div>
+    
+    <div className = "data-container">
+      <p className = "phase-label"> Profile Information</p>
     <Profile formData={formData} handleChange={handleChange} handleSubmit = {handleSubmit} />
 
       {showPhase1 ? (

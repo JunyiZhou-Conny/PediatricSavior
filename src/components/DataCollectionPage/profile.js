@@ -7,11 +7,11 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
   return (
     
       
-    <div>
+    <div className = "phase-container">
     <form onSubmit={handleSubmit} className="objectivesContainer">
       <TextareaInput
         size="medium"
-        label="Objective 1"
+        label="Objective 1*"
         name="ScenarioOutline.objectives.objective1"
         value={formData.ScenarioOutline.objectives.objective1}
         onChange={handleChange}
@@ -57,7 +57,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
     
         <form onSubmit={handleSubmit} className="scenarioContainer">
           <TextareaInput
-            label="Scenario Outline"
+            label="Scenario Outline*"
             size = "large"
             className = "textAreaInput large"
             name="ScenarioOutline.casePresentation"
@@ -73,8 +73,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
         <form onSubmit={handleSubmit} className="profileContainer">
           <div className="horizontal-input-container">
             <TextareaInput
-              
-              label="Name"
+              label="Name*"
               name="ScenarioOutline.patientReport.basicInformation.name"
               value={formData.ScenarioOutline.patientReport.basicInformation.name}
               onChange={handleChange}
@@ -82,7 +81,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
               className="textAreaInput small"
             />
             <TextareaInput
-              label="Age"
+              label="Age*"
               type="number"
               name="ScenarioOutline.patientReport.basicInformation.age"
               value={formData.ScenarioOutline.patientReport.basicInformation.age}
@@ -91,7 +90,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
               className="textAreaInput small"
             />
             <TextareaInput
-              label="Sex"
+              label="Sex*"
               type="text"
               name="ScenarioOutline.patientReport.basicInformation.sex"
               value={formData.ScenarioOutline.patientReport.basicInformation.sex}
@@ -100,7 +99,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
               className="textAreaInput small"
             />
             <TextareaInput
-              label="Weight"
+              label="Weight*"
               type="text"
               name="ScenarioOutline.patientReport.basicInformation.weight"
               value={formData.ScenarioOutline.patientReport.basicInformation.weight}
@@ -109,7 +108,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
               className="textAreaInput small"
             />
             <TextareaInput
-              label="Diagnosis"
+              label="Diagnosis*"
               type="text"
               name="ScenarioOutline.patientReport.basicInformation.diagnosis"
               value={formData.ScenarioOutline.patientReport.basicInformation.diagnosis}
@@ -117,6 +116,16 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
               size="small"
               className="textAreaInput small"
             />
+
+            <TextareaInput
+                    label="Last Meal"
+                    type = "text"
+                    name="ScenarioOutline.patientReport.history.lastMeal"
+                    value={formData.ScenarioOutline.patientReport.history.lastMeal}
+                    onChange={handleChange}
+                    size="small"
+                    className="textAreaInput small"
+                  />
           </div>
         </form>
     
@@ -165,16 +174,7 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
         className="textAreaInput medium"
       />
     
-      <TextareaInput
-        size="medium"
-        label="Last Meal"
-        name="ScenarioOutline.patientReport.history.lastMeal"
-        value={formData.ScenarioOutline.patientReport.history.lastMeal}
-        
-        defaultValue=""
-        onChange={handleChange}
-        className="textAreaInput medium"
-      />
+      
     
       <TextareaInput
         size="medium"
@@ -204,7 +204,6 @@ const Profile = ({ formData, handleChange, handleSubmit }) => {
         label="Surgeries"
         name="ScenarioOutline.patientReport.PMH.surgeries"
         value={formData.ScenarioOutline.patientReport.PMH.surgeries}
-        
         defaultValue=""
         onChange={handleChange}
         className="textAreaInput medium"
