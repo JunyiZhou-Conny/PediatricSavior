@@ -8,7 +8,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Set up MongoDB connection 
-client = MongoClient('mongodb+srv://sliu484:K78iS903oYFohcca@cluster0.cjvuvqh.mongodb.net/')  
+Mongoclient = os.environ.get('MONGODB_URI')
+client = MongoClient(Mongoclient)  
 db = client['gpt_prompt']
 
 simulationFile = loadFile("backend/AssistantAPICall/case_1.json")
