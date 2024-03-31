@@ -8,6 +8,7 @@ import ChatbotUi from './components/ChatbotUi/ChatbotUi';
 import { Puff } from 'react-loader-spinner';
 import Profile from './components/Auth/Profile/Profile';
 import ProfileWindow from './components/Auth/Profile/ProfileWindow';
+import ChatHistory from './components/ChatHistoryPage/ChatHistory';
 import './styles.css';
 
 const App = () => {
@@ -64,13 +65,18 @@ const App = () => {
           <div className="user-info">{isUserAdmin ? 'ADMIN' : 'RESIDENT'}</div>
           <SideButton value={'Airway Management Assistant'} onClick={() => setActiveInterface('ChatbotUi')} />
           {isUserAdmin && (
+            <SideButton value = {'Chat History'} onClick={() => setActiveInterface('ChatHistory')} />
+          )}
+          {isUserAdmin && (
             <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')} />
           )}
           <LogoutButton />
         </div>
 
         <div className="chat-container">
-          {activeInterface === 'ChatbotUi' ? <ChatbotUi></ChatbotUi> : isUserAdmin ? <DataCollectionPage /> : null}
+          {activeInterface === 'ChatbotUi' && <ChatbotUi />}
+          {isUserAdmin && activeInterface === 'DataCollectUi' && <DataCollectionPage />}
+          {isUserAdmin && activeInterface === 'ChatHistory' && <ChatHistory />}
         </div>
       </div>
     </div>

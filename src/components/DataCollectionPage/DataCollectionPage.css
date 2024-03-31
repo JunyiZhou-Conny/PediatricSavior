@@ -23,6 +23,7 @@ body, html {
   padding: 0;
   font-family: var(--font-family);
   overflow-x: hidden;
+  background-color: #355997;
 }
 
 .scenarioContainer, .objectivesContainer {
@@ -32,7 +33,7 @@ body, html {
   margin: 2%; /* Responsive margin */
   padding: 1%; /* Responsive padding */
   
-  width: 58.5%; /* Responsive width */
+  width: 55.5%; /* Responsive width */
   max-width: 100%; /* Ensures it doesn't exceed the viewport width */
   overflow-y: auto;
 }
@@ -60,7 +61,7 @@ body, html {
   box-shadow: var(--box-shadow);
   margin: 2%;
   padding: .5%;
-  max-width: 60%;
+  max-width: 56.5%;
 }
 
 .profileBlock {
@@ -112,8 +113,9 @@ body, html {
 .btn-container{
    /* Centering button container, could be applied elsewhere if needed */
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   margin-left: 100px;
+  
   display: flex;
   flex-wrap: wrap;
   

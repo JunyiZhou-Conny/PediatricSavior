@@ -7,24 +7,28 @@
   --padding-horizontal: 20px;
   --margin-bottom: 10px;
   --border-radius: 20px;
-  overflow-y: none;
+  
 
 
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Use viewport height to ensure full coverage */
+}
+
 body, html {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
+  
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+
+
 
 .App-header {
   background-color: #282c34;
@@ -63,7 +67,10 @@ body, html {
   padding: 20px;
   border-right: 1px solid #ccc;
   background-color: #379586;
+  height: 100%;
+  
 }
+
 
 .chat-container {
   flex-grow: 1;
@@ -144,9 +151,9 @@ button:hover {
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
-  margin-bottom: 10px;
+  
   cursor: pointer;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
 .sidebar button:hover, .logout-button:hover {
