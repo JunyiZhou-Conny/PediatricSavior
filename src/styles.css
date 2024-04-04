@@ -56,10 +56,17 @@ body, html {
   flex-direction: column;
   gap: 10px;
   background-color: #f0f0f0;
+  
+  padding-left: 5%;
+  
+  
 }
 
 .app-body {
   display: flex;
+  
+  margin-left: 17%;
+  
 }
 
 .sidebar {
@@ -68,6 +75,16 @@ body, html {
   border-right: 1px solid #ccc;
   background-color: #379586;
   height: 100%;
+  
+  
+  position: fixed;
+  top: 0; 
+  left: 0;
+  z-index: 1000;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  z-index: 1000;
+  
   
 }
 
