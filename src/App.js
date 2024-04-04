@@ -1,43 +1,99 @@
-// React immports
-import React, { useState } from 'react';
-import './styles.css';
-
-// Component imports
+import React, { useEffect, useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from './components/Auth/LogIn/LogIn';
+import LogoutButton from './components/Auth/LogOut/LogOut';
 import SideButton from './components/SideButton/SideButton';
 import DataCollectionPage from './components/DataCollectionPage/DataCollectionPage';
 import ChatbotUi from './components/ChatbotUi/ChatbotUi';
-
-// Authentication/LogIn imports
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from './components/LogIn/LogIn';
-import LogoutButton from './components/LogOut/LogOut';
-
-
-
-
-
-
+import { Puff } from 'react-loader-spinner';
+import Profile from './components/Auth/Profile/Profile';
+import ProfileWindow from './components/Auth/Profile/ProfileWindow';
+import ParticipantIDPopup from './components/ParticipantIDPopup/ParticipantIDPopup';
+import './styles.css';
 
 const App = () => {
-  const [activeInterface, setActiveInterface] = useState('ChatbotUi');
-  return (
+  const [activeInterface, setActiveInterface] = useState(null);
+  const { isAuthenticated, user, isLoading, loginWithRedirect } = useAuth0();
+  const [isUserAdmin, setIsUserAdmin] = useState(false);
+  const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
+  const [chatbotLoaded, setChatbotLoaded] = useState(false);
+  const [showParticipantIDPopup, setShowParticipantIDPopup] = useState(false);
+
+  useEffect(() => {
+    const roles = user?.['https://your_domain/roles'] || [];
+    setIsUserAdmin(roles.includes('admin'));
+  }, [user]);
+
+  const toggleProfileModal = () => {
+    setIsProfileModalVisible(!isProfileModalVisible);
+  };
+
+  const handleChatbotButtonClick = () => {
+    if (!chatbotLoaded) {
+      setShowParticipantIDPopup(true);
+    } else {
+      setActiveInterface('ChatbotUi');
+    }
+  };
+
+  const handleParticipantIDSubmit = (participantID) => {
+    setActiveInterface('ChatbotUi');
+    setChatbotLoaded(true);
+    setShowParticipantIDPopup(false);
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      loginWithRedirect();
+    }
+  }, [isAuthenticated, isLoading, loginWithRedirect]);
+
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Puff color="#00BFFF" height={100} width={100} />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Puff color="#00BFFF" height={100} width={100} />
+      </div>
+    );
+  }
+
+  return isAuthenticated ? (
     <div className="App">
       <header className="App-header">
-        <h2>Pediatric Airway Management Assistant</h2>
-        <div style={{ marginLeft: 'auto' }}>
-          <LoginButton />
-        </div>
+        <h2 className="title">Pediatric Airway Management Assistant</h2>
+        <img src={user.picture} alt="User" className="profile-avatar" onClick={toggleProfileModal} />
       </header>
+      {isProfileModalVisible && (
+        <ProfileWindow user={user} isUserAdmin={isUserAdmin}/>
+      )}
+      {showParticipantIDPopup && (
+        <ParticipantIDPopup onSubmit={handleParticipantIDSubmit} onClose={() => setShowParticipantIDPopup(false)} />
+      )}
       <div className="app-body">
         <div className="sidebar">
-          <SideButton value={'Airway Management Assistant'} onClick={() => setActiveInterface('ChatbotUi')} />
-          <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')} />
+          <div className="user-info">{isUserAdmin ? 'ADMIN' : 'RESIDENT'}</div>
+          <SideButton value={'Airway Management Assistant'} onClick={handleChatbotButtonClick} />
+          {isUserAdmin && (
+            <SideButton value={'Data Collection Assistant'} onClick={() => setActiveInterface('DataCollectUi')} />
+          )}
+          <LogoutButton />
         </div>
+
         <div className="chat-container">
-          {activeInterface === 'ChatbotUi' ? <ChatbotUi /> : <DataCollectionPage />}
+          {activeInterface === 'ChatbotUi' ? <ChatbotUi /> : null}
+          {activeInterface === 'DataCollectUi' && isUserAdmin ? <DataCollectionPage /> : null}
         </div>
       </div>
     </div>
+  ) : (
+    <div>Redirecting to login...</div>
   );
 };
 

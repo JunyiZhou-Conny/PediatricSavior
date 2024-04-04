@@ -1,101 +1,190 @@
-/* General resets */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.data-container{
+  background-color: #355997;
+}
+
+
+
+:root {
+  --font-family: 'Nunito', sans-serif;
+  --primary-color: rgb(196, 194, 205); /* Bright yellow */
+  --text-color: #333; /* Dark grey */
+  --background-color: #e5d7d7; /* Light pink, unused due to override */
+  --btn-hover-color: #0056b3; /* Dark blue */
+  --btn-primary-color: #355997; /* Bright blue */
+  --border-radius: 10px;
+  --border: 1px solid #ccc;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 body, html {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
+  overflow-x: hidden;
 }
 
-.profile{
-  size:10px;
+.scenarioContainer, .objectivesContainer {
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  margin: 2%; /* Responsive margin */
+  padding: 1%; /* Responsive padding */
+  
+  width: 58.5%; /* Responsive width */
+  max-width: 100%; /* Ensures it doesn't exceed the viewport width */
+  overflow-y: auto;
 }
 
-/* Container styling */
+
+
+/* Button and input styling unified */
+.btn-primary, input[type="text"], input[type="number"], textarea, .medium-input, .small-input, .large-input {
+  padding: 10px;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  resize: none; /* Applicable to textarea and inputs if needed */
+  margin-left: 475px;
+}
+
+
+
+
 .profileContainer {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #e5d7d7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  overflow-y: auto;
-  resize:none;
-}
-
-/* Container styling */
-.scenerioContainer {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #e5d7d7;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  overflow-y: auto;
-  resize:none;
-}
-
-/* Form group styling */
-.form-group {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  margin: 2%;
+  padding: .5%;
+  max-width: 60%;
 }
 
-.profile-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+.profileBlock {
+  padding: 10px; /* Inner spacing for content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: if you want individual blocks to stand out */
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
-}
-
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Button styling */
 .btn-primary {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
+  background-color: var(--primary-color);
+  color: var(--btn-primary-color);
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--btn-hover-color);
 }
 
-/* Utility classes */
-.hidden {
-  display: none;
+.phase-label, .Hardstop-label {
+  display: block;
+  color: var(--text-color);
+  font-weight: bold;
+  margin-left: 50px;
+  margin-bottom: 5px;
 }
 
-.profile-input {
-  width: 50%; /* Responsive width */
-  height: 40px; /* Fixed height */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
+
+
+.phase-label {
+  font-size: 30px;
+  color: white; /* Assuming white is intentional for phase labels */
+  margin-top: 50px; /* Adjusted to be consistent */
+}
+
+.Hardstop-label {
+  font-size: 15px;
+  color: var(--primary-color); /* Assuming this is intentional for contrast */
+}
+
+.form-group.small label {
+  text-align: left; /* Aligns the text inside the label to the left */
+  margin-left: 10px;
+  width: 100%; /* Ensures the label takes up the full width of its container */
+  margin-bottom: 5px; /* Provides spacing between the label and the textarea */
+}
+
+/* Layout adjustments */
+.btn-container{
+   /* Centering button container, could be applied elsewhere if needed */
+  margin-top: 5px;
+  margin-bottom: 15px;
+  margin-left: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.horizontal-input-container {
+  /* Centering button container, could be applied elsewhere if needed */
+ margin-top: 5px;
+ margin-bottom: -10px;
+ 
+ margin-left: 15px;
+ display: flex;
+ flex-wrap: wrap;
+ 
+}
+
+.horizontal-input-container > * {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+  width: calc(16.666% - 10px); /* Adjust width as needed for fixed-width inputs */
+}
+
+.textarea {
+  /* Additional styles for your textarea */
+  width: 100%; /* Make textarea fill container */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.textarea-container, .form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 20px; /* Adjust spacing between each TextareaInput */
+}
+
+.textAreaInput.small textarea, .textAreaInput.medium textarea, .textAreaInput.large textarea {
+  border: var(--border);
+  border-radius: var(--border-radius);
   resize: none;
+  
 }
 
+.textAreaInput.small textarea {
+  font-size: large;
+  width: 105px;
+  max-height: 25px !important;
+}
+
+.textAreaInput.medium textarea {
+  width: 165px;
+  min-height: 100px !important;
+  margin-right: 20px;
+}
+
+.textAreaInput.large textarea {
+  width: 350px;
+  min-height: 160px !important;
+}
+
+/* Additional styles for specific input sizes */
+.medium-input, .small-input, .large-input {
+  width: 100px; /* Standardizing width for simplicity, adjust as necessary */
+  height: 30px;
+}
+
+/* Miscellaneous adjustments */
 .case-input {
-  width: 80%; /* Adjust as needed */
-  height: 150px; /* Fixed height */
-  padding: 0 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none; /* Disables resizing */
-  margin: 10px;
-  flex: 1; /* If using flexbox in the container */
+  width: 90%;
+  height: 150px;
+  margin: 10px 5px;
+  flex: 1;
 }
