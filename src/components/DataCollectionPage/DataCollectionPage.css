@@ -22,21 +22,53 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: var(--font-family);
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
+  width: 100%; /* Ensures body takes full viewport width */
+  min-height: 100%; /* Ensures minimum height */
+  background-color: #355997;
 }
 
 .scenarioContainer, .objectivesContainer {
   background-color: var(--primary-color);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  margin: 2%; /* Responsive margin */
-  padding: 1%; /* Responsive padding */
-  
-  width: 58.5%; /* Responsive width */
-  max-width: 100%; /* Ensures it doesn't exceed the viewport width */
+  margin: 2% auto; /* Centers the containers and provides margin */
+  padding: 1%;
+  width: auto; /* Auto width for initial flexibility */
+  max-width: 55.5%; /* Maximum width to maintain layout integrity */
   overflow-y: auto;
 }
 
+.scenarioContainer, .objectivesContainer, .profileContainer {
+  /* Centering elements with margin auto */
+  margin: 2% auto; /* Top and bottom margin, auto for left and right */
+  padding: 1%;
+  
+  /* Control width more predictably */
+  width: 90%; /* Adjust this value as needed */
+  max-width: 1200px; /* Example max-width; adjust as needed for your design */
+  
+  overflow-y: auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+@media (max-width: 768px) {
+  .scenarioContainer, .objectivesContainer{
+    /* Adjust for smaller screens */
+    width: 95%; /* Slightly wider on small screens */
+    margin: 10px auto; /* Increased margin for top and bottom */
+    padding: 2%; /* Increased padding for readability */
+  }
+}
+
+@media (max-width: 768px) {
+  .profileContainer {
+    width: 95%; /* Allow more width on smaller screens */
+    margin: 10px auto; /* Adjust margin for better vertical spacing */
+    padding: 2%; /* Increase padding for content visibility */
+  }
+}
 
 
 /* Button and input styling unified */
@@ -56,11 +88,12 @@ body, html {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   background-color: var(--primary-color);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  margin: 2%;
-  padding: .5%;
-  max-width: 60%;
+  margin: 2% auto; /* Ensures top and bottom margins are set, and auto for left and right for centering */
+  padding: 1%;
+  width: 90%; /* Explicitly setting width to a percentage for responsiveness */
+  max-width: 1200px; /* Setting a max-width to control maximum stretching */
 }
 
 .profileBlock {
@@ -112,8 +145,9 @@ body, html {
 .btn-container{
    /* Centering button container, could be applied elsewhere if needed */
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   margin-left: 100px;
+  
   display: flex;
   flex-wrap: wrap;
   
