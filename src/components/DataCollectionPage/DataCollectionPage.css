@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+/* General resets */
+/* Global page elements */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: #f2f2f2; /* Set the background color for the whole page */
+}
+
+/* Headings and labels */
+.phase-label {
+  font-size: 1.25rem; /* Example size */
+  color: rgb(246, 201, 92); /* Example color */
+  margin-left: 20px; /* Align with the form containers */
+}
+
+/* Apply shared styles with a base class */
+.form-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f2f2f2; /* Choose your preferred color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+}
+
+/* Container styling */
+.profileContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Container styling */
+.scenarioContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Container styling */
+.objectivesContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Container styling */
+.patientInfoContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Container styling */
+.historyContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Container styling */
+.initialExamContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Container styling */
+.phaseContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+
+
+/* Container styling */
+.stopContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #e5d7d7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+}
+
+/* Title styling */
+.patientReportTitle {
+  font-size: 24px; /* Adjust as needed */
+  margin: 0; /* Adjust as needed */
+  padding: 10px 0; /* Adjust as needed */
+  text-align: center; /* Optional: center the title */
+}
+
+/* Form group styling */
+.form-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
+
+.profile-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
+
+.profile-input {
+  width: 50%; /* Responsive width */
+  height: 40px; /* Fixed height */
+  padding: 0 10px; /* Padding inside the input */
+  border: 1px solid #ccc; /* Border styling */
+  border-radius: 5px; /* Rounded corners */
+  resize: none;
+}
+
+.case-input {
+  width: 80%; /* Adjust as needed */
+  height: 150px; /* Fixed height */
+  padding: 10px; /* Padding inside the input */
+  border: 1px solid #ccc; /* Border styling */
+  border-radius: 5px; /* Rounded corners */
+  resize: none; /* Disables resizing */
+  margin: 10px auto;
+  flex: 1; /* If using flexbox in the container */
+}

@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lazy+Dog');
+
+
+body {
+    overflow-x: hidden; /* Disable horizontal scrolling */
+  }
+
+
+.text-section {
+    max-width: 200px !important;
+    display: inline-block;
+    
+}
+
+
+.hero-section {
+    margin-top: 85px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    color: white;
+    background-color: #2D4371; /* example background color */
+    padding-left: 50px;
+    
+  }
+
+  @keyframes typing {
+    from { max-width: 0; }
+    to { max-width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
+
+
+
+.project-heading-1 {
+    color: #F6C95C;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    background-color: #2D4371;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 3.0rem;
+    max-width: 600px;
+    padding-left: 50px;
+    overflow: hidden;
+    border-right: .1em solid orange; /* The cursor */
+    white-space: nowrap;
+    /* Combine both animations into a single declaration */
+    animation: typing 4s steps(40, end) forwards, /* Type out the text */
+             blink-caret 0.75s infinite; /* Blink the cursor */
+    animation-fill-mode: forwards; /* Keep the cursor state at the end of the animation */
+
+}
+
+
+
+.project-heading-2 {
+    color: #F6C95C;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    background-color: #2D4371;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 3.0rem;
+    max-width: 600px;
+    padding-left: 50px;
+    overflow: hidden;
+    border-right: .1em solid orange; /* The cursor */
+    white-space: nowrap;
+    /* Combine both animations into a single declaration */
+    animation: typing 4s steps(40, end) forwards, /* Type out the text */
+             blink-caret 0.75s infinite; /* Blink the cursor */
+    animation-fill-mode: forwards; /* Keep the cursor state at the end of the animation */
+
+}
+
+
+
+
+  
+
+
+.project-type {
+    color: #ccc;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    background-color: #2D4371;
+    margin-bottom: 0px;
+    font-size: 1.3rem;
+    max-width: 600px !important;
+    padding-left: 50px;
+}
+
+.project-description {
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    background-color: #2D4371;
+    margin-top: 0px;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 600px !important;
+    padding-left: 50px;
+}
+
+.hero-image {
+    background: transparent;
+    width: 60%;
+    height: auto;
+    margin-left: 90px;
+    margin-top: 10px;
+    transform: scale(1.4);
+}

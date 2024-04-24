@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+:root {
+  --font-size: 30px;
+  --font-family: 'Nunito', sans-serif;
+  --padding-vertical: 10px;
+  --padding-horizontal: 20px;
+  --margin-bottom: 10px;
+  --border-radius: 20px;
+  
+
+
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Use viewport height to ensure full coverage */
+  background-color: #355997;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #2D4371;
+  
+}
+
+
+
+
+.App-header {
+  background-color: #282c34;
+  color: white;
+  padding-right: 20px;
+  padding-left: 10px;
+  
+  
+  display: flex; /* Enables Flexbox layout within this container */
+  align-items: center; /* Vertically centers the items in the container */
+  justify-content: space-between; /* Places space between the child elements, pushing them to opposite ends */
+  font-size: 12px;
+}
+
+.App-header h2 {
+  margin-left: 500px;
+  font-family: var(--font-family);
+}
+
+
+
+
+.chat-window {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  height: calc(100vh - 170px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #355997;
+  
+  padding-left: 5%;
+  
+  
+  
+}
+
+.app-body {
+  display: flex;
+  margin-left: 17%;
+  
+}
+
+.sidebar {
+  width: 15%;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  background-color: #379586;
+  height: 100%;
+  
+  
+  position: fixed;
+  top: 0; 
+  left: 0;
+  z-index: 1000;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  z-index: 1000;
+  
+  
+}
+
+
+.chat-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #e9a0a5;
+  color: black;
+  font-family: Nunito;
+  font-weight: 550;
+}
+
+.bot {
+  align-self: flex-start;
+  background-color: #ccc;
+  color: black;
+  font-weight: 550;
+  font-family: Nunito; 
+}
+
+form {
+  display: flex;
+  padding: 15px;
+  background-color: #355997;
+  /*
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  */
+}
+
+input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-right: 10px;
+  
+}
+
+
+
+
+button {
+  padding: 10px 20px;
+  background-color: #e9a0a5;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e4c2d2;
+  
+}
+
+.user-info, .general-info {
+  font-size: var(--font-size);
+  font-family: 'Nunito', sans-serif;
+  /*
+  background-color: #388f80;
+  */
+  
+  padding: var(--padding-vertical) var(--padding-horizontal);
+  margin-bottom: var(--margin-bottom);
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+
+.sidebar button, .logout-button {
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(233, 160, 165);
+  color: black;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-family: Nunito;
+  font-weight: bold; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+
+.sidebar button:hover, .logout-button:hover {
+  background-color: rgb(208, 218, 235);
+  transform: scale(1.05); /* Slightly enlarge the avatar */
+  box-shadow: 0 2px 4px rgb(74, 73, 73) 
+}
+
+.title{
+  color: white;
+  font-size: 25px;
+  margin-left: 50px;
+}
+
+/* popup for participant info*/
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.close:hover {
+  color: red;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup input,
+.popup button {
+  margin: 10px auto;
+  display: block;
+}

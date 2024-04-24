@@ -1,0 +1,184 @@
+.about-page-container {
+    color: white !important;
+    background-color: #2D4371 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 900 !important;
+    max-width: 1000px !important;
+    margin: auto !important;
+    padding: 20px !important;
+
+    /*
+    color: #F6C95C;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    */
+} 
+
+.guiding-questions-parent-container {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.guiding-questions-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 2; /* Makes sure this is on top */
+}
+
+
+.guiding-questions-image.animate-image img{
+  /* Apply the image animation only when the .animate-image class is present */
+  animation: image-slide 4s cubic-bezier(.5, .5, 0, 1) forwards;
+}
+
+.guiding-question-text.animate-image .fading-effect {
+  /* Apply the text animation only when the .animate-image class is present */
+  animation: text-slide 4s cubic-bezier(.5, .5, 0, 1) forwards; 
+  /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+  animation: text-slide 4s cubic-bezier(.5,.5,0,1); */
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards
+}
+
+.gq-image {
+  background: transparent;
+    width: 60%;
+    height: auto;
+    margin-left: 90px;
+    margin-top: 10px;
+    transform: scale(0.4);
+}
+
+
+.guiding-question-text {
+    color: white; /*This part wasn't shown in the SCSS*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 1; /* Places this below the image container */
+    margin-left: -100px;
+}
+.fading-effect {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+    animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards; */
+    background-color: #2D4371;
+  }
+  /* Slides the image from left (-250px) to right (150px) */ 
+  @media screen and (min-width:1000px) {
+    
+        @keyframes image-slide {
+            0% {
+                transform: translatex(-250px) scale(0);
+            }
+            60% {
+                transform: translatex(-250px) scale(1);
+            }
+            90% {
+                transform: translatex(150px) scale(1);
+            }
+            100% {
+                transform: translatex(150px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes text-slide {
+            0% {
+                width: 100%;
+            }
+            60% {
+                width: 100%;
+            }
+            77% {
+                width: 0;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+    }
+
+    @media screen and (max-width:1000px) {
+
+        @keyframes image-slide {
+            0% {
+                transform: translatex(-150px) scale(0);
+            }
+            60% {
+                transform: translatex(-150px) scale(1);
+            }
+            90% {
+                transform: translatex(120px) scale(1);
+            }
+            100% {
+                transform: translatex(120px) scale(1);
+            }
+        }
+
+
+        @keyframes text-slide {
+            0% {
+                width: 100%;
+            }
+            60% {
+                width: 100%;
+            }
+            77%{
+                width: 0;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+    }
+
+    @media screen and (max-width:450px) {
+
+        @keyframes image-slide {
+            0% {
+                transform: translatex(-80px) scale(0);
+            }
+            60% {
+                transform: translatex(-80px) scale(1);
+            }
+            90% {
+                transform: translatex(80px) scale(1);
+            }
+            100% {
+                transform: translatex(80px) scale(1);
+           }
+        }
+
+      @keyframes text-slide {
+            0% {
+                width: 100%;
+            }
+            60% {
+                width: 100%;
+            }
+            77% {
+                width: 0;
+            }
+            100% {
+                width: 0;
+            }
+      }
+ }
+
+

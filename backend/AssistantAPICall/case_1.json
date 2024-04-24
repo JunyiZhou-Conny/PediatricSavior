@@ -1,0 +1,43 @@
+{
+  "Scenario Outline": "4-year-old male with past medical history of epilepsy (well controlled on Keppra) with three days of vomiting and diarrhea, found to be influenza A positive, was admitted for IV fluids in the setting of dehydration and inability to tolerate PO fluids. A rapid response is called after the patient started seizing while admitted and has already received Ativan twice and a Keppra load is being administered, with resolution of the seizure for the last 5 minutes. You are called back to the bedside because the patient is now apneic and hypoxic.",
+  "Patient Report": {
+    "Basic Information": "Name: RJ, Age/sex: 4 years old male, Weight: 18kg, DX: Influenza A with dehydration",
+    "History": "Signs/Symptoms: vomiting, diarrhea, decreased PO, decreased urination, fever\nAllergies: None\nMedications: home Keppra\nPMH: epilepsy\nLast meal: 2 days ago\nEvents: brought in because hadn’t been able to keep fluids down. Last seizure 1 year ago. Have been trying to give Keppra at home, but has been vomiting everything  including medicine.",
+    "PMH": "Medical conditions: epilepsy\nHospitalizations: one prior hospitalization when initially diagnosed with seizures\nSurgeries: none\nAllergies: none\nMedications: Keppra\nSocial History: Live with parents, younger sister\nFamily History: none",
+    "Initial Exam": "General Appearance: Awake, alert, no apparent distress\nBreathing: Normal work of breathing, clear breath sounds bilaterally in room air\nCirculation: 2+ distal pulses, capillary refill <2 sec, warm extremities, no cyanosis\nAbdomen: soft, non-tender, non-distended, slightly hyperactive bowel sounds\nNeuro: pupils equal round and reactive to light, extra-ocular movements intact, cranial nerves grossly intact, 5/5 strength",
+    "Labs": "RVP: positive for influenza A"
+  },
+  "Phase 1": {
+    "General Description": "Upon arrival, patient noted to have minimal to no respiratory effort. The patient has IV access. Note: you currently don’t have access to intubation supplies or medications.",
+    "Vitals and Conditions": "HR: 125\nRR: 0\nTemp: 37.5\nNIBP: 93/58\nO2: 73%\nAirway:  secretions noted at the mouth\nBreathing: No chest rise, no audible breath sounds bilaterally.\nCirculation: femoral pulses 2+, capillary refill 2 sec\nDisability: No abnormal movements. Pupils equal round and reactive to light.",
+    "Expected Actions": {
+      "Choice of ventilation equipment": "Picks suitable size mask\nSuitable size self-inflating bag or flow inflating bag\nProperly connects bag to oxygen source & turns on",
+      "Ventilation Technique": "Positions behind child to ventilate at head of bed",
+      "Management of Airway": "Clearance of secretions with appropriate catheter",
+      "Positioning of the mask": "Mask placed on face correctly (correct orientation)\nCovers mouth and nose\nHolds mask correctly\nCreates effective seal\nAvoids pressure on eyes"
+    }
+  },
+  "Phase 2": {
+    "General Description": "Minimal chest rise with bag mask ventilation",
+    "Vitals and Conditions": "HR: 135\nRR: 0\nTemp: 37.5\nNIBP: 92/56\nO2: 58%\nAirway:  no further secretions noted \nBreathing: no to minimal chest rise with bagging\nCirculation: femoral pulses 2+\nDisability: No abnormal or spontaneous movements. Not responsive to verbal stimuli. POC Blood glucose 96.",
+    "Expected Actions": {
+      "Management of Airway": "Maneuvers to open the airway and jaw thrust done correctly, without pressing on submandibular tissues\nHead positioning correct",
+      "Ventilation Technique": "Hand holding mask also maintains open airway\nCompresses self-inflating (or flow-inflating) bag correctly\nFrequency of compressions of bag appropriate for child’s age"
+    }
+  },
+
+  "Phase 3": {
+    "General Description": "Hand holding mask also maintains open airway\nCompresses self-inflating (or flow-inflating) bag correctly\nFrequency of compressions of bag appropriate for child’s age",
+    "Vitals and Conditions": "HR: 120\nRR: 24 (with bagging), no spontaneous breaths\nTemp: 37.5\nNIBP: 92/56\nO2: 86%\nAirway: No further secretions noted\nBreathing: No spontaneous breaths. Improving air movement with transmitted upper airway sounds bilaterally\nCirculation: 2+ peripheral pulses\nDisability: withdraws from pain.",
+    "Expected Actions": {
+      "Management of airway": "Correct sizing of NPA or OPA inserted correctly",
+      "Ventilation technique": "Effective ventilations w/ movement of chest"
+    }
+  },
+
+  "Final Phase": {
+    "General Description": "Stabilization -- Patient now with good chest rise and normalization of oxygen saturation with bag mask ventilation.",
+    "Vitals and Conditions": "HR: 120\nRR: 24 (with bagging)\nTemp: 36.8\nNIBP: 93/57\nO2: 99%\nAirway: no further secretions\nBreathing: good chest rise, good air movement with bagging, no further transmitted upper airway sounds\nCirculation: 2+ peripheral pulses\nDisability: no further seizure-like activity",
+    "Expected Actions": "None! The simulation has been successfully completed."
+  }
+}

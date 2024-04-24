@@ -1,0 +1,104 @@
+.profile-container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: center;
+    background: white;
+  }
+  
+  .profile-avatar {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 50%;
+    margin-left: 10px;
+    
+    /*
+    border: 2px solid #00BFFF;
+    */
+
+    /* Add transition for smooth shadow effect */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .profile-avatar:hover {
+    /* Add faint gray shadow on hover 
+    box-shadow: 0 2px 4px white !important; 
+    */
+    transform: scale(1.05); /* Slightly enlarge the avatar */
+    box-shadow: 0 2px 4px rgb(74, 73, 73) !important; /* Add a faint shadow */ 
+    
+  }
+  
+
+  .profile-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    word-break: break-word;
+  }
+
+  .profile-type {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-left: 20px;
+  }
+  
+  .profile-email {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    word-break: break-word;
+  }
+
+  .logout-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00BFFF;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #0090C0;
+  }
+  
+
+  .dropdown-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-top: 5px;
+  }
+  
+  
+  
+
+  .profile-window {
+    position: absolute;
+    top: 100%; /* Adjust as needed */
+    right: 0;
+    /* width: 300px; */ /* Or your desired width */
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other content */
+    border-radius: 8px;
+    overflow: hidden; /* Keeps the content within the borders */
+    margin-right: 30px;
+    min-width: 300px; /* Minimum size */
+    max-width: 100%; /* It can grow up to 100% of its parent's width */
+    width: auto; /* Allows the width to adjust based on content */
+  }
+
+  .window { /* or another suitable container */
+    position: relative;
+  }

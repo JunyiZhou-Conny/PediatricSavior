@@ -1,0 +1,341 @@
+.product-page-container {
+    color: white !important;
+    background-color: #2D4371 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 900 !important;
+    max-width: 1200px !important;
+    margin: auto !important;
+    padding: 20px !important;
+} 
+
+h3 {
+  color: white !important;   
+}
+
+
+
+.guiding-questions-heading,
+.rapid-cycle-heading,
+.chat-gpt-role-heading,
+.checklists-heading, 
+.primary-objective-heading,
+.methods-heading {
+    color: #F6C95C;
+    margin-top: 50px important;
+    font-size: 32px;
+    /* margin-bottom: 0px; */
+}
+.guiding-questions-parent-container,
+.rapid-cycle-parent-container,
+.chat-gpt-role-parent-container,
+.checklists-parent-container,
+.primary-objective-parent-container, 
+.methods-parent-container{
+    width: 80%;
+    display: block;
+    position: relative;
+    overflow: visible;
+}
+.guiding-questions-image,
+.rapid-cycle-image,
+.chat-gpt-role-image,
+.checklists-image,
+.primary-objective-image,
+.methods-image {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 2; /* Makes sure this is on top */
+}
+.guiding-questions-image.animate-image img,
+.rapid-cycle-image.animate-image img, 
+.chat-gpt-role-image.animate-image img, 
+.checklists-image.animate-image img,
+.primary-objective-image.animate-image img,
+.methods-image.animate-image img {
+  /* Apply the image animation only when the .animate-image class is present */
+  animation: image-slide 2s cubic-bezier(.5, .5, 0, 1) forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards
+}
+
+.guiding-questions-text.animate-image .guiding-questions-fading-effect, 
+.rapid-cycle-text.animate-image .rapid-cycle-fading-effect,
+.chat-gpt-role-text.animate-image .chat-gpt-role-fading-effect,
+.checklists-text.animate-image .checklists-fading-effect,
+.primary-objective-text.animate-image .primary-objective-fading-effect,
+.methods-text.animate-image .methods-fading-effect  {
+  /* Apply the text animation only when the .animate-image class is present */
+  animation: text-slide 2s cubic-bezier(.5, .5, 0, 1) forwards; 
+  /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+  animation: text-slide 4s cubic-bezier(.5,.5,0,1); */
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards
+}
+
+.gq-image,
+.rc-image, 
+.cgr-image,
+.cl-image,
+.po-image,
+.mo-image {
+  background: transparent;
+    width: 50%;
+    height: auto;
+    margin-left: 90px;
+    margin-top: 10px;
+    transform: scale(0.4);
+}
+.guiding-questions-text,
+.rapid-cycle-text,
+.chat-gpt-role-text, 
+.checklists-text,
+.primary-objective-text,
+.methods-text {
+    color: white !important; /*This part wasn't shown in the SCSS*/
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 1; /* Places this below the image container */
+    margin-left: -100px;
+}
+.guiding-questions-fading-effect,
+.rapid-cycle-fading-effect,
+.chat-gpt-role-fading-effect, 
+.checklists-fading-effect, 
+.primary-objective-fading-effect, 
+.methods-fading-effect {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+    animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards; */
+    background-color: #2D4371;
+  }
+  .initial-position-adjustment {
+    transform: translate(-50%, -50%) translateX(-100px); 
+}
+
+
+
+.study-population, 
+.assessment, 
+.intervention, 
+.post-intervention {
+    background-color: #ccc;
+    color: black;
+}
+
+
+
+  /* Slides the image from left (-250px) to right (150px) */ 
+  @media screen and (min-width:1000px) {
+    
+        @keyframes image-slide {
+            0% {
+                transform: translatex(-250px) scale(0);
+                opacity: 1;
+            }
+            10% {
+                transform: translatex(-250px) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: translatex(300px) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translatex(3000px) scale(0.1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes text-slide {
+            0% {
+                width: 100%;
+            }
+            10% {
+                width: 100%;
+            }
+            60% {
+                width: 0;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+    }
+
+    @media screen and (max-width:1000px) {
+
+        @keyframes image-slide {
+            0% {
+                transform: translatex(-150px) scale(0);
+            }
+            60% {
+                transform: translatex(-150px) scale(1);
+            }
+            90% {
+                transform: translatex(120px) scale(1);
+            }
+            100% {
+                transform: translatex(120px) scale(1);
+            }
+        }
+
+
+        @keyframes text-slide {
+            0% {
+                width: 100%;
+            }
+            60% {
+                width: 100%;
+            }
+            77%{
+                width: 0;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+    }
+
+    @media screen and (max-width:450px) {
+
+        @keyframes image-slide {
+            0% {
+                transform: translatex(-80px) scale(0);
+            }
+            60% {
+                transform: translatex(-80px) scale(1);
+            }
+            90% {
+                transform: translatex(80px) scale(1);
+            }
+            100% {
+                transform: translatex(80px) scale(1);
+           }
+        }
+
+      @keyframes text-slide {
+            0% {
+                width: 100%;
+            }
+            60% {
+                width: 100%;
+            }
+            77% {
+                width: 0;
+            }
+            100% {
+                width: 0;
+            }
+      }
+ }
+
+
+/*
+.product-page-container {
+    color: white !important;
+    background-color: #2D4371 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 900 !important;
+    max-width: 1200px !important;
+    margin: auto !important;
+    padding: 20px !important;
+} 
+
+
+
+.guiding-questions-heading,
+.rapid-cycle-heading, 
+.chat-gpt-role-heading {
+    color: #F6C95C;
+    margin-bottom: 0px;
+}
+.guiding-questions-parent-container, 
+.rapid-cycle-parent-container, 
+.chat-gpt-role-parent-container {
+    width: 80%;
+    height: 30vh;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.guiding-questions-image, 
+.rapid-cycle-image, 
+.chat-gpt-role-image  {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    z-index: 2; 
+}
+.guiding-questions-image.animate-image img, 
+.rapid-cycle-image.animate-image img, 
+.chat-gpt-role-image.animate-image img {
+  animation: image-slide 2s cubic-bezier(.5, .5, 0, 1) forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards
+}
+
+.guiding-question-text.animate-image .fading-effect, 
+.rapid-cycle-text.animate-image .fading-effect
+.chat-gpt-role-text.animate-image .fading-effect {
+  animation: text-slide 2s cubic-bezier(.5, .5, 0, 1) forwards; 
+
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards
+}
+
+.gq-image,
+.rc-image,
+.cgr-image {
+  background: transparent;
+    width: 50%;
+    height: auto;
+    margin-left: 90px;
+    margin-top: 10px;
+    transform: scale(0.4);
+}
+.guiding-question-text,
+.rapid-cycle-text,
+.chat-gpt-role-text {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    margin-left: -100px;
+}
+.guiding-question-fading-effect,
+.rapid-cycle-fading-effect,
+.chat-gpt-role-fading-effect{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+    animation: text-slide 4s cubic-bezier(.5,.5,0,1);
+    animation-fill-mode: forwards;
+    background-color: #2D4371;
+  }
+  .initial-position-adjustment {
+    transform: translate(-50%, -50%) translateX(-100px); 
+}
+
+
+
+*/
