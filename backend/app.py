@@ -1,5 +1,5 @@
 import os
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response, request, jsonify, send_from_directory
 from pymongo import MongoClient
 from flask_cors import CORS 
 from flask_cors import cross_origin
@@ -26,6 +26,20 @@ temp_message = ""
 # Assuming global variables for managing conversation state
 conversation_thread = None
 conversation_run = None
+
+@app.route('/api/instruction-text', methods=['GET'])
+def get_instruction_text():
+    directory_path = './AssistantAPICall/'
+    filename = 'instruction_text.txt'
+    return send_from_directory(directory_path, filename)
+
+@app.route('/api/save-instruction-text', methods=['POST'])
+def save_instruction_text():
+    data = request.get_json()
+    text = data['text']
+    with open('backend/AssistantAPICall/instruction_text.txt', 'w') as file:
+        file.write(text)
+    return {'status': 'File saved successfully'}
 
 def store_conversation(user_input, bot_response, participantID):
     """Store the conversation in the MongoDB collection."""

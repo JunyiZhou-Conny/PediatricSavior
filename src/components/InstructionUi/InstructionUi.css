@@ -1,0 +1,40 @@
+.instruction-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
+    padding: 20px;
+    background-color: #355997;
+    border: 1px solid #355997;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.text-area {
+    flex: 1 1 auto;  
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #355997;
+    border-radius: 4px;
+    resize: vertical; 
+    font-family: Arial, sans-serif;
+    height: 500px;  
+    overflow: auto; 
+}
+
+.save-button {
+    width: 200px;
+    padding: 10px 20px;
+    background-color: #e9a0a5; /* Bootstrap 'success' green */
+    border: none;
+    border-radius: 40px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease;
+    margin-left: auto;   
+    margin-right: auto; 
+}
+
+.save-button:hover {
+    background-color: rgb(174, 76, 172); /* Darker green on hover */
+}

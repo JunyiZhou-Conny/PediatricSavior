@@ -3,6 +3,7 @@ import SideButton from './SideButton/SideButton';
 import ChatbotUi from './ChatbotUi/ChatbotUi';
 import DataCollectionPage from './DataCollectionPage/DataCollectionPage';
 import ChatHistory from './ChatHistoryPage/ChatHistory';
+import InstructionUi from './InstructionUi/InstructionUi';
 import LogoutButton from './Auth/LogOut/LogOut';
 import ProfileWindow from './Auth/Profile/ProfileWindow';
 import ParticipantIDPopup from './ParticipantIDPopup/ParticipantIDPopup';
@@ -49,12 +50,15 @@ const AuthenticatedApp = ({
                                       onClick={() => setActiveInterface('ChatHistory')} />}
           {isUserAdmin && <SideButton value={'Data Collection Assistant'}
                                       onClick={() => setActiveInterface('DataCollectUi')} />}
+          {isUserAdmin && <SideButton value={'Instruction Editor'}
+                                      onClick={() => setActiveInterface('Instruction Editor')} />}                            
           <LogoutButton />
         </div>
         <div className="chat-container">
           {activeInterface === 'ChatbotUi' && <ChatbotUi participantID={participantID} />}
           {isUserAdmin && activeInterface === 'DataCollectUi' && <DataCollectionPage />}
           {isUserAdmin && activeInterface === 'ChatHistory' && <ChatHistory />}
+          {isUserAdmin && activeInterface === 'Instruction Editor' && <InstructionUi />}
         </div>
       </div>
     </div>
