@@ -26,6 +26,31 @@ temp_message = ""
 # Assuming global variables for managing conversation state
 conversation_thread = None
 conversation_run = None
+participantID = None
+
+# @app.route('/api/instruction-text', methods=['GET'])
+# def get_instruction_text():
+#     try:
+#         collection = db['instruction']
+#         instruction_data = collection.find_one({})  # Assuming there's only one entry
+#         print(instruction_data['content'])
+#         if instruction_data:
+#             return jsonify(instruction_data['content'])  # Assuming the content is stored under the 'content' key
+#         else:
+#             return jsonify("No instruction found"), 404
+#     except Exception as e:
+#         return jsonify(str(e)), 500
+
+# @app.route('/api/save-instruction-text', methods=['POST'])
+# def save_instruction_text():
+#     collection = db['instruction']
+#     data = request.get_json()
+#     text = data['text']
+#     try:
+#         result = collection.update_one({}, {'$set': {'content': text}}, upsert=True)
+#         return jsonify("File saved successfully"), 200 if result.modified_count > 0 else jsonify("No changes made"), 200
+#     except Exception as e:
+#         return jsonify(str(e)), 500
 
 @app.route('/api/instruction-text', methods=['GET'])
 def get_instruction_text():
@@ -54,6 +79,16 @@ def store_conversation(user_input, bot_response, participantID):
         db.conversations.insert_one(conversation_data)
     except Exception as e:
         print(f"An error occurred while inserting to MongoDB: {e}")
+
+@app.route('/set-participant-id', methods=['POST'])
+def set_participant_id():
+    global global_participant_id
+    participant_id = request.json.get('participantID')
+    if participant_id:
+        global_participant_id = participant_id
+        print(global_participant_id)
+        return {'message': 'Participant ID set successfully'}, 200
+    return {'error': 'No Participant ID provided'}, 400
 
 
 @app.route('/init-conversation', methods=['POST'])
@@ -89,27 +124,17 @@ def submit_user_input():
 
     data = request.json
     user_input = data.get('text')
-    participantID = data.get('participantID')  # Retrieve participantID from request data
+    #participantID = data.get('participantID')  # Retrieve participantID from request data
 
     if not user_input:
         return jsonify({"error": "No input provided"}), 400
-    if not participantID:
-        return jsonify({"error": "Participant ID is required"}), 400
     
-    try:
     # Submit the new user input to the ongoing conversation
-        conversation_run = submit_message(conversation_thread, user_input, simulationFile)
+    conversation_run = submit_message(conversation_thread, user_input, simulationFile)
     
     # Wait for the run to complete and fetch the last message
-        wait_on_run(conversation_run, conversation_thread)
-        last_message = getChatHistory(conversation_thread)[-1]
-
-    except Exception as e:
-        return jsonify({"error": f"Failed to process message: {str(e)}"}), 500
-
-    # Store the conversation after each exchange, including participantID
-    store_conversation(user_input, last_message, participantID)
-
+    wait_on_run(conversation_run, conversation_thread)
+    last_message = getChatHistory(conversation_thread)[-1]
     temp_message = last_message
     
     return jsonify({"response": last_message})

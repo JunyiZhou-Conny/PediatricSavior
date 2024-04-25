@@ -6,13 +6,28 @@ const ParticipantIDPopup = ({ onSubmit, onClose }) => {
 
 // simple validation to ensure the participantID isn't empty
 // participantID is mandatory to continue with the conversation
-  const handleSubmit = () => {
-    if (participantID.trim()) { 
-      onSubmit(participantID);
-    } else {
-      setError("Participant ID cannot be empty.");
-    }
-  };
+const handleSubmit = () => {
+  if (participantID.trim()) { 
+    fetch('/set-participant-id', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ participantID: participantID })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message); // Handle success
+      onSubmit(participantID);  // Continue with whatever processing you need
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  } else {
+    setError("Participant ID cannot be empty.");
+  }
+};
+
 
   return (
     <div className="popup-overlay">
