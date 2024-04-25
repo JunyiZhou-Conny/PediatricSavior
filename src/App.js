@@ -14,12 +14,12 @@ const App = () => {
   const [chatbotLoaded, setChatbotLoaded] = useState(false);
   const [showParticipantIDPopup, setShowParticipantIDPopup] = useState(false);
   const [participantID, setParticipantID] = useState('');
-
+// obtaining roles
   useEffect(() => {
     const roles = user?.[`https://your_domain/roles`] || [];
     setIsUserAdmin(roles.includes('admin'));
   }, [user]);
-
+// an attempt at differentiating between refreshing and closing the tab
   useEffect(() => {
     const loggedInFlag = sessionStorage.getItem('loggedIn');
     if (loggedInFlag) {
@@ -49,7 +49,7 @@ const App = () => {
       sessionStorage.removeItem('refreshing');
     });
   }, []);
-
+// loading icon
   if (isLoading) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -57,7 +57,9 @@ const App = () => {
       </div>
     );
   }
-
+// the return function, pre and post login
+// load auth if authenticated
+// else return landing page
   return (
     <Router>
       {isAuthenticated ? (

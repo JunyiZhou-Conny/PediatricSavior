@@ -6,7 +6,7 @@ import LandingPage from './LandingPage/LandingPage';
 import AboutPage from './AboutPage/AboutPage';
 import ProductPage from './ProductPage/ProductPage';
 import NavigationBar from './NavigationBar/NavigationBar';
-
+// pre login functions
 const UnauthApp = () => {
   return (
     <>
