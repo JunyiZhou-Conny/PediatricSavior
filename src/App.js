@@ -14,12 +14,12 @@ const App = () => {
   const [chatbotLoaded, setChatbotLoaded] = useState(false);
   const [showParticipantIDPopup, setShowParticipantIDPopup] = useState(false);
   const [participantID, setParticipantID] = useState('');
-// obtaining roles
+// obtain roles
   useEffect(() => {
     const roles = user?.[`https://your_domain/roles`] || [];
     setIsUserAdmin(roles.includes('admin'));
   }, [user]);
-// an attempt at differentiating between refreshing and closing the tab
+// second attempt
   useEffect(() => {
     const loggedInFlag = sessionStorage.getItem('loggedIn');
     if (loggedInFlag) {
@@ -30,25 +30,41 @@ const App = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
+    // Set refreshing flag to true at start of session
+    sessionStorage.setItem('refreshing', 'true');
+
+    // Calculate time difference to determine action
+    const lastTime = sessionStorage.getItem('lastUnloadTime');
+    if (lastTime) {
+      const currentTime = Date.now();
+      const timeDiff = currentTime - lastTime;
+      if (timeDiff < 2000) {
+        console.log('Page was refreshed');
+      } else {
+        console.log('Page was closed and reopened');
+      }
+    }
+
+    window.addEventListener('unload', handleUnload);
     window.addEventListener('beforeunload', handleBeforeUnload);
+
     return () => {
+      window.removeEventListener('unload', handleUnload);
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [isAuthenticated]);
+  }, []);
 
   const handleBeforeUnload = (event) => {
+    sessionStorage.setItem('lastUnloadTime', Date.now().toString());
     if (!sessionStorage.getItem('refreshing')) {
       sessionStorage.removeItem('loggedIn');
       logout({ returnTo: window.location.origin });
     }
   };
 
-  useEffect(() => {
-    sessionStorage.setItem('refreshing', 'true');
-    window.addEventListener('unload', () => {
-      sessionStorage.removeItem('refreshing');
-    });
-  }, []);
+  const handleUnload = () => {
+    sessionStorage.removeItem('refreshing');
+  };
 // loading icon
   if (isLoading) {
     return (
