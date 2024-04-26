@@ -8,7 +8,8 @@
     flex-direction: column;
     gap: 10px;
     background-color: #355997;
-    
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+    word-wrap: break-word; /* Prevents long text strings from overflowing */
     
   }
 
@@ -22,8 +23,8 @@
     border-bottom-left-radius: 20px; /* Only the bottom-left corner will be rounded */
     margin-left: 40px;
     margin-right: 30px;
-    background-color: #355997; /* The dark blue background */
-    color: white; /* Text color */
+    background-color: #26292f; /* The dark blue background */
+    color: rgb(213, 204, 204); /* Text color */
     overflow-y: auto; /* Scrollable vertically */
     resize: none; /* Disable resizing */
     max-height: 200px; /* Maximum height */
@@ -34,16 +35,20 @@
     font-size: 16px;
   }
 
-  .chat-bot-form {
-    /*
-    margin-bottom: -100px !important; 
-    margin-top: -60px !important;
-    */
-  }
+  .loading-bar {
+    height: 20px;
+    background-color: #ccc;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
 
   .chat-input-button {
-    padding: 10px 20px;
-    background-color: #ccc !important; 
+    padding: 20px 20px;
+    background-color: #f2ecec !important; 
     color: black; /* Text color */
     border: none; /* Removes the border */
     border-top-right-radius: 20px; /* Only the top-right corner will be rounded */
@@ -59,4 +64,53 @@
     background-color: #e4c2d2; /* Lighter pink color on hover */
   }
   
+  .reset-buttom {
+    background-color: rgb(242, 110, 172);
+    margin-left: 10px; /* Adjust spacing as needed */
+}
   
+@keyframes dots {
+  0%, 20% {
+      color: white;
+      font-size: 30px;
+  }
+  40% {
+      color: grey;
+      font-size: 30px;
+  }
+  60% {
+      color: grey;
+      font-size: 30px;
+  }
+  80%, 100% {
+      color: white;
+      font-size: 30px;
+  }
+}
+
+.loading-message {
+  font-size: 20px;
+  color: white;
+  font-family: Nunito;
+  text-align: left;
+}
+
+.loading-message::after {
+  content: '...';
+  animation: dots 1.5s infinite;
+  width: 1ch;
+}
+
+button {
+  font-family: 'Nunito', sans-serif; /* Add fallback font */
+}
+
+.user-input{
+  margin-left: 10px;
+  padding-left: 10px;
+  background-color: rgb(213, 204, 204);
+}
+
+.chat-bot-form{
+  background-color: transparent;
+}

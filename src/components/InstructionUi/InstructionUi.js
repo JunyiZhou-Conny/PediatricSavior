@@ -24,7 +24,7 @@ const InstructionUi = () => {
             body: JSON.stringify({ text: editText })
         })
         .then(response => response.json())
-        .then(data => alert('File saved successfully'))
+        .then(data => alert('File saved successfully! Please click "Reset Conversation" in the chatbot interface to activate the new instruction.'))
         .catch(error => console.error('Error saving file:', error));
     };
 

@@ -7,7 +7,7 @@ import InstructionUi from './InstructionUi/InstructionUi';
 import LogoutButton from './Auth/LogOut/LogOut';
 import ProfileWindow from './Auth/Profile/ProfileWindow';
 import ParticipantIDPopup from './ParticipantIDPopup/ParticipantIDPopup';
-
+// post login functions
 const AuthenticatedApp = ({
   user,
   isUserAdmin,
@@ -19,9 +19,13 @@ const AuthenticatedApp = ({
   setShowParticipantIDPopup,
   isProfileModalVisible,
   setIsProfileModalVisible,
-  setParticipantID,  // Assuming this setter is also passed from App.js
-  setChatbotLoaded   // Assuming this setter is also passed from App.js
+  setParticipantID, 
+  setChatbotLoaded   
 }) => {
+  // funtionality will be listed here
+  // differentiate between admin and non-admim
+  // id popup for accessing chatbot interface
+  // show different functions depending on user role
   return (
     <div className="App">
       <header className="App-header">
@@ -44,15 +48,15 @@ const AuthenticatedApp = ({
       <div className="app-body">
         <div className="sidebar">
           <div className="user-info">{isUserAdmin ? 'ADMIN' : 'RESIDENT'}</div>
-          <SideButton value={'Airway Management Assistant'}
+          <SideButton value={'ChatBot'}
                       onClick={() => chatbotLoaded ? setActiveInterface('ChatbotUi') : setShowParticipantIDPopup(true)} />
           {isUserAdmin && <SideButton value={'Chat History'}
                                       onClick={() => setActiveInterface('ChatHistory')} />}
-          {isUserAdmin && <SideButton value={'Data Collection Assistant'}
+          {isUserAdmin && <SideButton value={'Data Collection'}
                                       onClick={() => setActiveInterface('DataCollectUi')} />}
           {isUserAdmin && <SideButton value={'Instruction Editor'}
                                       onClick={() => setActiveInterface('Instruction Editor')} />}                            
-          <LogoutButton />
+          <LogoutButton className='LogoutButton'/>
         </div>
         <div className="chat-container">
           {activeInterface === 'ChatbotUi' && <ChatbotUi participantID={participantID} />}
