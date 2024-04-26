@@ -9,10 +9,22 @@
 } 
 
 h3 {
-  color: white !important;   
+  color: black !important;   
 }
 
 
+
+.guiding-questions,
+.rapid-cycle, 
+.chat-gpt-role,
+.checklists,
+.primary-objective,
+.methods{
+    background-color: #c4c2cd;
+    border-radius:10px;
+    margin: -20px;
+    margin-left: 0px;
+}
 
 .guiding-questions-heading,
 .rapid-cycle-heading,
@@ -20,9 +32,11 @@ h3 {
 .checklists-heading, 
 .primary-objective-heading,
 .methods-heading {
-    color: #F6C95C;
+    /* color: #F6C95C; */
+    color: white;
     margin-top: 50px important;
     font-size: 32px;
+    border: 50px !important;
     /* margin-bottom: 0px; */
 }
 .guiding-questions-parent-container,
@@ -36,6 +50,8 @@ h3 {
     position: relative;
     overflow: visible;
 }
+
+
 .guiding-questions-image,
 .rapid-cycle-image,
 .chat-gpt-role-image,
@@ -43,7 +59,7 @@ h3 {
 .primary-objective-image,
 .methods-image {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 45%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -75,6 +91,8 @@ h3 {
   -webkit-animation-fill-mode: forwards
 }
 
+
+/*INDIVIDUALLY STYLE EACH IMAGE SEPARATELY*/
 .gq-image,
 .rc-image, 
 .cgr-image,
@@ -86,7 +104,7 @@ h3 {
     height: auto;
     margin-left: 90px;
     margin-top: 10px;
-    transform: scale(0.4);
+    transform: scale(0.6);
 }
 .guiding-questions-text,
 .rapid-cycle-text,
@@ -94,9 +112,9 @@ h3 {
 .checklists-text,
 .primary-objective-text,
 .methods-text {
-    color: white !important; /*This part wasn't shown in the SCSS*/
+    color: black !important; /*This part wasn't shown in the SCSS*/
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 45%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
@@ -118,21 +136,21 @@ h3 {
     animation: text-slide 4s cubic-bezier(.5,.5,0,1);
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards; */
-    background-color: #2D4371;
+    background-color: #c4c2cd;
   }
   .initial-position-adjustment {
     transform: translate(-50%, -50%) translateX(-100px); 
 }
 
 
-
-.study-population, 
-.assessment, 
-.intervention, 
-.post-intervention {
-    background-color: #ccc;
-    color: black;
+.content-box {
+    background-color: white;
+    border: 10px;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
+
 
 
 

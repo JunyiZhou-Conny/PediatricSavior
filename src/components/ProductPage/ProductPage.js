@@ -3,7 +3,12 @@
 import React from 'react';
 import { useState } from 'react';
 import './ProductPage.css';
-import gq_image from './gq-image.png'
+import gq_image from './img1.png';
+import rc_image from './img1.png';
+import cg_image from './img1.png';
+import cl_image from './img1.png';
+import po_image from './img1.png';
+import mo_image from './img1.png';
 import {  useRef, useEffect } from 'react';
 
 
@@ -82,18 +87,18 @@ const ProductPage = () => {
   }
 
   const initialImageStyle = {
-    transform: 'translate(-50%, -50%) translateX(-320px)',
+    transform: 'translate(-50%, -50%) translateX(-250px)',
   };
   
   return (
     <div className="product-page-container">
       <h1 className="guiding-questions-heading">Guiding Questions</h1>
-
       <section className="guiding-questions">
         <div className="guiding-questions-parent-container" style={{ height: containerHeightGQ }}>
         <div 
           className={`guiding-questions-image ${animateGQImage ? 'animate-image' : ''}`}
-          onClick={() => setAnimateGQImage(true)}
+          onClick={() => setAnimateGQImage(true)} //THIS IS KEY LINE !!!!!!!!!!*********
+          style={!animateGQImage ? initialImageStyle : {}}
         >
             <img 
               id="gq-image" 
@@ -103,7 +108,7 @@ const ProductPage = () => {
             />
           </div>
           <div className={`guiding-questions-text ${animateGQImage ? 'animate-image' : ''}`} ref={refGQ}
-          >
+          ><p> </p>
             <p>How can we improve basic airway management skills of residents using simulation?</p>
             <p>Are there other effective methods equivalent to Rapid Cycle Deliberate Practice 
               (RCDP) that could be utilized, particularly when time and resources are a limiting 
@@ -113,20 +118,24 @@ const ProductPage = () => {
             </p>
             <div className="guiding-questions-fading-effect"></div>
           </div>
+          
         </div>
       </section>
+      
     
 
-      <section className="rapid-cycle">
+      
       <h1 className="rapid-cycle-heading">Rapid Cycle</h1>
+      <section className="rapid-cycle">
       <div className="rapid-cycle-parent-container" style={{ height: containerHeightRC }}>
         <div 
           className={`rapid-cycle-image ${animateRCImage ? 'animate-image' : ''}`}
           onClick={() => setAnimateRCImage(true)}
+          style={!animateGQImage ? initialImageStyle : {}}
         >
             <img 
               id="rc-image" 
-              src=""
+              src={rc_image}
               className="rc-image"
               alt="rc-image"
             />
@@ -138,19 +147,24 @@ const ProductPage = () => {
             <p>Suggested RCDP is an effective method for simulation debriefing with procedural skills in pediatrics </p>
             <div className="rapid-cycle-fading-effect"></div>
           </div>
+          
         </div>
-      </section>
+        </section>
+        
+     
       
-      <section className="chat-gpt-role">
+      
         <h1 className="chat-gpt-role-heading">ChatGPT Role</h1>
+        <section className="chat-gpt-role">
         <div className="chat-gpt-role-parent-container" style={{ height: containerHeightCG }}>
           <div 
             className={`chat-gpt-role-image ${animateCGImage ? 'animate-image' : ''}`}
             onClick={() => setAnimateCGImage(true)}
+            style={!animateGQImage ? initialImageStyle : {}}
           >
               <img 
                 id="cgr-image" 
-                src=""
+                src={cg_image}
                 className="cgr-image"
                 alt="cgr-image"
               />
@@ -167,16 +181,18 @@ const ProductPage = () => {
           </div>
       </section>
       
-      <section className="checklists">
+      
         <h1 className="checklists-heading">Pediatric Airway Management Assessment Tools/Checklists</h1>
+        <section className="checklists">
         <div className="checklists-parent-container" style={{ height: containerHeightCL }}>
           <div 
             className={`checklists-image ${animateCLImage ? 'animate-image' : ''}`}
             onClick={() => setAnimateCLImage(true)}
+            style={!animateGQImage ? initialImageStyle : {}}
           >
               <img 
                 id="cl-image" 
-                src=""
+                src={cl_image}
                 className="cl-image"
                 alt="cl-image"
               />
@@ -193,16 +209,18 @@ const ProductPage = () => {
           </div>
       </section>
       
-      <section className="primary-objective">
+      
         <h1 className="primary-objective-heading">Primary Objective</h1>
+        <section className="primary-objective">
         <div className="primary-objective-parent-container" style={{ height: containerHeightPO }}>
           <div 
             className={`primary-objective-image ${animatePOImage ? 'animate-image' : ''}`}
             onClick={() => setAnimatePOImage(true)}
+            style={!animateGQImage ? initialImageStyle : {}}
           >
               <img 
                 id="po-image" 
-                src=""
+                src={po_image}
                 className="po-image"
                 alt="po-image"
               />
@@ -210,46 +228,49 @@ const ProductPage = () => {
             <div className={`primary-objective-text ${animatePOImage ? 'animate-image' : ''}`} ref={refPO}
             >
               <p>To determine if ChatGPT is equivalent to human simulation and debriefing with Rapid cycle Deliberate Practice (RCDP)</p>
+              <p>By doing so, we are able to significantly reduce the training time and the resources spent on training; and even if it does not come out to be as robust as expected, it can still serve as a great supporting resource</p>
               <div className="primary-objective-fading-effect"></div>
             </div>
           </div>
       </section>
       
-      <section className="methods">
+      
       <h1 className="methods-heading">Methods:</h1>
+      <section className="methods">
         <div className="methods-parent-container" style={{ height: containerHeightMO }}>
           <div 
             className={`methods-image ${animateMOImage ? 'animate-image' : ''}`}
             onClick={() => setAnimateMOImage(true)}
+            style={!animateGQImage ? initialImageStyle : {}}
           >
               <img 
                 id="mo-image" 
-                src=""
+                src={mo_image}
                 className="mo-image"
                 alt="mo-image"
               />
             </div>
-            <div className={`methods-text ${animateMOImage ? 'animate-image' : ''}`} ref={refMO}
-            >
-              <div className="study-population">
-                <h4>Study Population & Setting</h4>
-                <p>Pediatric Residents, Inpatient Rotation at Hughes Spalding (Morehouse and Emory).</p>
-              </div>
-              <div className="assessment">
-                <h4>Pre-Assessment</h4>
-                <p>Baseline Airway Simulation - Airway Checklist.</p>
-              </div>
-              <div className="intervention">
-                <h4>Intervention</h4>
-                <p>The study includes two arms: the Chat GPT Interactive Module and the Airway Simulation with RCDP Debriefing.</p>
-              </div>
-              <div className="post-intervention">
-                <h4>Post-Intervention</h4>
-                <p>Final Airway Simulation - Airway Checklist. The outcomes of both interventions are compared to measure effectiveness.</p>
+            <div className={`methods-text ${animateMOImage ? 'animate-image' : ''}`} ref={refMO}>
+            <div className="content-box">
+              <h4>Study Population & Setting</h4>
+              <p>Pediatric Residents, Inpatient Rotation at Hughes Spalding (Morehouse and Emory).</p>
             </div>
-            <div className="methods-fading-effect"></div>
+            <div className="content-box">
+              <h4>Pre-Assessment</h4>
+              <p>Baseline Airway Simulation - Airway Checklist.</p>
             </div>
-          </div>
+            <div className="content-box">
+              <h4>Intervention</h4>
+              <p>The study includes two arms: the Chat GPT Interactive Module and the Airway Simulation with RCDP Debriefing.</p>
+            </div>
+            <div className="content-box">
+              <h4>Post-Intervention</h4>
+              <p>Final Airway Simulation - Airway Checklist. The outcomes of both interventions are compared to measure effectiveness.</p>
+            </div>
+                <div className="methods-fading-effect"></div>
+            </div>
+            </div>
+        
       </section>
 
       <style jsx global>{`

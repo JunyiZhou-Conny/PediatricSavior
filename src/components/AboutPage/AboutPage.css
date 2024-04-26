@@ -1,184 +1,104 @@
 .about-page-container {
-    color: white !important;
-    background-color: #2D4371 !important;
-    font-family: 'Nunito', sans-serif !important;
-    font-weight: 900 !important;
-    max-width: 1000px !important;
-    margin: auto !important;
-    padding: 20px !important;
-
-    /*
-    color: #F6C95C;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 900;
-    */
-} 
-
-.guiding-questions-parent-container {
-    width: 100%;
-    height: 100vh;
-    display: block;
-    position: relative;
-    overflow: hidden;
-}
-.guiding-questions-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    z-index: 2; /* Makes sure this is on top */
-}
-
-
-.guiding-questions-image.animate-image img{
-  /* Apply the image animation only when the .animate-image class is present */
-  animation: image-slide 4s cubic-bezier(.5, .5, 0, 1) forwards;
-}
-
-.guiding-question-text.animate-image .fading-effect {
-  /* Apply the text animation only when the .animate-image class is present */
-  animation: text-slide 4s cubic-bezier(.5, .5, 0, 1) forwards; 
-  /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
-  animation: text-slide 4s cubic-bezier(.5,.5,0,1); */
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards
-}
-
-.gq-image {
-  background: transparent;
-    width: 60%;
-    height: auto;
-    margin-left: 90px;
-    margin-top: 10px;
-    transform: scale(0.4);
-}
-
-
-.guiding-question-text {
-    color: white; /*This part wasn't shown in the SCSS*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
-    z-index: 1; /* Places this below the image container */
-    margin-left: -100px;
-}
-.fading-effect {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
-    animation: text-slide 4s cubic-bezier(.5,.5,0,1);
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards; */
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
     background-color: #2D4371;
+    font-family: 'Nunito', sans-serif !important;
   }
-  /* Slides the image from left (-250px) to right (150px) */ 
-  @media screen and (min-width:1000px) {
-    
-        @keyframes image-slide {
-            0% {
-                transform: translatex(-250px) scale(0);
-            }
-            60% {
-                transform: translatex(-250px) scale(1);
-            }
-            90% {
-                transform: translatex(150px) scale(1);
-            }
-            100% {
-                transform: translatex(150px) scale(1);
-                opacity: 0;
-            }
-        }
 
-        @keyframes text-slide {
-            0% {
-                width: 100%;
-            }
-            60% {
-                width: 100%;
-            }
-            77% {
-                width: 0;
-            }
-            100% {
-                width: 0;
-            }
-        }
 
+.team-introduction {
+    color: white !important;
+}
+
+.main-heading,
+.team-name {
+    color: white;
+    border: 10px;
+}
+
+  .box-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Creates 4 columns */
+    grid-gap: 20px;
+    justify-items: center; /* Center each box horizontally */
+    background-color: #2D4371 !important;
+  }
+  
+  .box {
+    font-weight: bold;
+    background-color: #ccc; /* Light grey background */
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    width: 80%; /* Full width of the column */
+    height: auto; /* Adjust height based on content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Adds shadow for better visibility */
+    margin-bottom: 20px; /* Space between rows */
+  }
+  
+  .box-image {
+    width: 100%; /* Slightly less than full width for padding */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 150px; /* Limit image height */
+    object-fit: cover;  /* Cover the container without distorting the image */
+  object-position: center;
+  transition: transform 0.3s ease;
+  border-radius:50px;
+  }
+
+  .box:hover .box-image {
+    transform: scale(1.5); /* Adjust scale to desired zoom level */
+  }
+  
+  .image-description {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* Custom alignment for the last row */
+.box-container::after {
+    content: "";
+    width: 0;
+    grid-column: 1 / span 4; /* Takes full width */
+    visibility: hidden;
+  }
+  
+  @media (max-width: 800px) {
+    .box-container {
+      grid-template-columns: repeat(2, 1fr); /* 3 columns for smaller screens */
     }
-
-    @media screen and (max-width:1000px) {
-
-        @keyframes image-slide {
-            0% {
-                transform: translatex(-150px) scale(0);
-            }
-            60% {
-                transform: translatex(-150px) scale(1);
-            }
-            90% {
-                transform: translatex(120px) scale(1);
-            }
-            100% {
-                transform: translatex(120px) scale(1);
-            }
-        }
-
-
-        @keyframes text-slide {
-            0% {
-                width: 100%;
-            }
-            60% {
-                width: 100%;
-            }
-            77%{
-                width: 0;
-            }
-            100% {
-                width: 0;
-            }
-        }
-
-    }
-
-    @media screen and (max-width:450px) {
-
-        @keyframes image-slide {
-            0% {
-                transform: translatex(-80px) scale(0);
-            }
-            60% {
-                transform: translatex(-80px) scale(1);
-            }
-            90% {
-                transform: translatex(80px) scale(1);
-            }
-            100% {
-                transform: translatex(80px) scale(1);
-           }
-        }
-
-      @keyframes text-slide {
-            0% {
-                width: 100%;
-            }
-            60% {
-                width: 100%;
-            }
-            77% {
-                width: 0;
-            }
-            100% {
-                width: 0;
-            }
-      }
- }
-
-
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    width: 50%;
+    max-width: 600px;
+  }
+  
+  .close-button {
+    float: right;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  
