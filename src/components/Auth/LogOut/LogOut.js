@@ -10,11 +10,7 @@ const LogoutButton = () => {
     const logoutUrl = `${window.location.origin}/`; // change this route for aws integration
 
     return (
-<<<<<<< HEAD
       <button className='log-out-button' onClick={() => logout({ returnTo: window.location.origin })}>
-=======
-      <button onClick={() => logout({ returnTo: logoutUrl })}>
->>>>>>> ad14e165d3a9280c4507776d6d203dcaca25e9ac
         Log Out
       </button>
     );
