@@ -10,28 +10,36 @@ body, html {
 
 /* Headings and labels */
 .phase-label {
-  font-size: 1.25rem; /* Example size */
+  font-size: 2.0rem; /* Example size */
   color: rgb(246, 201, 92); /* Example color */
   margin-left: 20px; /* Align with the form containers */
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600 !important; 
+  margin-top: 70px;
+  margin-bottom: 10px;
 }
 
 /* Apply shared styles with a base class */
 .form-container {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
+  /*max-width: 1200px;*/
+  margin: 2% auto;
+  padding: 1%;
   background-color: #f2f2f2; /* Choose your preferred color */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
+  width: 90%; 
+  max-width: 55.5%;
 }
+
+
 
 /* Container styling */
 .profileContainer {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
@@ -43,11 +51,28 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
   resize:none;
+}
+
+
+
+/* Container styling */
+.objectivesContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* adjusts number of columns based on available space */
+  gap: 50px;
 }
 
 /* Container styling */
@@ -55,7 +80,7 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
@@ -67,7 +92,7 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
@@ -79,11 +104,29 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
   resize:none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* adjusts number of columns based on available space */
+  gap: 50px;
+}
+
+/* Container styling */
+.PMHContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* adjusts number of columns based on available space */
+  gap: 50px;
 }
 
 /* Container styling */
@@ -91,11 +134,26 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
   resize:none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* adjusts number of columns based on available space */
+  gap: 50px;
+}
+
+/* Container styling */
+.labContainer {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  resize:fixed;
 }
 
 /* Container styling */
@@ -103,11 +161,14 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
-  resize:none;
+  /* resize:none; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* adjusts number of columns based on available space */
+  gap: 50px;
 }
 
 
@@ -117,11 +178,14 @@ body, html {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #e5d7d7;
+  background-color: #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   overflow-y: auto;
   resize:none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* adjusts number of columns based on available space */
+  gap: 50px;
 }
 
 /* Title styling */
@@ -149,6 +213,8 @@ label {
   display: block;
   margin-bottom: 5px;
   color: #333;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
 }
 
 
@@ -161,17 +227,21 @@ textarea:focus {
 
 /* Button styling */
 .btn-primary {
-  background-color: #007bff;
-  color: white;
+  background-color: #e9a0a5;
+  color: black;
   padding: 10px 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  margin-left: 525px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #efd6d8;
 }
 
 /* Utility classes */
@@ -184,17 +254,63 @@ textarea:focus {
   height: 40px; /* Fixed height */
   padding: 0 10px; /* Padding inside the input */
   border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 10px; /* Rounded corners */
   resize: none;
+  flex: 1 0 180px; /* Flex-grow | Flex-shrink | Flex-basis */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+  .profile-input:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgb(74, 73, 73) !important;
+  }
 
 .case-input {
-  width: 80%; /* Adjust as needed */
-  height: 150px; /* Fixed height */
-  padding: 10px; /* Padding inside the input */
-  border: 1px solid #ccc; /* Border styling */
-  border-radius: 5px; /* Rounded corners */
-  resize: none; /* Disables resizing */
-  margin: 10px auto;
-  flex: 1; /* If using flexbox in the container */
+  width: 65%;
+  height: 150px;
+  margin: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  flex: 1 0 180px; /* Flex-grow | Flex-shrink | Flex-basis */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 10px !important;
+}
+
+.case-input:hover {
+  transform: scale(1.05); /* Slightly enlarge the avatar */
+  box-shadow: 0 2px 4px rgb(74, 73, 73) !important;
+}
+
+.case-input-long {
+  width: 328%;
+  height: 150px;
+  margin: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  flex: 1 0 180px; /* Flex-grow | Flex-shrink | Flex-basis */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 10px !important;
+}
+
+.case-input-long:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rbg(74, 73, 73) !important;
+  margin: 10px 5px !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start; /*This will push the button to the right */
+  padding-right: 20px; /* Optional padding on the right */
+}
+
+.phaseButton {
+  font-family: 'Nunito', sans-serif; 
+  font-weight: bold;
+  margin-left: 30px;
 }
