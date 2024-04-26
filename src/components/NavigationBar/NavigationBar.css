@@ -1,22 +1,19 @@
 /* Navigation links */
 .navigation-links {
-    color: #000; /* Black color for the text */
-    text-decoration: none;
-    font-size: 1em;
-    background-color: #2D4371;
-    position: fixed; /* Position the navigation bar */
-    top: 0; /* Align the top of the navigation bar with the top of the screen */
-    right: 0; /* Align the right side of the navigation bar with the right side of the screen */
-    display: flex; /* Use flexbox to align items horizontally */
-    align-items: center; /* Vertically center the items */
-  }
-  
-  /* Active class for navigation links */
-  .navigation-links.active {
-    background-color: #FF1493; /* Pink color for the active link */
-  }
-  
-  .home-button {
+  color: #000; /* Black color for the text */
+  text-decoration: none;
+  font-size: 1em;
+  background-color: #2D4371;
+}
+
+
+
+/* Active class for navigation links */
+.navigation-links.active {
+  background-color: #FF1493; /* Pink color for the active link */
+}
+
+.home-button {
     background-color: #2D4371;
     color: white;
     font-family: 'Nunito', sans-serif;
@@ -76,19 +73,16 @@
 .sign-in-button:hover {
 
 }
-  
-  .logo {
+
+.logo {
     background-color: #2D4371;
     font-size: 32px;
     font-family: 'Nunito', sans-serif;
     font-weight: bold;
+    margin-right: 850px;
     color: white;
-    position: fixed; /* Position the logo */
-    top: 0; /* Align the top of the logo with the top of the screen */
-    left: 0; /* Align the left side of the logo with the left side of the screen */
-    padding: 10px; /* Add some padding around the logo */
-  }
-  
-  .logo:hover {
+}
+
+.logo:hover{
     background-color: #2D4371;
-  }
+}
