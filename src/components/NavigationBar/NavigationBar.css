@@ -16,30 +16,66 @@
     background-color: #FF1493; /* Pink color for the active link */
   }
   
-  .home-button,
-  .product-button,
-  .about-us-button,
-  .sign-in-button {
+  .home-button {
     background-color: #2D4371;
     color: white;
     font-family: 'Nunito', sans-serif;
     font-weight: 550;
     cursor: pointer;
     padding: 8px 15px;
-    margin-right: 10px; /* Add some spacing between the buttons */
-  }
-  
-  .home-button:hover,
-  .product-button:hover,
-  .about-us-button:hover {
+}
+
+.home-button:hover {
     transform: scale(1.1) !important;
     background-color: #2D4371;
     transition: transform 0.3s ease;
-  }
-  
-  .sign-in-button {
+}
+
+.product-button {
+    background-color: #2D4371;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 550;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+.product-button:hover {
+    transform: scale(1.1) !important;
+    background-color: #2D4371;
+    transition: transform 0.3s ease;
+}
+
+.about-us-button {
+    background-color: #2D4371;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 550;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+.about-us-button:hover {
+    transform: scale(1.1) !important;
+    background-color: #2D4371;
+    transition: transform 0.3s ease;
+}
+
+.sign-in-button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 550;
+    padding: 8px 15px;
+    margin: 15px;
     background-color: #e9a0a5;
-  }
+    color: white ;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sign-in-button:hover {
+
+}
   
   .logo {
     background-color: #2D4371;
