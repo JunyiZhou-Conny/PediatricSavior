@@ -7,7 +7,7 @@ import InstructionUi from './InstructionUi/InstructionUi';
 import LogoutButton from './Auth/LogOut/LogOut';
 import ProfileWindow from './Auth/Profile/ProfileWindow';
 import ParticipantIDPopup from './ParticipantIDPopup/ParticipantIDPopup';
-
+// post login functions
 const AuthenticatedApp = ({
   user,
   isUserAdmin,
@@ -19,9 +19,13 @@ const AuthenticatedApp = ({
   setShowParticipantIDPopup,
   isProfileModalVisible,
   setIsProfileModalVisible,
-  setParticipantID,  // Assuming this setter is also passed from App.js
-  setChatbotLoaded   // Assuming this setter is also passed from App.js
+  setParticipantID, 
+  setChatbotLoaded   
 }) => {
+  // funtionality will be listed here
+  // differentiate between admin and non-admim
+  // id popup for accessing chatbot interface
+  // show different functions depending on user role
   return (
     <div className="App">
       <header className="App-header">
