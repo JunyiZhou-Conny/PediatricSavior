@@ -18,9 +18,6 @@ CORS(app)
 client = MongoClient(os.environ.get('MONGO_DB_CONNECTION_STRING', 'your_default_connection_string'))
 db = client[os.environ.get('DB_NAME', 'Chatbot_Data')]
 
-
-simulationFile = loadFile("backend/AssistantAPICall/case_1.json")
-
 temp_message = ""
 
 # Assuming global variables for managing conversation state
@@ -66,6 +63,15 @@ def save_instruction_text():
         file.write(text)
     return {'status': 'File saved successfully'}
 
+@app.route('/reset-conversation', methods=['POST'])
+def reset_conversation():
+    print('resetting conversation')
+    global conversation_thread, conversation_run
+    conversation_thread = None
+    conversation_run = None
+    reset()
+    return '', 204  # No Content response
+
 def store_conversation(user_input, bot_response, participantID):
     """Store the conversation in the MongoDB collection."""
     conversation_data = {
@@ -98,6 +104,7 @@ def init_conversation():
     print("Received init-conversation request with data:", request.json)
 
     global conversation_thread, conversation_run, simulationFile
+    simulationFile = next(db['case'].aggregate([{'$sample': {'size': 1}}]), None)
     if conversation_thread is None or conversation_run is None:
         # Only initialize if not already done
         data = request.json
@@ -136,6 +143,7 @@ def submit_user_input():
     wait_on_run(conversation_run, conversation_thread)
     last_message = getChatHistory(conversation_thread)[-1]
     temp_message = last_message
+    print(last_message)
     
     return jsonify({"response": last_message})
 

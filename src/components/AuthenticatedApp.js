@@ -44,15 +44,15 @@ const AuthenticatedApp = ({
       <div className="app-body">
         <div className="sidebar">
           <div className="user-info">{isUserAdmin ? 'ADMIN' : 'RESIDENT'}</div>
-          <SideButton value={'Airway Management Assistant'}
+          <SideButton value={'ChatBot'}
                       onClick={() => chatbotLoaded ? setActiveInterface('ChatbotUi') : setShowParticipantIDPopup(true)} />
           {isUserAdmin && <SideButton value={'Chat History'}
                                       onClick={() => setActiveInterface('ChatHistory')} />}
-          {isUserAdmin && <SideButton value={'Data Collection Assistant'}
+          {isUserAdmin && <SideButton value={'Data Collection'}
                                       onClick={() => setActiveInterface('DataCollectUi')} />}
           {isUserAdmin && <SideButton value={'Instruction Editor'}
                                       onClick={() => setActiveInterface('Instruction Editor')} />}                            
-          <LogoutButton />
+          <LogoutButton className='LogoutButton'/>
         </div>
         <div className="chat-container">
           {activeInterface === 'ChatbotUi' && <ChatbotUi participantID={participantID} />}

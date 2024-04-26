@@ -9,17 +9,29 @@ import './styles.css';
 
 const App = () => {
   const [activeInterface, setActiveInterface] = useState(null);
-  const { isAuthenticated, user, isLoading, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, user, isLoading, loginWithRedirect, logout } = useAuth0();
   const [isUserAdmin, setIsUserAdmin] = useState(false);
   const [isProfileModalVisible, setIsProfileModalVisible] = useState(false);
   const [chatbotLoaded, setChatbotLoaded] = useState(false);
   const [showParticipantIDPopup, setShowParticipantIDPopup] = useState(false);
-  const [participantID, setParticipantID] = useState(''); // New state for participantID
+  const [participantID, setParticipantID] = useState('');
 
   useEffect(() => {
-    const roles = user?.['https://your_domain/roles'] || [];
+    const roles = user?.[`https://your_domain/roles`] || [];
     setIsUserAdmin(roles.includes('admin'));
   }, [user]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [logout]);
 
   if (isLoading) {
     return (
@@ -43,10 +55,9 @@ const App = () => {
           setShowParticipantIDPopup={setShowParticipantIDPopup}
           isProfileModalVisible={isProfileModalVisible}
           setIsProfileModalVisible={setIsProfileModalVisible}
-          setParticipantID = {setParticipantID}
-          setChatbotLoaded = {setChatbotLoaded}
-          participantID = {participantID}
-
+          setParticipantID={setParticipantID}
+          setChatbotLoaded={setChatbotLoaded}
+          participantID={participantID}
         />
       ) : (
         <UnauthApp />

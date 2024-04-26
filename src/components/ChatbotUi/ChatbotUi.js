@@ -6,7 +6,31 @@ export default function ChatbotUi(){
 
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false); // New loading state
+    const [isLoading, setIsLoading] = useState(false); // Loading for text generation
+    const [loading, setLoading] = useState(false); //Loading for initalization
+
+
+
+    const handleResetConversation = () => {
+        // Call backend to reset the conversation
+        fetch('http://localhost:4999/reset-conversation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                console.log('Conversation reset successfully');
+                setMessages([]); // Clear the messages array in frontend
+                setUserInput(""); // Clear the input field if needed
+                initializeChat(); // Initialize the conversation after reset
+            } else {
+                console.error('Failed to reset the conversation');
+            }
+        })
+        .catch(error => console.error('Error resetting the conversation:', error));
+    };
+    
 
     const fetchImage = (id) => {
       // Example fetch request to your backend endpoint that serves the image
@@ -71,6 +95,7 @@ export default function ChatbotUi(){
         .then(response => response.json())
         .then(data => {
             const messageText = data.message;
+            //const formattedText = `<pre>${messageText}</pre>`;
             const botMessage = { id: Date.now(), text: messageText, sender: 'bot', type: 'text' };
 
             const match = messageText.match(/Related image found, image id is (\d+)/);
@@ -95,6 +120,7 @@ export default function ChatbotUi(){
 
   
   const initializeChat = () => {
+    setLoading(true);
     fetch('http://localhost:4999/init-conversation', {
         method: 'POST',
         headers: {
@@ -105,7 +131,12 @@ export default function ChatbotUi(){
     .then(response => response.json())
     .then(data => {
         console.log("Chat initialized:", data);
-        // Optionally update the UI with a welcome message or other initial state
+    })
+    .then(
+        setTimeout(() => {
+            setLoading(false); // Stop showing the loading bar after 5 seconds
+        }, 5000))
+    .then(data => {
         const botMessage = { id: Date.now(), text: 'Please type "Begin Simulation" to begin', sender: 'bot', type: 'text' };
         setMessages(prevMessages => [...prevMessages, botMessage]);
     })
@@ -114,31 +145,53 @@ export default function ChatbotUi(){
     });
 };
 
-    // Initialize chat on component mount
-    useEffect(() => {
-        initializeChat();
-    }, []);
+    // // Initialize chat on component mount
+    // useEffect(() => {
+    //     initializeChat();
+    // }, []);
   
     const chatWindowRef = useRef(null);
     useEffect(() => {
       const chatWindow = chatWindowRef.current;
       chatWindow.scrollTop = chatWindow.scrollHeight;
+      sessionStorage.setItem('abc', JSON.stringify(messages));
     }, [messages]);
 
+    useEffect(() => {
+
+        console.log(savedMessages)
+        if (savedMessages) {
+            console.log('Not first visit')
+            setMessages(JSON.parse(savedMessages));
+        }else{
+            console.log('first visit')
+            handleResetConversation();
+        }
+    }, []);
+    const savedMessages = sessionStorage.getItem('abc')
+
     return (
-      <div>
-          <div className="chat-window" ref={chatWindowRef}>
-              {messages.map((msg) => (
-                  <div key={msg.id} className={`message ${msg.sender}`}>
-                      {msg.type === 'text' ? msg.text : <img src={msg.text} alt="Chatbot response" className="chat-image"/>}
-                  </div>
-              ))}
-              {isLoading && <div className="loading-message">Generating response...</div>}
-          </div>
-          <form className="chat-bot-form" onSubmit={handleSubmit}>
-              <input type="text" value={userInput} onChange={handleUserInput} placeholder="Say something..." />
-              <button type="submit">Send</button>
-          </form>
-      </div>
-  );
+        <div>
+            <div className="chat-window" ref={chatWindowRef}>
+                {messages.map((msg) => (
+                    <div key={msg.id} className={`message ${msg.sender}`}>
+                        {msg.type === 'text' ? <div className="formatted-text">{msg.text}</div> : <img src={msg.text} alt="Chatbot response" className="chat-image"/>}
+                    </div>
+                ))}
+                {isLoading && <div className="loading-message">Generating response </div>}
+            </div>
+            <form className="chat-bot-form" onSubmit={handleSubmit}>
+                {loading ? (
+                    <div className="loading-bar">Chatbot Initializing ... </div>
+                ) : (
+                    <>
+                        <input type="text" className='user-input'value={userInput} onChange={handleUserInput} placeholder="Say something..." />
+                        <button type="submit" >Send</button>
+                        <button type="button" className='reset-buttom'onClick={handleResetConversation}>Reset Conversation</button>
+                    </>
+                )}
+            </form>
+        </div>
+      );
+      
 }

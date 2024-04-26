@@ -15,6 +15,21 @@ assistant = client.beta.assistants.create(
 )
 ASSISTANT_ID = assistant.id
 
+def reset():
+    global client, assistant, ASSISTANT_ID
+    client = OpenAI()
+    with open("backend/AssistantAPICall/instruction_text.txt", "r") as file:
+        instruction = file.read()
+
+    assistant = client.beta.assistants.create(
+        name="Airway Training Assistant",
+        instructions=instruction,
+        model="gpt-4-turbo-preview",
+    )
+    ASSISTANT_ID = assistant.id
+    return None
+
+
 
 def initialize(user_message, simulationFile):
     """

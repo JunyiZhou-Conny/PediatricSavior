@@ -22,7 +22,7 @@
 }
 
 body, html {
-  height: 100%;
+  height: auto;
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #2D4371;
@@ -142,9 +142,6 @@ input {
   
 }
 
-
-
-
 button {
   padding: 10px 20px;
   background-color: #e9a0a5;
@@ -179,7 +176,7 @@ button:hover {
 }
 
 
-.sidebar button, .logout-button {
+.sidebar button {
   font-size: 20px;
   width: 100%;
   text-align: center;
