@@ -10,12 +10,12 @@ import simonImage from './simon-cs370.JPG'
 
 const teamMembers = [
   { id: 1, name: 'Conny Zhou', description: 'Class of 2025 \nMajor: AMS \nBest Team Lead, responsible for authentication, FrontEnd, BackEnd and Graphic Designs', imgSrc: connyImage },
-  { id: 2, name: 'Simon Liu', description: 'Person 2 Description', imgSrc: simonImage },
-  { id: 3, name: 'Chloe Liu', description: 'Person 3 Description', imgSrc: '/path-to-person3.jpg' },
-  { id: 4, name: 'David', description: 'Person 4 Description', imgSrc: davidImage },
-  { id: 5, name: 'Ryan Meng', description: 'Person 5 Description', imgSrc: ryanImage },
-  { id: 6, name: 'Harutoshi Okumura', description: 'Person 6 Description', imgSrc: haruImage },
-  { id: 7, name: 'Blake', description: 'Person 7 Description', imgSrc: '/path-to-person7.jpg' },
+  { id: 2, name: 'Simon Liu', description: 'Class of 2025. Major: History & Philosophy, responsible for BackEnd, Chat Bot, Prompt Engineering ', imgSrc: simonImage },
+  { id: 3, name: 'Chloe Liu', description: 'Class of 2025. Major: Computer Science & BBA (Minor), responsible for BackEnd, FrontEnd-BackEnd Merging, Database Management', imgSrc: '/path-to-person3.jpg' },
+  { id: 4, name: 'David Chen', description: 'Class of 2025. Major: Computer Science & Mathematics, responsible for BackEnd, Chat Bot, Prompt Engineering', imgSrc: davidImage },
+  { id: 5, name: 'Ryan Meng', description: 'Class of 2025. Major: Math and Computer Science Joint Major & Economics', imgSrc: ryanImage },
+  { id: 6, name: 'Harutoshi Okumura', description: 'Class of 2026. Major: Computer Science & Applied Mathematics and Statistics, responsible for FrontEnd, Landing Page', imgSrc: haruImage },
+  { id: 7, name: 'Blake Grudzien', description: 'Class of 2026. Major: Computer Science & Math Minor, responsible for FrontEnd, FrontEnd-BackEnd', imgSrc: '/path-to-person7.jpg' },
 ];
 
 
