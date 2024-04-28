@@ -143,12 +143,25 @@ export default function ChatbotUi(){
     .catch(error => {
         console.error('Error initializing chat:', error);
     });
-};
+    };
 
-    // // Initialize chat on component mount
-    // useEffect(() => {
-    //     initializeChat();
-    // }, []);
+    const submitChatHistory = () => {
+        const history = sessionStorage.getItem('abc');
+        if (history) {
+            fetch('http://localhost:4999/submit-chat-history', { // Adjust URL as needed
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: history
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Chat history submitted successfully:', data);
+            })
+            .catch(error => console.error('Error submitting Chat history:', error));
+        }
+    };
   
     const chatWindowRef = useRef(null);
     useEffect(() => {
@@ -185,9 +198,11 @@ export default function ChatbotUi(){
                     <div className="loading-bar">Chatbot Initializing ... </div>
                 ) : (
                     <>
+                        <button type="button" className='reset-button'onClick={handleResetConversation}>Reset</button>
                         <input type="text" className='user-input'value={userInput} onChange={handleUserInput} placeholder="Say something..." />
                         <button type="submit" >Send</button>
-                        <button type="button" className='reset-buttom'onClick={handleResetConversation}>Reset Conversation</button>
+                        <button type="button" className='save-conversation-button'onClick={submitChatHistory}>Save</button> 
+    
                     </>
                 )}
             </form>

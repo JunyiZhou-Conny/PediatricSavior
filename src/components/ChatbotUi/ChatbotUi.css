@@ -8,8 +8,8 @@
     flex-direction: column;
     gap: 10px;
     background-color: #355997;
-    white-space: pre-wrap; /* Preserves whitespace and wraps text */
-    word-wrap: break-word; /* Prevents long text strings from overflowing */
+    /*white-space: pre-wrap; /* Preserves whitespace and wraps text */
+    /*word-wrap: break-word; /* Prevents long text strings from overflowing */
     
   }
 
@@ -64,9 +64,13 @@
     background-color: #e4c2d2; /* Lighter pink color on hover */
   }
   
-  .reset-buttom {
+  .reset-button {
     background-color: rgb(242, 110, 172);
     margin-left: 10px; /* Adjust spacing as needed */
+}
+.save-conversation-button {
+  background-color: rgb(199, 175, 186);
+  margin-left: 10px; /* Adjust spacing as needed */
 }
   
 @keyframes dots {

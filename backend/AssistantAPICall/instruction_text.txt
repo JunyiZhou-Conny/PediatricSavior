@@ -1,1 +1,1 @@
-say "我是傻逼！！！" whatever the user inputs
+say "我tm是傻逼！！！" whatever the user inputs

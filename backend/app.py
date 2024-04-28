@@ -23,7 +23,7 @@ temp_message = ""
 # Assuming global variables for managing conversation state
 conversation_thread = None
 conversation_run = None
-participantID = None
+global_participant_id = None
 
 # @app.route('/api/instruction-text', methods=['GET'])
 # def get_instruction_text():
@@ -72,19 +72,47 @@ def reset_conversation():
     reset()
     return '', 204  # No Content response
 
-def store_conversation(user_input, bot_response, participantID):
+@app.route('/submit-chat-history', methods=['POST'])
+@cross_origin()
+def store_conversation():
+    global global_participant_id
     """Store the conversation in the MongoDB collection."""
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
     conversation_data = {
-        'user_input': user_input,
-        'bot_response': bot_response,
-        'participantID': participantID, #Store participantID with each conversation
-        'timestamp': datetime.now(timezone.utc) # Store the current timestamp
+        'participantID': global_participant_id, #Store participantID with each conversation
+        'timestamp': datetime.now(timezone.utc), # Store the current timestamp
+        'history': data
     }
     try:
         # Insert the conversation data into the 'conversations' collection
         db.conversations.insert_one(conversation_data)
+        return {'status': 'History uploaded successfully'}
     except Exception as e:
         print(f"An error occurred while inserting to MongoDB: {e}")
+
+def get_conversation_history_from_db(participant_id):
+    try:
+        collection = db['conversations']
+        # Query MongoDB for the conversation history
+        history = list(collection.find({"participantID": participant_id}, {'_id': 0}))
+        print(history)
+        return history
+    except Exception as e:
+        print(f"An error occurred while fetching data: {e}")
+        return []
+
+@app.route('/get-conversation-history/<participant_id>', methods=['GET'])
+def get_history(participant_id):
+    if not participant_id:
+        return jsonify({'error': 'Participant ID is required'}), 400
+
+    history = get_conversation_history_from_db(participant_id)
+    if not history:
+        return jsonify({'error': 'No conversation history found for this ID'}), 404
+
+    return jsonify({'conversationHistory': history}), 200
 
 @app.route('/set-participant-id', methods=['POST'])
 def set_participant_id():
