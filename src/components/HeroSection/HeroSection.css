@@ -49,7 +49,7 @@ body {
     max-width: 600px;
     padding-left: 50px;
     overflow: hidden;
-    border-right: .1em solid orange; /* The cursor */
+    border-right: transparent; /* The cursor */
     white-space: nowrap;
     /* Combine both animations into a single declaration */
     animation: typing 4s steps(40, end) forwards, /* Type out the text */
