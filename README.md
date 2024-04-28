@@ -74,28 +74,32 @@
 <p>Details about the design and implementation of the chatbot interface using React.</p>
 
 ### Data Collection Page Design
-The React-based chatbot interface is designed to gather detailed, scenario-specific information through a structured and user-friendly web application. This interface effectively manages complex forms with deeply nested data and multiple phases using React’s stateful components.
+The `App` component is designed to manage a complex form for collecting detailed patient and medical scenario data. It utilizes React's state management capabilities with the `useState` hook to handle user inputs and dynamic form modifications.
 
-#### Overview of Key Features
-##### Dynamic Forms
-- **Custom Components**: The interface utilizes custom React components, `FormInput` and `TextareaInput`, to capture a variety of data points ranging from basic text inputs to more detailed text areas for extensive data entry.
-- **Modular Approach**: This modular approach allows for reusability and consistency across the interface.
+#### Structure and Functionality
+##### State Management
+- `formData` for storing detailed patient and scenario information.
+- `phases` for managing an array of medical phases, each containing specific medical data.
+- `isSubmitting` to control the submission process and prevent duplicate submissions.
 
-##### Complex State Management
-- **Hierarchical Structures**: The application’s state is meticulously organized into hierarchical structures using the `useState` hook, which holds scenario outlines, patient reports, and multi-phase clinical data.
-- **Effective Management**: This allows for managing intricate data relationships and state changes effectively.
+##### Form Handling Functions
+- `handleChange` updates nested fields within `formData`.
+- `handlePhaseChange` updates nested fields within a specific phase in the `phases` array based on user interaction.
+- `addPhase` allows users to dynamically add new phases to the form.
+- `handleSubmit` handles form submission, sending data to a server and managing the submission status.
 
-##### Nested Data Handling
-- **Sophisticated Functions**: The interface features sophisticated functions, `handleChange` and `handlePhaseChange`, that update the state based on user input.
-- **Deep Copying and Path Resolution**: These functions handle changes to nested data using deep copying techniques and path resolution, ensuring the integrity and isolation of state updates.
+##### User Interface
+The form is divided into multiple sections to input various types of data:
+- Scenario outlines and objectives.
+- Patient basic information and medical history.
+- Detailed inputs for each phase including vital signs and medical procedures.
+Dynamic form sections allow for the addition of new phases as needed.
+Submission controls include buttons for adding phases and submitting the entire form.
 
-##### Form Submission with Validation
-- **Data Submission**: Data submission is handled via a `handleSubmit` function, which performs a POST request to a server endpoint.
-- **Prevention of Multiple Submissions**: It incorporates mechanisms to prevent multiple submissions and can be extended to include data validation to ensure accuracy and completeness of the information submitted.
+#### Interaction
+Users can input and edit data across various nested fields and dynamically add more phases as required. The form provides comprehensive data collection capabilities with structured input handling for complex scenarios, making it suitable for detailed medical data entry tasks.
 
-##### User Interaction and Feedback
-- **Interactive Elements**: The design includes interactive elements such as buttons to add new phases and submit the overall data.
-- **Feedback Mechanisms**: User feedback mechanisms like alerts and disabling submission during processing are in place to enhance user experience and prevent data errors.
+
 
 ### Chat History Design
 <p>Explanation of the chat history feature design on the frontend.</p>
@@ -106,10 +110,13 @@ The React-based chatbot interface is designed to gather detailed, scenario-speci
 ## BackEnd Design
 ### MongoDB Database
 <p>Description of the MongoDB database setup and schema used for the project.</p>
+
 ### GPT Training
 <p>Insight into how GPT models are trained for this project.</p>
+
 ### Selenium
 <p>Details on the use of Selenium for backend automation and testing.</p>
+
 ### Authentication With Auth0
 <p>Explanation of backend authentication mechanisms using Auth0.</p>
 
