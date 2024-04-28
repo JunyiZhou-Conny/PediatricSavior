@@ -158,6 +158,8 @@ export default function ChatbotUi(){
             .then(response => response.json())
             .then(data => {
                 console.log('Chat history submitted successfully:', data);
+            }).then(data => {
+                alert('Chat history saved successfully!')
             })
             .catch(error => console.error('Error submitting Chat history:', error));
         }
