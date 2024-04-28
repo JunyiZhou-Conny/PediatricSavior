@@ -1,6 +1,5 @@
 # CS 370 Pediatric Savior Airway Management Simulation Chatbot
 
-
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -9,14 +8,14 @@
       <ul>
         <li><a href="#guide-for-residents">Guide For Residents</a>
           <ul>
-            <li><a href="#sign-up-sign-in">Sign-Up/Sign-In</a></li>
-            <li><a href="#airway-management-assistant">Airway Management Assistant</a></li>
+            <li><a href="#sign-up-sign-in1">Sign-Up/Sign-In</a></li>
+            <li><a href="#airway-management-assistant1">Airway Management Assistant</a></li>
           </ul>
         </li>
         <li><a href="#guide-for-researchers">Guide For Researchers</a>
           <ul>
-            <li><a href="#sign-up-sign-in">Sign-Up/Sign-In</a></li>
-            <li><a href="#airway-management-assistant">Airway Management Assistant</a></li>
+            <li><a href="#sign-up-sign-in2">Sign-Up/Sign-In</a></li>
+            <li><a href="#airway-management-assistant2">Airway Management Assistant</a></li>
             <li><a href="#data-collection">Data Collection</a></li>
             <li><a href="#chat-history">Chat History</a></li>
           </ul>
@@ -35,19 +34,15 @@
       <ul>
         <li><a href="#mongodb-database">MongoDB Database</a></li>
         <li><a href="#gpt-training">GPT Training</a></li>
-        <li><a href="#selenium">Selenium</a></li>
-        <li><a href="#authentication-with-auth0-backend">Authentication With Auth0</a></li>
       </ul>
     </li>
     <li><a href="#aws-hosting">AWS Hosting</a>
       <ul>
         <li><a href="#backend-hosting-aws-elastic-beanstalk">Backend Hosting - AWS Elastic Beanstalk</a></li>
         <li><a href="#frontend-hosting">FrontEnd Hosting</a></li>
-        <li><a href="#chat-history-design-aws">Chat History Design</a></li>
-      </ul>
-    </li>
-  </ol>
-</details>
+        <li><a href="#Obtaining-SSL-Certificate-and-Domain Purchases">Obtaining SSL Certificate and Domain Purchases</a></li>
+        <li><a href="#Adding-SSL-Certificate-and-DNS-Configuration">Adding SSL Certificate and DNS Configuration</a></li>
+
 
 ## Overview of the Project
 <p>This section will provide a comprehensive overview of the Pediatric Savior Airway Management Simulation Chatbot project, including its objectives, scope, and impact on pediatric care training.</p>
@@ -55,16 +50,28 @@
 ## User Guide
 ### Guide For Residents
 #### Sign-Up/Sign-In
+
+<a name="sign-up-sign-in1"></a>
+
 <p>Instructions for residents to sign up and sign in to the system.</p>
 
 #### Airway Management Assistant
+
+<a name="airway-management-assistant1"></a>
+
 <p>Details on how residents can use the airway management assistant feature.</p>
 
 ### Guide For Researchers
+
+<a name="sign-up-sign-in2"></a>
+
 #### Sign-Up/Sign-In
 <p>Instructions for researchers to sign up and sign in to the system.</p>
 
 #### Airway Management Assistant
+
+<a name="airway-management-assistant2"></a>
+
 <p>Explanation of how the airway management assistant supports researchers.</p>
 
 #### Data Collection
@@ -74,7 +81,10 @@
 <p>Information on accessing and utilizing chat history for research purposes.</p>
 
 ## FrontEnd Design
+<a name="react-framework-chatbot-interface"></a>
+
 ### React Framework ChatBot Interface Design
+
 The `ChatbotUi` component is designed to facilitate interactive conversations with a ChatGPT-like model by managing message exchanges and dynamic content within a chat interface.
 
 #### State Management
@@ -163,9 +173,6 @@ The component renders the following UI elements:
 ### GPT Training
 <p>Insight into how GPT models are trained for this project.</p>
 
-### Authentication With Auth0
-<p>Explanation of backend authentication mechanisms using Auth0.</p>
-
 ## AWS Hosting
 
 Our final product is hosted on the Internet to allow public access utilizing AWS as our intermediary. In particular, we utilized 2 services offerred by AWS: Amazon S3 bucket and Amazon Elastic Beanstalk. Each service is responsible for different roles which are specified below.
@@ -173,9 +180,13 @@ Our final product is hosted on the Internet to allow public access utilizing AWS
 Here is the heuristic between how these 2 services interact with each other:
 
 1.  **AWS Elastic Beanstalk**: This service allows you to deploy and scale web applications and services quickly. You can upload your application code to Elastic Beanstalk, and it automatically takes care of deployment details like capacity provisioning, load balancing, auto-scaling, and health monitoring. It supports a range of programming languages and integrates with services such as EC2 and Elastic Load Balancing, making it easier to manage applications without deep knowledge of the infrastructure ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/)) ([AWS Documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html)) ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
-1.  **Amazon S3 Bucket Static Website Hosting**: This service enables you to host a static website on Amazon S3. By enabling this feature on an S3 bucket, you can serve static content (HTML, CSS, JavaScript, images) directly from S3, a highly durable and available storage service. It simplifies web hosting without the need for a server, since S3 can deliver the content directly to the web browser ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
-1.  **Amazon Route 53 Domain Name Purchases**: Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web service. It not only routes users to your internet applications by translating domain names into IP addresses but also allows you to purchase and manage domain names. Through Route 53, you can buy domain names and automatically configure DNS settings for them ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
-1.  **Amazon CloudFront**: This is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds. CloudFront integrates with other Amazon Web Services products to give developers and businesses an easy way to distribute content to end-users with no minimum usage commitments ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+2.   **Amazon S3 Bucket Static Website Hosting**: This service enables you to host a static website on Amazon S3. By enabling this feature on an S3 bucket, you can serve static content (HTML, CSS, JavaScript, images) directly from S3, a highly durable and available storage service. It simplifies web hosting without the need for a server, since S3 can deliver the content directly to the web browser ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+3.  **Amazon Route 53 Domain Name Purchases**: Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web service. It not only routes users to your internet applications by translating domain names into IP addresses but also allows you to purchase and manage domain names. Through Route 53, you can buy domain names and automatically configure DNS settings for them ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+4.   **Amazon CloudFront**: This is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds. CloudFront integrates with other Amazon Web Services products to give developers and businesses an easy way to distribute content to end-users with no minimum usage commitments ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+
+
+
+<a name="backend-hosting-aws-elastic-beanstalk"></a>
 
 ### Backend Hosting - AWS Elastic Beanstalk
 #### Preparing the Backend for Deployment
@@ -269,6 +280,7 @@ Here is the heuristic between how these 2 services interact with each other:
      - requirements.txt
      - application.py
      - AssistantAPICall folder
+     - env.list is optional if you pass the environment variable into the environment through configuration
    - Be sure to choose Dokcer as your platform when creating the environment
    - Use VPC and choose corresponding subnets
    - Go to configuration and open the elastic load balancer option and add new listener on port 443 that accepts HTTPS request. To accomplish this, you need SSL certificate and custom domain name. Check the section later for a detailed review
@@ -278,10 +290,8 @@ Here is the heuristic between how these 2 services interact with each other:
 
 1. **Prepare Local Frontend Copy:**
    - Clone the frontend repository into a local folder. Update the API calls as necessary.
-   - Updating the API call is of great importance especially after setting the backend configuration
-   - Remember, never upload your S3 before getting the correct API url to call for.
-   - We have api.connyzhou.com as the API entry. So be sure to modify all of the fetch functions. For instance, when running on your local machine, you might be calling to http://localhost4999/submit-user-input. Modify this to https://api.conyzhou.com/submit-user-input when you are ready to upload it to S3 bucket
-
+   - Updating the API call is of great importance especially after setting the backend configuration. We have api.connyzhou.com as the API entry.  You might be wondering why that is the case. This is due to that Auth0 requires HTTPS protocols. Check the SSL Certificate section for detail overview. So be sure to modify all of the fetch functions. For instance, when running on your local machine, you might be calling to http://localhost4999/submit-user-input. Modify this to https://api.conyzhou.com/submit-user-input when you are ready to upload it to S3 bucket
+   
 2. **Build Frontend:**
    
    - Run `npm install` and `npm run build` to create a production build. The content of this build contains the following files:
