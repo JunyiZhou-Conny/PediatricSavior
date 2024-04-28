@@ -76,19 +76,18 @@
 ### Data Collection Page Design
 The `App` component is designed to manage a complex form for collecting detailed patient and medical scenario data. It utilizes React's state management capabilities with the `useState` hook to handle user inputs and dynamic form modifications.
 
-#### Structure and Functionality
-##### State Management
+#### State Management
 - `formData` for storing detailed patient and scenario information.
 - `phases` for managing an array of medical phases, each containing specific medical data.
 - `isSubmitting` to control the submission process and prevent duplicate submissions.
 
-##### Form Handling Functions
+#### Form Handling Functions
 - `handleChange` updates nested fields within `formData`.
 - `handlePhaseChange` updates nested fields within a specific phase in the `phases` array based on user interaction.
 - `addPhase` allows users to dynamically add new phases to the form.
 - `handleSubmit` handles form submission, sending data to a server and managing the submission status.
 
-##### User Interface
+#### User Interface
 The form is divided into multiple sections to input various types of data:
 - Scenario outlines and objectives.
 - Patient basic information and medical history.
@@ -99,10 +98,33 @@ Submission controls include buttons for adding phases and submitting the entire 
 #### Interaction
 Users can input and edit data across various nested fields and dynamically add more phases as required. The form provides comprehensive data collection capabilities with structured input handling for complex scenarios, making it suitable for detailed medical data entry tasks.
 
-
-
 ### Chat History Design
-<p>Explanation of the chat history feature design on the frontend.</p>
+The `ChatHistory` component is designed to fetch and display chat history based on user inputs using the React framework. Below is a concise description of its structure and functionality:
+
+#### State Management
+The component maintains several pieces of state:
+- `participantID`: Stores the inputted participant ID.
+- `dateFilter`: Holds the selected date to filter the chat history.
+- `chatHistory`: Contains the fetched chat conversations, organized by date.
+- `error`: Captures and displays any errors during the chat data fetching process.
+
+#### Event Handlers
+- **handleParticipantIDChange**: Updates the `participantID` state with the user's input.
+- **handleDateChange**: Sets the `dateFilter` state based on the user's date selection.
+
+#### Data Fetching and Processing
+- **fetchChatHistory**: An asynchronous function that:
+  - Retrieves chat history data from a specified endpoint using the participant ID.
+  - Processes this data to group messages by their respective dates.
+  - Applies a date filter if specified.
+  - Handles any errors by setting the `error` state.
+
+#### Rendering
+The component renders the following UI elements:
+- **Input Fields**: For entering the participant ID and selecting a date filter.
+- **Fetch Button**: Triggers the chat history fetching process.
+- **Error Display**: Conditionally shown if an error occurs during data fetching.
+- **Chat Logs**: Displays the chat history, grouped by date, if available.
 
 ### Authentication With Auth0
 <p>Overview of how Auth0 is used for authentication in the frontend.</p>
