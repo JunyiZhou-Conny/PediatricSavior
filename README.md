@@ -75,7 +75,7 @@
 
 ## FrontEnd Design
 ### React Framework ChatBot Interface Design
-The `ChatbotUi` component in React is designed to facilitate interactive conversations with a chatbot. It manages message exchanges, chat initialization, and dynamic content like images within a chat interface. Here's a breakdown of its main features and functionalities:
+The `ChatbotUi` component is designed to facilitate interactive conversations with a ChatGPT-like model by managing message exchanges and dynamic content within a chat interface.
 
 #### State Management
 The component leverages React's `useState` hook to manage various states:
@@ -101,7 +101,7 @@ The component leverages React's `useState` hook to manage various states:
 - **Loading Indicators**: Displays visual indicators during chatbot response generation and initialization, enhancing the interactive experience.
 
 ### Data Collection Page Design
-The `App` component is designed to manage a complex form for collecting detailed patient and medical scenario data. It utilizes React's state management capabilities with the `useState` hook to handle user inputs and dynamic form modifications.
+Designed to manage complex forms for collecting detailed medical scenario data, utilizing React's state management capabilities.
 
 #### State Management
 - `formData` for storing detailed patient and scenario information.
@@ -126,7 +126,7 @@ Submission controls include buttons for adding phases and submitting the entire 
 Users can input and edit data across various nested fields and dynamically add more phases as required. The form provides comprehensive data collection capabilities with structured input handling for complex scenarios, making it suitable for detailed medical data entry tasks.
 
 ### Chat History Design
-The `ChatHistory` component is designed to fetch and display chat history based on user inputs using the React framework. Below is a concise description of its structure and functionality:
+Fetches and displays chat history based on user inputs using React framework.
 
 #### State Management
 The component maintains several pieces of state:
