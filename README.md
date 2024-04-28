@@ -76,29 +76,30 @@
 ### Data Collection Page Design
 The React-based chatbot interface is designed to gather detailed, scenario-specific information through a structured and user-friendly web application. This interface effectively manages complex forms with deeply nested data and multiple phases using React’s stateful components.
 
-## Overview of Key Features
-### Dynamic Forms
+#### Overview of Key Features
+##### Dynamic Forms
 - **Custom Components**: The interface utilizes custom React components, `FormInput` and `TextareaInput`, to capture a variety of data points ranging from basic text inputs to more detailed text areas for extensive data entry.
 - **Modular Approach**: This modular approach allows for reusability and consistency across the interface.
 
-### Complex State Management
+##### Complex State Management
 - **Hierarchical Structures**: The application’s state is meticulously organized into hierarchical structures using the `useState` hook, which holds scenario outlines, patient reports, and multi-phase clinical data.
 - **Effective Management**: This allows for managing intricate data relationships and state changes effectively.
 
-### Nested Data Handling
+##### Nested Data Handling
 - **Sophisticated Functions**: The interface features sophisticated functions, `handleChange` and `handlePhaseChange`, that update the state based on user input.
 - **Deep Copying and Path Resolution**: These functions handle changes to nested data using deep copying techniques and path resolution, ensuring the integrity and isolation of state updates.
 
-### Form Submission with Validation
+##### Form Submission with Validation
 - **Data Submission**: Data submission is handled via a `handleSubmit` function, which performs a POST request to a server endpoint.
 - **Prevention of Multiple Submissions**: It incorporates mechanisms to prevent multiple submissions and can be extended to include data validation to ensure accuracy and completeness of the information submitted.
 
-### User Interaction and Feedback
+##### User Interaction and Feedback
 - **Interactive Elements**: The design includes interactive elements such as buttons to add new phases and submit the overall data.
 - **Feedback Mechanisms**: User feedback mechanisms like alerts and disabling submission during processing are in place to enhance user experience and prevent data errors.
 
 ### Chat History Design
 <p>Explanation of the chat history feature design on the frontend.</p>
+
 ### Authentication With Auth0
 <p>Overview of how Auth0 is used for authentication in the frontend.</p>
 
