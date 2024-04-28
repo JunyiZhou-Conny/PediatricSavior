@@ -56,22 +56,49 @@
 ### Guide For Residents
 #### Sign-Up/Sign-In
 <p>Instructions for residents to sign up and sign in to the system.</p>
+
 #### Airway Management Assistant
 <p>Details on how residents can use the airway management assistant feature.</p>
 
 ### Guide For Researchers
 #### Sign-Up/Sign-In
 <p>Instructions for researchers to sign up and sign in to the system.</p>
+
 #### Airway Management Assistant
 <p>Explanation of how the airway management assistant supports researchers.</p>
+
 #### Data Collection
 <p>Guidelines on how researchers can collect and manage data.</p>
+
 #### Chat History
 <p>Information on accessing and utilizing chat history for research purposes.</p>
 
 ## FrontEnd Design
 ### React Framework ChatBot Interface Design
-<p>Details about the design and implementation of the chatbot interface using React.</p>
+The `ChatbotUi` component in React is designed to facilitate interactive conversations with a chatbot. It manages message exchanges, chat initialization, and dynamic content like images within a chat interface. Here's a breakdown of its main features and functionalities:
+
+#### State Management
+The component leverages React's `useState` hook to manage various states:
+- `messages`: An array of message objects representing the conversation history.
+- `userInput`: The current text input from the user.
+- `isLoading`: Indicates whether the chatbot is generating a response.
+- `loading`: Tracks the initialization status of the chatbot.
+
+#### Key Functionalities
+- **Message Handling**: Users can send messages through an input form, which are then processed by a backend server. Responses from the chatbot, including text and images, are fetched and displayed in the chat window.
+- **Image Fetching**: If a response includes an image reference, the component fetches and displays this image as part of the conversation.
+- **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation.
+- **Automatic Scrolling and Session Storage**: Implements automatic scrolling to the latest messages and stores the conversation history in session storage to preserve chat state across page reloads.
+
+#### Effects and Refs
+- **Auto-scroll Effect**: Uses `useEffect` to automatically scroll the chat window to the latest message when the `messages` array is updated.
+- **Session Storage Effect**: Another `useEffect` ensures the conversation history is either retrieved from session storage or initialized afresh when the component mounts.
+- **Chat Window Reference**: Utilizes `useRef` to reference the chat window DOM element for auto-scrolling functionalities.
+
+#### User Interface
+- **Chat Window**: Displays messages as either text or images, with visual differentiation between user and bot messages.
+- **Input Form**: Includes text input for messages, a submit button to send messages, and a reset button to clear the chat history.
+- **Loading Indicators**: Displays visual indicators during chatbot response generation and initialization, enhancing the interactive experience.
 
 ### Data Collection Page Design
 The `App` component is designed to manage a complex form for collecting detailed patient and medical scenario data. It utilizes React's state management capabilities with the `useState` hook to handle user inputs and dynamic form modifications.
