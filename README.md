@@ -163,9 +163,6 @@ The component renders the following UI elements:
 ### GPT Training
 <p>Insight into how GPT models are trained for this project.</p>
 
-### Selenium
-<p>Details on the use of Selenium for backend automation and testing.</p>
-
 ### Authentication With Auth0
 <p>Explanation of backend authentication mechanisms using Auth0.</p>
 
@@ -173,7 +170,13 @@ The component renders the following UI elements:
 
 Our final product is hosted on the Internet to allow public access utilizing AWS as our intermediary. In particular, we utilized 2 services offerred by AWS: Amazon S3 bucket and Amazon Elastic Beanstalk. Each service is responsible for different roles which are specified below.
 
-Here is the heuristic between how these 2 services interact with each other. AWS Elastic Beanstalk
+Here is the heuristic between how these 2 services interact with each other:
+
+1.  **AWS Elastic Beanstalk**: This service allows you to deploy and scale web applications and services quickly. You can upload your application code to Elastic Beanstalk, and it automatically takes care of deployment details like capacity provisioning, load balancing, auto-scaling, and health monitoring. It supports a range of programming languages and integrates with services such as EC2 and Elastic Load Balancing, making it easier to manage applications without deep knowledge of the infrastructure ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/)) ([AWS Documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html)) ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+1.  **Amazon S3 Bucket Static Website Hosting**: This service enables you to host a static website on Amazon S3. By enabling this feature on an S3 bucket, you can serve static content (HTML, CSS, JavaScript, images) directly from S3, a highly durable and available storage service. It simplifies web hosting without the need for a server, since S3 can deliver the content directly to the web browser ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+1.  **Amazon Route 53 Domain Name Purchases**: Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web service. It not only routes users to your internet applications by translating domain names into IP addresses but also allows you to purchase and manage domain names. Through Route 53, you can buy domain names and automatically configure DNS settings for them ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+1.  **Amazon CloudFront**: This is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds. CloudFront integrates with other Amazon Web Services products to give developers and businesses an easy way to distribute content to end-users with no minimum usage commitments ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+
 ### Backend Hosting - AWS Elastic Beanstalk
 #### Preparing the Backend for Deployment
 
@@ -277,7 +280,7 @@ Here is the heuristic between how these 2 services interact with each other. AWS
    - Clone the frontend repository into a local folder. Update the API calls as necessary.
    - Updating the API call is of great importance especially after setting the backend configuration
    - Remember, never upload your S3 before getting the correct API url to call for.
-   - We have api.connyzhou.com as the API entry. So be sure to modify all of the fetch functions. For instance, when running on your local machine, you might be calling to http://localhost4999/submit-user-input. Modify this to https://api.conyzhou.com/submit-user-input when you are ready to upload it to S3 bucket
+   - We have api.connyzhou.com as the API entry. So be sure to modify all of the fetch functions. For instance, when running on your local machine, you might be calling to http://localhost4999/submit-user-input. Modify this to https://api.conyzhou.com/submit-user-input when you are ready to upload it to S3 bucket
 
 2. **Build Frontend:**
    
