@@ -1,9 +1,23 @@
 /* Navigation links */
+
+nav {
+    display: flex;
+  justify-content: space-between; /* Ensures items are spaced between logo and navigation links */
+  align-items: center; /* Align items vertically in the center */
+  width: 100%;
+}
 .navigation-links {
   color: #000; /* Black color for the text */
   text-decoration: none;
   font-size: 1em;
   background-color: #2D4371;
+  padding: 0 10px; /* Add padding as needed */
+  align-items: center; /* Align items vertically */
+  display: flex;
+  flex: 0 1 0%;  /* Takes up remaining space, allows shrinking and growing */
+  justify-content: flex-end;  /* Aligns children (buttons) to the end (right) */
+  gap: 10px
+
 }
 
 
@@ -20,6 +34,10 @@
     font-weight: 550;
     cursor: pointer;
     padding: 8px 15px;
+    min-width: 100px;
+    flex-grow: 1;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .home-button:hover {
@@ -35,6 +53,10 @@
     font-weight: 550;
     cursor: pointer;
     padding: 8px 15px;
+    border: none;
+    flex-grow: 1;
+  text-align: center;
+  min-width: 100px;
 }
 
 .product-button:hover {
@@ -50,6 +72,10 @@
     font-weight: 550;
     cursor: pointer;
     padding: 8px 15px;
+
+    flex-grow: 1; /* Buttons grow evenly */
+  text-align: center;
+  min-width: 100px;
 }
 
 .about-us-button:hover {
@@ -68,10 +94,14 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    min-width: 80px;
+
+    
 }
 
 .sign-in-button:hover {
-
+    transform: scale(1.1) !important;
+    transition: transform 0.3s ease;
 }
 
 .logo {
@@ -79,10 +109,27 @@
     font-size: 32px;
     font-family: 'Nunito', sans-serif;
     font-weight: bold;
-    margin-right: 850px;
     color: white;
+
+
+    flex: 0 1 auto; /* Prevent logo from shrinking */
+  max-width: 200px; /* Maximum width of logo */
+  /* margin-right: auto; */
+; 
 }
 
 .logo:hover{
     background-color: #2D4371;
 }
+
+
+@media (max-width: 768px) {
+    .logo {
+      font-size: 24px; /* Smaller font size for smaller screens */
+      margin-right: 0; /* Adjust margin */
+    }
+    .home-button, .product-button, .about-us-button, .sign-in-button {
+      padding: 5px 10px; /* Smaller padding */
+      font-size: 0.8em; /* Smaller font size */
+    }
+  }

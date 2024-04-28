@@ -3,7 +3,7 @@
     background-color: #2D4371 !important;
     font-family: 'Nunito', sans-serif !important;
     font-weight: 900 !important;
-    max-width: 1200px !important;
+    max-width: 1000px !important;
     margin: auto !important;
     padding: 20px !important;
 } 
@@ -116,10 +116,12 @@ h3 {
     position: absolute;
     top: 50%;
     left: 45%;
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-60%,-50%);
+    transform: translate(-34%,-50%);
     z-index: 1; /* Places this below the image container */
-    margin-left: -100px;
+    width: 120%; /* Increased width */
+    margin-left: -10px; /* Minimal adjustment to maintain center alignment */
+    padding-right: 20px;
 }
 .guiding-questions-fading-effect,
 .rapid-cycle-fading-effect,
@@ -132,6 +134,7 @@ h3 {
     bottom: 0;
     right: 0;
     width: 100%;
+
     /* -webkit-animation: text-slide 4s cubic-bezier(.5,.5,0,1);
     animation: text-slide 4s cubic-bezier(.5,.5,0,1);
     animation-fill-mode: forwards;

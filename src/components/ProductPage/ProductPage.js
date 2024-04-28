@@ -154,7 +154,7 @@ const ProductPage = () => {
      
       
       
-        <h1 className="chat-gpt-role-heading">ChatGPT Role</h1>
+        <h1 className="chat-gpt-role-heading">Chat Bot Interface for Pediatric Airway Emergencies Training</h1>
         <section className="chat-gpt-role">
         <div className="chat-gpt-role-parent-container" style={{ height: containerHeightCG }}>
           <div 
@@ -171,11 +171,24 @@ const ProductPage = () => {
             </div>
             <div className={`chat-gpt-role-text ${animateCGImage ? 'animate-image' : ''}`} ref={refCG}
             >
-              <p>An artifical intelligence (AI) chatbot</p>
-              <p>Medical trainees desire AI to be integrated into the curriculum</p>
-              <p>ChatGPT can be effectively used to train physicans, including how to deliver bad news</p>
-              <p>Limited empirical studies on impacts of generative AI on medical education</p>
-              <p>A systematic review article identified features of simulation that lead to effective learning</p>
+              <h3>Our chat bot interface integrates a tailored version of the GPT model specifically designed for hospital residents. This cutting-edge tool offers:</h3>
+              <div className="content-box">
+              <p>Realistic Simulations: Engage in high-fidelity simulations of pediatric airway emergencies to hone your response skills in critical situations.</p>
+              <p>Guided Decision-Making: Utilize structured checklists and procedures that guide you through the steps necessary to stabilize and save young patients.</p>
+              <p>Skill Enhancement: Improve your clinical decision-making capabilities within a controlled, educational environment, preparing you for real-life medical challenges.</p>
+              </div>
+              <h3>Data Collection Assistant</h3>
+              <div className="content-box">
+              <p>This feature empowers administrative users to continuously refine the training model by inputting new and emergent pediatric cases into our database:</p>
+              <p>Continuous Model Improvement: Regular updates with new case data ensure the GPT model remains at the forefront of medical training technology.</p>
+              <p>Adaptability to Medical Trends: By incorporating the latest in pediatric emergency care, the model increases in accuracy and relevance, providing residents with up-to-date training scenarios.</p>
+              </div>
+              <h3>Chat History Access</h3>
+              <div className="content-box">
+              <p>Our chat history access feature is an essential tool for training oversight and quality control, designed specifically for administrative users:</p>
+              <p>Detailed Review Capabilities: Easily access and review past interactions based on specific dates to monitor training engagement and protocol adherence.</p>
+              <p>Training Effectiveness Assessment: Evaluate the effectiveness of the simulation training, identify areas for improvement, and gather insights into how residents apply their skills in simulated settings.</p>
+              </div>
               <div className="chat-gpt-role-fading-effect"></div>
             </div>
           </div>

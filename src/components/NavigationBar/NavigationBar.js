@@ -31,8 +31,8 @@ const NavigationBar = () => {
 
   return (
     <nav>
+      <button className="logo">ZeroToHero</button>
       <div className="navigation-links">
-        <button className="logo">ZeroToHero</button>
         <button onClick={handleHome} className="home-button">Home</button>
         <button onClick={handleProduct} className="product-button">Product</button>
         <button onClick={handleAboutUs} className="about-us-button">About Us</button>
