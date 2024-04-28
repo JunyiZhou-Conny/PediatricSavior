@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FormInput from './FormAreaInput';
 import TextareaInput from './TextAreaInput';
+import TextareaInputLong from './TextAreaInputLong';
 import './DataCollectionPage.css'
 
 // formData holds the data for the main form
@@ -228,7 +229,7 @@ const App = () => {
     <div>
       <p className = "phase-label"> Scenario Patient Information</p>
       <form className="form-container scenarioContainer">
-      <TextareaInput label="Scenerio Outline" name="ScenarioOutline.casePresentation" value={formData.ScenarioOutline.casePresentation} onChange={handleChange} />
+      <TextareaInputLong label="Scenerio Outline" name="ScenarioOutline.casePresentation" value={formData.ScenarioOutline.casePresentation} onChange={handleChange} />
       </form>
 
       <form className="form-container objectivesContainer">

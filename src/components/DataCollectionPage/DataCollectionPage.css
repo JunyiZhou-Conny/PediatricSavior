@@ -314,3 +314,22 @@ textarea:focus {
   font-weight: bold;
   margin-left: 30px;
 }
+
+.case-input-long {
+  width: 328%;
+  height: 150px;
+  margin: 10px 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px; 
+  flex: 1 0 180px; /* Flex-grow | Flex-shrink | Flex-basis */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 10px !important;
+}
+
+.case-input-long:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rbg(74, 73, 73) !important;
+  margin: 10px 5px !important;
+}
