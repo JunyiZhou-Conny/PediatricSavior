@@ -285,6 +285,8 @@ Here is the heuristic between how these 2 services interact with each other:
    - Use VPC and choose corresponding subnets
    - Go to configuration and open the elastic load balancer option and add new listener on port 443 that accepts HTTPS request. To accomplish this, you need SSL certificate and custom domain name. Check the section later for a detailed review
    - Deploy the version and verify the application is running by visiting the provided endpoint.
+   - Below is a screenshot of our application versions. Each docker zip contains the files mentioned above:
+     ![Application Version](https://github.com/liuximeng2/README_IMAGE/Application_Version.png)
 ### FrontEnd Hosting
 #### Configuring Frontend with S3 Bucket
 
@@ -327,15 +329,17 @@ Here is the heuristic between how these 2 services interact with each other:
      
    
 6. **Update CloudFront Distribution (if used):**
-   - If using the same bucket for different frontends, update the origin domain in CloudFront after every new upload.
+   - Be sure to clean up the previous cache whenever your S3 bucket is updated. Amazon CloudFront is basically a caching service, and it is of curcial to clean up previous cache. Tap the invalidation navigation bar, and use the wildcard "/*" to eliminate all caching.
+     ![Invalidation](https://github.com/liuximeng2/README_IMAGE/Invalidation.png)
 
 ### Obtaining SSL Certificate and Domain Purchases
+The rationale behind this step lies in the fact that our authentication service relies on making HTTPS request, and it would be necessary to obtain an SSL certificate to ensure it happens. In general case, HTTPS is a much safer protocal than HTTP, so we believe implementing this step is necessary. As for the services we are using, whether the static web hosting on S3 bucket or the Elastic BeanStalk, they both use HTTP protocal. In such a case, we need to purchase our own domain name. An SSL certificate can be obtained through proving your ownership of a particular website. Let us go through the process step by step:
 
 1. **Buy a Domain:**
-   - Purchase a domain from AWS Route 53 or other domain registrars.
+   - Purchase a domain from AWS Route 53 or other domain registrars.([Registering Domain Name]([https://aws.amazon.com/elasticbeanstalk/](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html)))
 
 2. **Hosted Zone Configuration:**
-   - A hosted zone in Route 53 is where you manage your domain's DNS records.
+   - A hosted zone in Route 53 is where you manage your domain's DNS records. Usually this is managed automatically by AWS. Be aware of its existence.
 
 ### Miscellaneous
 
