@@ -387,8 +387,8 @@ Contact: rmeng6@emory.edu
 Name: Haru  
 Contact: hche475@emory.edu
 
-Name: Chloe 
-Contact: 
+Name: Chloe Liu
+Contact: zliu468@emory.edu
 
 Name: Simon Liu  
 Contact: 
