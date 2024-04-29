@@ -33,7 +33,7 @@
     <li><a href="#backend-design">BackEnd Design</a>
       <ul>
         <li><a href="#mongodb-database">MongoDB Database</a></li>
-        <li><a href="#gpt-training">GPT Training</a></li>
+        <li><a href="#gpt-training">Connecting to OpenAI API & Prompt-tuning</a></li>
       </ul>
     </li>
     <li><a href="#aws-hosting">AWS Hosting</a>
