@@ -194,6 +194,9 @@ Our application leverages MongoDB, a NoSQL database, to store and manage dynamic
   - **ChatbotUI.js** checks the type of each message: if the type is 'text', it displays the text as it is. If the type is 'image', it then renders the image in an img element with the 'src' attribute set to the image data, displaying it within the conversation flow.
   - A loading state is indicated to the user while the image is being fetched, providing feedback that the system is processing their interaction.
 
+#### Connection with the Database: (TBD)
+- **connection string**: 
+
 ### Connecting to OpenAI API & Prompt-tuning
 <a name="prompt-tuning"></a>
 We utilize OpenAI's [Assistants API](https://platform.openai.com/docs/assistants/overview) for generating conversations. This API offers more versatility and advanced features compared to the [Chat Completions API](https://platform.openai.com/docs/guides/text-generation/chat-completions-api), such as file searching and function execution capabilities. Despite not deploying these sophisticated functions in the initial stage, planning for future scalability is crucial as the project evolves beyond our immediate work.
