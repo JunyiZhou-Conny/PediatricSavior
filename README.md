@@ -190,9 +190,9 @@ Our application leverages MongoDB, a NoSQL database, to store and manage dynamic
 
 #### Image Handling
 - **Image Fetching**: Upon detecting an image trigger, ChatbotUi.js sends a request to the backend, which retrieves the image data from the MongoDB image collection using the image ID embedded in the bot's message.
-  - The backend endpoint /get-image/:id serves the image by retrieving the Binary data, encoding it to Base64, and returning it in a JSON response.
+  - The backend endpoint `/get-image/:id`serves the image by retrieving the Binary data, encoding it to Base64, and returning it in a JSON response.
 - **Image Retrieval & Rendering**: The front end handles the JSON response by creating a message object with the image data and adding it to the messages array.
-  - ChatbotUI.js checks the type of each message: if the type is 'text', it displays the text as it is. If the type is 'image', it then renders the image in an img element with the 'src' attribute set to the image data, displaying it within the conversation flow.
+  - **ChatbotUI.js** checks the type of each message: if the type is 'text', it displays the text as it is. If the type is 'image', it then renders the image in an img element with the 'src' attribute set to the image data, displaying it within the conversation flow.
   - A loading state is indicated to the user while the image is being fetched, providing feedback that the system is processing their interaction.
 
 ### Connecting to OpenAI API & Prompt-tuning
