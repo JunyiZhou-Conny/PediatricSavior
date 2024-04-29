@@ -78,7 +78,13 @@
 <p>Guidelines on how researchers can collect and manage data.</p>
 
 #### Chat History
-<p>Information on accessing and utilizing chat history for research purposes.</p>
+The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated.
+- based 
+##### Accessing Chat History:
+  1. Log in to the application.
+  2. Navigate to the Chat History section.
+  3. Enter a valid participant ID.
+  4. Click on "Fetch History" to view the chat logs of the specific participant.
 
 ## FrontEnd Design
 <a name="react-framework-chatbot-interface"></a>
@@ -138,6 +144,11 @@ Users can input and edit data across various nested fields and dynamically add m
 ### Chat History Design
 Fetches and displays chat history based on user inputs using React framework.
 
+#### User Interface Flow (for end users): 
+When the application (App.js) loads, it determines which components to display based on the user's authentication status. If authenticated as the admin, it renders ChatHistory.js allowing users to interact with the chat history functionality. If authenticated as non-admin (regular research participants), the Chat History page will not be displayed in the navigation bar on the left. 
+#### Data Fetching Flow (for developers): 
+When a user inputs a unique participant ID in ChatHistory.js and triggers the data fetch, this component sends an API request to the Flask backend (app.py). After fetching the data, the server sends it back to ChatHistory.js, which then updates the UI to display the chat history.
+
 #### State Management
 The component maintains several pieces of state:
 - `participantID`: Stores the inputted participant ID.
@@ -147,13 +158,11 @@ The component maintains several pieces of state:
 
 #### Event Handlers
 - **handleParticipantIDChange**: Updates the `participantID` state with the user's input.
-- **handleDateChange**: Sets the `dateFilter` state based on the user's date selection.
 
 #### Data Fetching and Processing
 - **fetchChatHistory**: An asynchronous function that:
   - Retrieves chat history data from a specified endpoint using the participant ID.
   - Processes this data to group messages by their respective dates.
-  - Applies a date filter if specified.
   - Handles any errors by setting the `error` state.
 
 #### Rendering
@@ -163,12 +172,21 @@ The component renders the following UI elements:
 - **Error Display**: Conditionally shown if an error occurs during data fetching.
 - **Chat Logs**: Displays the chat history, grouped by date, if available.
 
-### Authentication With Auth0
+### Authentication With Auth0 (TBD)
 <p>Overview of how Auth0 is used for authentication in the frontend.</p>
 
 ## BackEnd Design
 ### MongoDB Database
-<p>Description of the MongoDB database setup and schema used for the project.</p>
+Our application leverages MongoDB, a NoSQL database, to store and manage dynamic chat data efficiently. The database is named **Chatbot_Data** and is structured into four main collections: **case**__, **conversations**__, **image**__, and **instruction**__.
+#### Collections
+- `cases`: Stores case scenarios, including patient reports and the outline of the case steps with nested objects for different phases of the case.
+  - From the **Data Collection** page, users are able to directly input new cases in a phase-by-phase manner that will be used to train the GPT model.
+- `conversations`: Contains conversation logs, where each document is associated with a unique pre-assigned participantID.
+  - The documents include a **timestamp** and a **history** array that records the sequence of messages exchanged between the bot and the user.
+- `image`:  Store images related to certain chatbot interactions.
+  - Images are stored as Binary data along with a description and a unique identifier.
+- `instruction`: Consists of instructions or help guidelines related to the chatbot or case scenarios
+  - From the **Instruction Editor** page, users are able to directly input new cases in a phase-by-phase manner that will be used to train the GPT model.
 
 ### Connecting to OpenAI API & Prompt-tuning
 <a name="prompt-tuning"></a>
@@ -398,7 +416,7 @@ Name: Chloe Liu
 Contact: zliu468@emory.edu
 
 Name: Simon Liu  
-Contact: 
+Contact: simon.liu@emory.edu
 
 Name: Zhaoliang Chen  
 Contact: david.chen2@emory.edu
