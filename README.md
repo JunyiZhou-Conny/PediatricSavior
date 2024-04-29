@@ -102,7 +102,7 @@ The component leverages React's `useState` hook to manage various states:
 
 #### Key Functionalities
 - **Message Handling**: Users can send messages through an input form, which are then processed by a backend server. Responses from the chatbot, including text and images, are fetched and displayed in the chat window.
-- **Image Fetching**: If a response includes an image reference, the component fetches and displays this image as part of the conversation.
+- **Image Fetching**: If a response includes an image reference, the component fetches and displays this image as part of the conversation. The chatbot's backend logic determines when an image is relevant to the conversation, tagging the response with an image ID.
 - **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation.
 - **Automatic Scrolling and Session Storage**: Implements automatic scrolling to the latest messages and stores the conversation history in session storage to preserve chat state across page reloads.
 
@@ -187,6 +187,13 @@ Our application leverages MongoDB, a NoSQL database, to store and manage dynamic
   - Images are stored as Binary data along with a description and a unique identifier.
 - `instruction`: Consists of instructions or help guidelines related to the chatbot or case scenarios
   - From the **Instruction Editor** page, users are able to directly input new cases in a phase-by-phase manner that will be used to train the GPT model.
+
+#### Image Handling
+- **Image Fetching**: Upon detecting an image trigger, ChatbotUi.js sends a request to the backend, which retrieves the image data from the MongoDB image collection using the image ID embedded in the bot's message.
+  - The backend endpoint /get-image/:id serves the image by retrieving the Binary data, encoding it to Base64, and returning it in a JSON response.
+- **Image Retrieval & Rendering**: The front end handles the JSON response by creating a message object with the image data and adding it to the messages array.
+  - ChatbotUI.js checks the type of each message: if the type is 'text', it displays the text as it is. If the type is 'image', it then renders the image in an img element with the 'src' attribute set to the image data, displaying it within the conversation flow.
+  - A loading state is indicated to the user while the image is being fetched, providing feedback that the system is processing their interaction.
 
 ### Connecting to OpenAI API & Prompt-tuning
 <a name="prompt-tuning"></a>
