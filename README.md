@@ -194,8 +194,10 @@ Our application leverages MongoDB, a NoSQL database, to store and manage dynamic
   - **ChatbotUI.js** checks the type of each message: if the type is 'text', it displays the text as it is. If the type is 'image', it then renders the image in an img element with the 'src' attribute set to the image data, displaying it within the conversation flow.
   - A loading state is indicated to the user while the image is being fetched, providing feedback that the system is processing their interaction.
 
-#### Connection with the Database: (TBD)
-- **connection string**: 
+#### Connection with the Database:
+- **connection string**: The connection string is a crucial piece of information that the application uses to connect to the MongoDB database. It contains the credentials and the address of the database that the application needs to store and retrieve data.
+  - For security concerns, the connection string, alongside the key for our OpenAI API, is not hard-coded into the application's source code and stored in public repositories like GitHub. We store the connection string in an environment variable.
+  - Refer to the  .env.example file in this repo to view the placeholders for the necessary variables that need to be defined in the local environment before running this application. 
 
 ### Connecting to OpenAI API & Prompt-tuning
 <a name="prompt-tuning"></a>
