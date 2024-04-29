@@ -152,8 +152,7 @@ When a user inputs a unique participant ID in ChatHistory.js and triggers the da
 #### State Management
 The component maintains several pieces of state:
 - `participantID`: Stores the inputted participant ID.
-- `dateFilter`: Holds the selected date to filter the chat history.
-- `chatHistory`: Contains the fetched chat conversations, organized by date.
+- `chatHistory`: Contains the fetched chat conversations, organized by date, displaying the most recent chat log at the top.
 - `error`: Captures and displays any errors during the chat data fetching process.
 
 #### Event Handlers
@@ -167,7 +166,7 @@ The component maintains several pieces of state:
 
 #### Rendering
 The component renders the following UI elements:
-- **Input Fields**: For entering the participant ID and selecting a date filter.
+- **Input Fields**: For entering the pre-defined unique participant ID.
 - **Fetch Button**: Triggers the chat history fetching process.
 - **Error Display**: Conditionally shown if an error occurs during data fetching.
 - **Chat Logs**: Displays the chat history, grouped by date, if available.
