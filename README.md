@@ -170,8 +170,14 @@ The component renders the following UI elements:
 ### MongoDB Database
 <p>Description of the MongoDB database setup and schema used for the project.</p>
 
-### GPT Training
-<p>Insight into how GPT models are trained for this project.</p>
+### Connecting to OpenAI API & Prompt-tuning
+We utilize OpenAI's [Assistants API](https://platform.openai.com/docs/assistants/overview) for generating conversations. This API offers more versatility and advanced features compared to the [Chat Completions API](https://platform.openai.com/docs/guides/text-generation/chat-completions-api), such as file searching and function execution capabilities. Despite not deploying these sophisticated functions in the initial stage, planning for future scalability is crucial as the project evolves beyond our immediate work.
+
+While Assistants API works with variants of both GPT-3.5 and GPT-4, we use gpt-4-turbo-preview for best performance. We initialized the assistant by specifying the model that we choose and the instructions. For each conversation that the user starts, we initialize a [Thread](https://platform.openai.com/docs/api-reference/threads) and for each user input, we [Run](https://platform.openai.com/docs/api-reference/runs) the assistant on that thread to get the model output. We implemented a wait_on_run function to check whether a run is complete at 0.5s intervals, and we return the model output to the user whenever the run is complete. 
+
+To mitigate instances of inaccurate or "hallucinated" responses, we enhance the user's query by appending the case description. This refinement directs the AI to concentrate on relevant topics, minimizing the likelihood of generating off-topic or erroneous content. However, it is important to acknowledge that completely eliminating AI-generated inaccuracies is currently unachievable. Given that case descriptions cannot encapsulate every detail or anticipate all potential inquiries, reliance on the AI's intrinsic knowledge base is sometimes necessary, which may inadvertently introduce hallucinations.
+
+In the GPT instruction, we explain the structure of the case descriptions and explicitly instruct the GPT how to use them to engage in conversations with the user. As the result of continual experimentation and adjustment, we now come to a proficient GPT that acts like an instructor to teach residents about the Bag Mask Ventilation process. Nonetheless, perfecting prompt-tuning is an ongoing endeavor, heavily reliant on receiving user feedback. To facilitate continuous improvement, we have established a prompt-tuning interface, granting administrative users the flexibility to refine prompts as needed.
 
 ## AWS Hosting
 
@@ -393,8 +399,8 @@ Contact: zliu468@emory.edu
 Name: Simon Liu  
 Contact: 
 
-Name: David Chen  
-Contact: zou23@emory.edu
+Name: Zhaoliang Chen  
+Contact: david.chen2@emory.edu
 
 Name: Junyi (Conny) Zhou  
 Contact: junyi.zhou@emory.edu
