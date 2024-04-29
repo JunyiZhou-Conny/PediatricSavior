@@ -33,7 +33,7 @@
     <li><a href="#backend-design">BackEnd Design</a>
       <ul>
         <li><a href="#mongodb-database">MongoDB Database</a></li>
-        <li><a href="#gpt-training">Connecting to OpenAI API & Prompt-tuning</a></li>
+        <li><a href="#prompt-tuning">Connecting to OpenAI API & Prompt-tuning</a></li>
       </ul>
     </li>
     <li><a href="#aws-hosting">AWS Hosting</a>
@@ -171,6 +171,7 @@ The component renders the following UI elements:
 <p>Description of the MongoDB database setup and schema used for the project.</p>
 
 ### Connecting to OpenAI API & Prompt-tuning
+<a name="prompt-tuning"></a>
 We utilize OpenAI's [Assistants API](https://platform.openai.com/docs/assistants/overview) for generating conversations. This API offers more versatility and advanced features compared to the [Chat Completions API](https://platform.openai.com/docs/guides/text-generation/chat-completions-api), such as file searching and function execution capabilities. Despite not deploying these sophisticated functions in the initial stage, planning for future scalability is crucial as the project evolves beyond our immediate work.
 
 While Assistants API works with variants of both GPT-3.5 and GPT-4, we use gpt-4-turbo-preview for best performance. We initialized the assistant by specifying the model that we choose and the instructions. For each conversation that the user starts, we initialize a [Thread](https://platform.openai.com/docs/api-reference/threads) and for each user input, we [Run](https://platform.openai.com/docs/api-reference/runs) the assistant on that thread to get the model output. We implemented a wait_on_run function to check whether a run is complete at 0.5s intervals, and we return the model output to the user whenever the run is complete. 
