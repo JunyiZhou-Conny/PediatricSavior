@@ -79,7 +79,7 @@
 
 #### Chat History
 The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated.
-- based 
+
 ##### Accessing Chat History:
   1. Log in to the application.
   2. Navigate to the Chat History section.
