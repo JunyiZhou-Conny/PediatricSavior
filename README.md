@@ -43,7 +43,7 @@
 
 #### Tutorial Video
 
-We believe having visual instruction is more intuitive compared to reading tons of documentation. So we made a video on YouTube to guide our users. Here is the link:
+We believe having visual instruction is more intuitive compared to reading tons of documentation. So we made a video on YouTube to guide our users. Here is the link:https://youtu.be/yY1-Hx5sHYY
 
 <a name="a-few-reminders"></a>
 
