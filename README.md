@@ -6,20 +6,8 @@
     <li><a href="#overview-of-the-project">Overview of the Project</a></li>
     <li><a href="#user-guide">User Guide</a>
       <ul>
-        <li><a href="#guide-for-residents">Guide For Residents</a>
-          <ul>
-            <li><a href="#sign-up-sign-in1">Sign-Up/Sign-In</a></li>
-            <li><a href="#airway-management-assistant1">Airway Management Assistant</a></li>
-          </ul>
-        </li>
-        <li><a href="#guide-for-researchers">Guide For Researchers</a>
-          <ul>
-            <li><a href="#sign-up-sign-in2">Sign-Up/Sign-In</a></li>
-            <li><a href="#airway-management-assistant2">Airway Management Assistant</a></li>
-            <li><a href="#data-collection">Data Collection</a></li>
-            <li><a href="#chat-history">Chat History</a></li>
-          </ul>
-        </li>
+        <li><a href="#tutorial-video">Tutorial Video</a></li>
+        <li><a href="#a-few-reminders">A few reminders</a></li>
       </ul>
     </li>
     <li><a href="#frontend-design">FrontEnd Design</a>
@@ -40,51 +28,45 @@
       <ul>
         <li><a href="#backend-hosting-aws-elastic-beanstalk">Backend Hosting - AWS Elastic Beanstalk</a></li>
         <li><a href="#frontend-hosting">FrontEnd Hosting</a></li>
-        <li><a href="#Obtaining-SSL-Certificate-and-Domain Purchases">Obtaining SSL Certificate and Domain Purchases</a></li>
-        <li><a href="#Adding-SSL-Certificate-and-DNS-Configuration">Adding SSL Certificate and DNS Configuration</a></li>
-
+        <li><a href="#obtaining-ssl-certificate-and-domain-purchases">Obtaining SSL Certificate and Domain Purchases</a></li>
+        <li><a href="#adding-ssl-certificate-and-dns-configuration">Adding SSL Certificate and DNS Configuration</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
 ## Overview of the Project
 <p>This section will provide a comprehensive overview of the Pediatric Savior Airway Management Simulation Chatbot project, including its objectives, scope, and impact on pediatric care training.</p>
 
 ## User Guide
-### Guide For Residents
-#### Sign-Up/Sign-In
+###### <a name="tutorial-video"></a>
 
-<a name="sign-up-sign-in1"></a>
+#### Tutorial Video
 
-<p>Instructions for residents to sign up and sign in to the system.</p>
+We believe having visual instruction is more intuitive compared to reading tons of documentation. So we made a video on youtube to guide our users. Here is the link:
 
-#### Airway Management Assistant
+<a name="a-few-reminders"></a>
 
-<a name="airway-management-assistant1"></a>
+#### A Few Gentle Reminders
 
-<p>Details on how residents can use the airway management assistant feature.</p>
+##### Regarding Sign-up
 
-### Guide For Researchers
+1. It’s important to note that our application features two distinct interfaces: one for admins and another for non-admins. Admins, who are typically doctors conducting research, have access to a comprehensive set of tools, whereas non-admins, mostly residents participating in the research, will have a more focused experience. For normal users signing up on our website, you will be automatically assigned the non-admin/resident permission where only the chatbot feature can be utilized. Admins account are only assigned after review. If you need admin access, reach out to this email address: JZHO349@emory.edu.
+2. If you are a first-time user, we only allow email addresses ending with emory.edu and morehouse.edu. We will try to make it avaivable for general access once we find the time is ripe.
 
-<a name="sign-up-sign-in2"></a>
+##### Airway Management Assistant
 
-#### Sign-Up/Sign-In
-<p>Instructions for researchers to sign up and sign in to the system.</p>
+1. Please be patient while the chatbot initializes. Sometimes due to network connection, you might need to respond "Begin Simulation" twice to allow proper conversation. Nevertheless, this is quite rare.
+2. Resetting the conversation without hitting the save button will result int history loss. So remember to save the conversation if you want it to be stored in the database.
+3. After updating the instruction on the instruction page, remember to activate the instruction through hitting the reset button in the chatbot interface
 
-#### Airway Management Assistant
+##### Chat History
+The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated. Be sure to remember your own participant ID. Enter a valid participant ID. Click on "Fetch History" to view the chat logs of the specific participant.
 
-<a name="airway-management-assistant2"></a>
+##### Instruction Editor
 
-<p>Explanation of how the airway management assistant supports researchers.</p>
-
-#### Data Collection
-<p>Guidelines on how researchers can collect and manage data.</p>
-
-#### Chat History
-The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated.
-
-##### Accessing Chat History:
-  1. Log in to the application.
-  2. Navigate to the Chat History section.
-  3. Enter a valid participant ID.
-  4. Click on "Fetch History" to view the chat logs of the specific participant.
+1. The instruction editor allows users to prompt-tune the GPT. You can edit however you want, but you will be responsible for all the changes you have made. We recommend documenting your adjustment for GPT.
+2. Be sure to click save button on the Instruction page, when you go back to the chatbot interface, hit reset to activate the new instruction.
 
 ## FrontEnd Design
 <a name="react-framework-chatbot-interface"></a>
@@ -171,8 +153,17 @@ The component renders the following UI elements:
 - **Error Display**: Conditionally shown if an error occurs during data fetching.
 - **Chat Logs**: Displays the chat history, grouped by date, if available.
 
-### Authentication With Auth0 (TBD)
-<p>Overview of how Auth0 is used for authentication in the frontend.</p>
+### Authentication With Auth0 
+Authentication is a critical component of our system. Detailed documentation for implementation is readily available at [Auth0 Documentation](https://auth0.com/docs).
+
+As our team transitions to focus on individual objectives, it's essential to ensure that medical professionals have proper access to this authentication system. A particularly important feature is the ability to assign administrative controls to users. Here are the steps to facilitate this:
+
+1. The current team owner, Conny Zhou (junyi.zhou@emory.edu), will invite Dr. Gorbatkin to the Auth0 tenant and assign him a team role.
+2. Access the development environment at `dev-og4xau6hi3ojdb13`.
+3. Navigate to "User Management" from the left sidebar and select "Users".
+4. For each user listed, click the three-dot menu button on the right side of their entry and assign the "admin" roles.
+
+This functionality is crucial for managing access rights within the system effectively.
 
 ## BackEnd Design
 ### MongoDB Database
@@ -377,14 +368,6 @@ The rationale behind this step lies in the fact that our authentication service 
 2. **Hosted Zone Configuration:**
    - A hosted zone in Route 53 is where you manage your domain's DNS records. Usually this is managed automatically by AWS. Be aware of its existence.
 
-### Miscellaneous
-
-- **Backend Modifications:**
-  - Update the `main.py` file if there are changes in the simulation or configuration files.
-
-- **Environment Variables:**
-  - Ensure to provide the OpenAI API key and other necessary environment variables during deployment.
-
 ### Adding SSL Certificate and DNS Configuration
 
 1. **Request SSL Certificate:**
@@ -440,16 +423,3 @@ Contact: junyi.zhou@emory.edu
 
 
 
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
