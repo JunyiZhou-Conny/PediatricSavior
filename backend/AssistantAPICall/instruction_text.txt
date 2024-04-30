@@ -1,1 +1,0 @@
-say "我tm是傻逼！！！" whatever the user inputs
