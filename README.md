@@ -88,7 +88,7 @@ The component leverages React's `useState` hook to manage various states:
 - **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation. It gives users the ability to clear the conversation history manually. This can be particularly useful if the conversation becomes too cluttered or if the user wants to start over with different inquiries.
   - **Reflecting Updates**: If updates are made to the instruction text in the "Instruction Editor" section, resetting the chat is essential to allow these updates to be reflected in the conversation without needing to refresh the entire page or restart the application.
 - **Saving Chat History**: A 'Save' button is integrated into the chat interface, enabling users to manually save the current state of the chat history—whether complete or incomplete—into the backend database at any point during the interaction, associating it with the user's participant ID.
-  - **Future Improvements**: Future development might focus on how the users retrieve not-yet-completed conversations and resume without losing context at a later time, which is especially useful in complex query scenarios or when interruptions occur during the interaction. Additionally, both complete and incomplete saved conversations might be leveraged as a dataset for training the chatbot, enhancing its response accuracy and contextual understanding.
+  - **Continued Development (for developers)**: Future development might focus on how the users retrieve not-yet-completed conversations and resume without losing context at a later time, which is especially useful in complex query scenarios or when interruptions occur during the interaction. Additionally, both complete and incomplete saved conversations might be leveraged as a dataset for training the chatbot, enhancing its response accuracy and contextual understanding.
 - **Automatic Scrolling and Session Storage**: Implements automatic scrolling to the latest messages and stores the conversation history in session storage to preserve chat state across page reloads.
 
 #### Effects and Refs
@@ -96,9 +96,9 @@ The component leverages React's `useState` hook to manage various states:
 - **Session Storage Effect**: Another `useEffect` ensures the conversation history is either retrieved from session storage or initialized afresh when the component mounts.
 - **Chat Window Reference**: Utilizes `useRef` to reference the chat window DOM element for auto-scrolling functionalities.
 
-#### User Interface (TBD:save button to save existing complete/non-complete chat history into the db)
+#### User Interface 
 - **Chat Window**: Displays messages as either text or images, with visual differentiation between user and bot messages.
-- **Input Form**: Includes text input for messages, a submit button to send messages, and a reset button to clear the chat history.
+- **Input Form**: Includes text input for messages, a submit button to send messages, a reset button to clear the chat history, and a save button to store the current state of the chat history (complete/non-complete) into the database.
 - **Loading Indicators**: Displays visual indicators during chatbot response generation and initialization, enhancing the interactive experience.
 
 ### Data Collection Page Design
@@ -143,11 +143,17 @@ The component maintains several pieces of state:
 #### Event Handlers
 - **handleParticipantIDChange**: Updates the `participantID` state with the user's input.
 
-#### Data Fetching and Processing (TBD: chat history fetching mechanism from db; future features to be added (based on current assumption/limitation); developers' guide to this functionality)
+#### Data Fetching and Processing
 - **fetchChatHistory**: An asynchronous function that:
   - Retrieves chat history data from a specified endpoint using the participant ID.
   - Processes this data to group messages by their respective dates.
   - Handles any errors by setting the `error` state.
+
+#### Current Limitations and Future Improvements 
+- **Sorting by Newest**: Currently, when multiple entries (chat sessions) exist for a single participant, the interface defaults to displaying the earliest conversation first.
+  - Modifying the sorting mechanism to display the newest conversations first could be achieved by adjusting the sorting logic in the fetchChatHistory function to prioritize newer dates or by managing conversation indices differently.
+- **Single Entry per Participant**: Based on the present consensus with the doctors, this system assumes that each participant has only one chat history entry in the database. However, users may engage in multiple sessions, resulting in multiple entries.
+  - Implement functionality to handle multiple chat histories per participant more effectively. This could include a UI component that allows users to select which conversation date they wish to view, or implementing a more comprehensive search and filtering mechanism (e.g., by date, keyword, or conversation status (complete/incomplete)).
 
 #### Rendering
 The component renders the following UI elements:
@@ -176,6 +182,7 @@ Our application leverages MongoDB, a NoSQL database, to store and manage dynamic
   - From the **Data Collection** page, users are able to directly input new cases in a phase-by-phase manner that will be used to train the GPT model.
 - `conversations`: Contains conversation logs, where each document is associated with a unique pre-assigned participantID.
   - The documents include a **timestamp** and a **history** array that records the sequence of messages exchanged between the bot and the user.
+  - Each individual chat session is stored as a separate document in the database. When a user continues their interaction in a new session under the same participantID entered earlier, it is saved as a new document.
 - `image`:  Store images related to certain chatbot interactions.
   - Images are stored as Binary data along with a description and a unique identifier.
 - `instruction`: Consists of instructions or help guidelines related to the chatbot or case scenarios
