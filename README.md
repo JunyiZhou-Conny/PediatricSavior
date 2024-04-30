@@ -323,8 +323,6 @@ Here is the heuristic between how these 2 services interact with each other:
    - Use VPC and choose corresponding subnets
    - Go to configuration, open the elastic load balancer option, and add a new listener on port 443 that accepts HTTPS requests. To accomplish this, you need an SSL certificate and a custom domain name. Check the section later for a detailed review
    - Deploy the version and verify the application is running by visiting the provided endpoint.
-   - Below is a screenshot of our application versions. Each docker zip contains the files mentioned above:
-     ![Application Version](https://github.com/liuximeng2/README_IMAGE/Application_Version.png)
 ### FrontEnd Hosting
 #### Configuring Frontend with S3 Bucket
 
