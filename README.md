@@ -51,14 +51,14 @@ We believe having visual instruction is more intuitive compared to reading tons 
 
 ##### Regarding Sign-up
 
-1. It’s important to note that our application features two distinct interfaces: one for admins and another for non-admins. Admins, who are typically doctors conducting research, have access to a comprehensive set of tools, whereas non-admins, mostly residents participating in the research, will have a more focused experience. For normal users signing up on our website, you will be automatically assigned the non-admin/resident permission where only the chatbot feature can be utilized. Admins account are only assigned after review. If you need admin access, reach out to this email address: JZHO349@emory.edu.
-2. If you are a first-time user, we only allow email addresses ending with emory.edu and morehouse.edu. We will try to make it avaivable for general access once we find the time is ripe.
+1. It’s important to note that our application features two distinct interfaces: one for admins and another for non-admins. Admins, who are typically doctors conducting research, have access to a comprehensive set of tools, whereas non-admins, mostly residents participating in the research, will have a more focused experience. For normal users signing up on our website, you will be automatically assigned the non-admin/resident permission where only the chatbot feature can be utilized. Admins accounts are only assigned after review. If you need admin access, reach out to this email address: JZHO349@emory.edu.
+2. If you are a first-time user, we only allow email addresses ending with emory.edu and morehouse.edu. We will try to make it available for general access once we find the time is ripe.
 
 ##### Airway Management Assistant
 
 1. Please be patient while the chatbot initializes. Sometimes due to network connection, you might need to respond "Begin Simulation" twice to allow proper conversation. Nevertheless, this is quite rare.
-2. Resetting the conversation without hitting the save button will result int history loss. So remember to save the conversation if you want it to be stored in the database.
-3. After updating the instruction on the instruction page, remember to activate the instruction through hitting the reset button in the chatbot interface
+2. Resetting the conversation without hitting the save button will result in history loss. So remember to save the conversation if you want it to be stored in the database.
+3. After updating the instruction on the instruction page, remember to activate the instruction by hitting the reset button in the chatbot interface
 
 ##### Chat History
 The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated. Be sure to remember your own participant ID. Enter a valid participant ID. Click on "Fetch History" to view the chat logs of the specific participant.
@@ -82,10 +82,13 @@ The component leverages React's `useState` hook to manage various states:
 - `isLoading`: Indicates whether the chatbot is generating a response.
 - `loading`: Tracks the initialization status of the chatbot.
 
-#### Key Functionalities (TBD:save existing complete/non-complete chat history into the db)
+#### Key Functionalities 
 - **Message Handling**: Users can send messages through an input form, which are then processed by a backend server. Responses from the chatbot, including text and images, are fetched and displayed in the chat window.
 - **Image Fetching**: If a response includes an image reference, the component fetches and displays this image as part of the conversation. The chatbot's backend logic determines when an image is relevant to the conversation, tagging the response with an image ID.
-- **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation. (TBD: more about the importance/meaning for having this reset button)
+- **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation. It gives users the ability to clear the conversation history manually. This can be particularly useful if the conversation becomes too cluttered or if the user wants to start over with different inquiries.
+  - **Reflecting Updates**: If updates are made to the instruction text in the "Instruction Editor" section, resetting the chat is essential to allow these updates to be reflected in the conversation without needing to refresh the entire page or restart the application.
+- **Saving Chat History**: A 'Save' button is integrated into the chat interface, enabling users to manually save the current state of the chat history—whether complete or incomplete—into the backend database at any point during the interaction, associating it with the user's participant ID.
+  - **Future Improvements**: Future development might focus on how the users retrieve not-yet-completed conversations and resume without losing context at a later time, which is especially useful in complex query scenarios or when interruptions occur during the interaction. Additionally, both complete and incomplete saved conversations might be leveraged as a dataset for training the chatbot, enhancing its response accuracy and contextual understanding.
 - **Automatic Scrolling and Session Storage**: Implements automatic scrolling to the latest messages and stores the conversation history in session storage to preserve chat state across page reloads.
 
 #### Effects and Refs
