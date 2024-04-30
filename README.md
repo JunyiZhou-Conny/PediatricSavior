@@ -43,7 +43,7 @@
 
 #### Tutorial Video
 
-We believe having visual instruction is more intuitive compared to reading tons of documentation. So we made a video on youtube to guide our users. Here is the link:
+We believe having visual instruction is more intuitive compared to reading tons of documentation. So we made a video on YouTube to guide our users. Here is the link:
 
 <a name="a-few-reminders"></a>
 
@@ -51,22 +51,22 @@ We believe having visual instruction is more intuitive compared to reading tons 
 
 ##### Regarding Sign-up
 
-1. It’s important to note that our application features two distinct interfaces: one for admins and another for non-admins. Admins, who are typically doctors conducting research, have access to a comprehensive set of tools, whereas non-admins, mostly residents participating in the research, will have a more focused experience. For normal users signing up on our website, you will be automatically assigned the non-admin/resident permission where only the chatbot feature can be utilized. Admins account are only assigned after review. If you need admin access, reach out to this email address: JZHO349@emory.edu.
-2. If you are a first-time user, we only allow email addresses ending with emory.edu and morehouse.edu. We will try to make it avaivable for general access once we find the time is ripe.
+1. It’s important to note that our application features two distinct interfaces: one for admins and another for non-admins. Admins, who are typically doctors conducting research, have access to a comprehensive set of tools, whereas non-admins, mostly residents participating in the research, will have a more focused experience. For normal users signing up on our website, you will be automatically assigned the non-admin/resident permission where only the chatbot feature can be utilized. An account will only be made an admin account after it is made and after review. If you need admin access, reach out to this email address: JZHO349@emory.edu.
+2. If you are a first-time user, we only allow email addresses ending with emory.edu and morehouse.edu. We will try to make it available for general access once we find the time is ripe.
 
 ##### Airway Management Assistant
 
 1. Please be patient while the chatbot initializes. Sometimes due to network connection, you might need to respond "Begin Simulation" twice to allow proper conversation. Nevertheless, this is quite rare.
-2. Resetting the conversation without hitting the save button will result int history loss. So remember to save the conversation if you want it to be stored in the database.
-3. After updating the instruction on the instruction page, remember to activate the instruction through hitting the reset button in the chatbot interface
+2. Resetting the conversation without hitting the save button will result in history loss. So remember to save the conversation if you want it to be stored in the database.
+3. After updating the instruction on the instruction page, remember to activate the instruction by hitting the reset button in the chatbot interface
 
 ##### Chat History
-The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated. Be sure to remember your own participant ID. Enter a valid participant ID. Click on "Fetch History" to view the chat logs of the specific participant.
+The chat history feature allows users to view past conversations by entering a participant ID. This feature is accessible through the main interface once the user is authenticated. Be sure to remember your participant ID. Enter a valid participant ID. Click on "Fetch History" to view the chat logs of the specific participant.
 
 ##### Instruction Editor
 
 1. The instruction editor allows users to prompt-tune the GPT. You can edit however you want, but you will be responsible for all the changes you have made. We recommend documenting your adjustment for GPT.
-2. Be sure to click save button on the Instruction page, when you go back to the chatbot interface, hit reset to activate the new instruction.
+2. Be sure to click the save button on the Instruction page, when you go back to the chatbot interface, hit reset to activate the new instruction.
 
 ## FrontEnd Design
 <a name="react-framework-chatbot-interface"></a>
@@ -82,7 +82,7 @@ The component leverages React's `useState` hook to manage various states:
 - `isLoading`: Indicates whether the chatbot is generating a response.
 - `loading`: Tracks the initialization status of the chatbot.
 
-#### Key Functionalities (TBD:save existing complete/non-complete chat history into the db)
+#### Key Functionalities (TBD: save existing complete/non-complete chat history into the db)
 - **Message Handling**: Users can send messages through an input form, which are then processed by a backend server. Responses from the chatbot, including text and images, are fetched and displayed in the chat window.
 - **Image Fetching**: If a response includes an image reference, the component fetches and displays this image as part of the conversation. The chatbot's backend logic determines when an image is relevant to the conversation, tagging the response with an image ID.
 - **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation. (TBD: more about the importance/meaning for having this reset button)
@@ -93,7 +93,7 @@ The component leverages React's `useState` hook to manage various states:
 - **Session Storage Effect**: Another `useEffect` ensures the conversation history is either retrieved from session storage or initialized afresh when the component mounts.
 - **Chat Window Reference**: Utilizes `useRef` to reference the chat window DOM element for auto-scrolling functionalities.
 
-#### User Interface (TBD:save button to save existing complete/non-complete chat history into the db)
+#### User Interface (TBD: save button to save existing complete/non-complete chat history into the db)
 - **Chat Window**: Displays messages as either text or images, with visual differentiation between user and bot messages.
 - **Input Form**: Includes text input for messages, a submit button to send messages, and a reset button to clear the chat history.
 - **Loading Indicators**: Displays visual indicators during chatbot response generation and initialization, enhancing the interactive experience.
@@ -202,12 +202,12 @@ In the GPT instruction, we explain the structure of the case descriptions and ex
 
 ## AWS Hosting
 
-Our final product is hosted on the Internet to allow public access utilizing AWS as our intermediary. In particular, we utilized 2 services offerred by AWS: Amazon S3 bucket and Amazon Elastic Beanstalk. Each service is responsible for different roles which are specified below.
+Our final product is hosted on the Internet to allow public access utilizing AWS as our intermediary. In particular, we utilized 2 services offered by AWS: Amazon S3 bucket and Amazon Elastic Beanstalk. Each service is responsible for different roles which are specified below.
 
 Here is the heuristic between how these 2 services interact with each other:
 
 1.  **AWS Elastic Beanstalk**: This service allows you to deploy and scale web applications and services quickly. You can upload your application code to Elastic Beanstalk, and it automatically takes care of deployment details like capacity provisioning, load balancing, auto-scaling, and health monitoring. It supports a range of programming languages and integrates with services such as EC2 and Elastic Load Balancing, making it easier to manage applications without deep knowledge of the infrastructure ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/)) ([AWS Documentation](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/Welcome.html)) ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
-2.   **Amazon S3 Bucket Static Website Hosting**: This service enables you to host a static website on Amazon S3. By enabling this feature on an S3 bucket, you can serve static content (HTML, CSS, JavaScript, images) directly from S3, a highly durable and available storage service. It simplifies web hosting without the need for a server, since S3 can deliver the content directly to the web browser ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
+2.   **Amazon S3 Bucket Static Website Hosting**: This service enables you to host a static website on Amazon S3. By enabling this feature on an S3 bucket, you can serve static content (HTML, CSS, JavaScript, images) directly from S3, a highly durable and available storage service. It simplifies web hosting without the need for a server since S3 can deliver the content directly to the web browser ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
 3.  **Amazon Route 53 Domain Name Purchases**: Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web service. It not only routes users to your internet applications by translating domain names into IP addresses but also allows you to purchase and manage domain names. Through Route 53, you can buy domain names and automatically configure DNS settings for them ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
 4.   **Amazon CloudFront**: This is a fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally with low latency and high transfer speeds. CloudFront integrates with other Amazon Web Services products to give developers and businesses an easy way to distribute content to end-users with no minimum usage commitments ([Amazon Web Services](https://aws.amazon.com/elasticbeanstalk/details/)).
 
@@ -296,13 +296,13 @@ Here is the heuristic between how these 2 services interact with each other:
 
 10. **Address Port Permission Denied Issue:**
 
-    - If encountering permission denied on a port (like 80), it may be occupied. Try another port or use sudo for privileged ports on Unix systems.
+    - If encountering a permission denied error on a port (like 80), it may be occupied. Try another port or use sudo for privileged ports on Unix systems.
     - If you are working on port 4999, then things should be working fine.
 
 #### Deploying with Elastic Beanstalk
 
 1. **Upload and Deploy:**
-   - Zip all the files needed for the backend and upload to AWS Elastic Beanstalk.
+   - Zip all the files needed for the backend and upload them to AWS Elastic Beanstalk.
      - Dockerfile
      - requirements.txt
      - application.py
@@ -310,7 +310,7 @@ Here is the heuristic between how these 2 services interact with each other:
      - env.list is optional if you pass the environment variable into the environment through configuration
    - Be sure to choose Dokcer as your platform when creating the environment
    - Use VPC and choose corresponding subnets
-   - Go to configuration and open the elastic load balancer option and add new listener on port 443 that accepts HTTPS request. To accomplish this, you need SSL certificate and custom domain name. Check the section later for a detailed review
+   - Go to configuration, open the elastic load balancer option, and add a new listener on port 443 that accepts HTTPS requests. To accomplish this, you need an SSL certificate and a custom domain name. Check the section later for a detailed review
    - Deploy the version and verify the application is running by visiting the provided endpoint.
    - Below is a screenshot of our application versions. Each docker zip contains the files mentioned above:
      ![Application Version](https://github.com/liuximeng2/README_IMAGE/Application_Version.png)
@@ -319,7 +319,7 @@ Here is the heuristic between how these 2 services interact with each other:
 
 1. **Prepare Local Frontend Copy:**
    - Clone the frontend repository into a local folder. Update the API calls as necessary.
-   - Updating the API call is of great importance especially after setting the backend configuration. We have api.connyzhou.com as the API entry.  You might be wondering why that is the case. This is due to that Auth0 requires HTTPS protocols. Check the SSL Certificate section for detail overview. So be sure to modify all of the fetch functions. For instance, when running on your local machine, you might be calling to http://localhost4999/submit-user-input. Modify this to https://api.conyzhou.com/submit-user-input when you are ready to upload it to S3 bucket
+   - Updating the API call is of great importance, especially after setting the backend configuration. We have api.connyzhou.com as the API entry.  You might be wondering why that is the case. This is due to that Auth0 requires HTTPS protocols. Check the SSL Certificate section for a detailed overview. So be sure to modify all of the fetch functions. For instance, when running on your local machine, you might be calling to http://localhost4999/submit-user-input. Modify this to https://api.conyzhou.com/submit-user-input when you are ready to upload it to S3 bucket
    
 2. **Build Frontend:**
    
@@ -356,17 +356,17 @@ Here is the heuristic between how these 2 services interact with each other:
      
    
 6. **Update CloudFront Distribution (if used):**
-   - Be sure to clean up the previous cache whenever your S3 bucket is updated. Amazon CloudFront is basically a caching service, and it is of curcial to clean up previous cache. Tap the invalidation navigation bar, and use the wildcard "/*" to eliminate all caching.
+   - Be sure to clean up the previous cache whenever your S3 bucket is updated. Amazon CloudFront is basically a caching service, and it is crucial to clean up the previous cache. Tap the invalidation navigation bar, and use the wildcard "/*" to eliminate all caching.
      ![Invalidation](https://github.com/liuximeng2/README_IMAGE/Invalidation.png)
 
 ### Obtaining SSL Certificate and Domain Purchases
-The rationale behind this step lies in the fact that our authentication service relies on making HTTPS request, and it would be necessary to obtain an SSL certificate to ensure it happens. In general case, HTTPS is a much safer protocal than HTTP, so we believe implementing this step is necessary. As for the services we are using, whether the static web hosting on S3 bucket or the Elastic BeanStalk, they both use HTTP protocal. In such a case, we need to purchase our own domain name. An SSL certificate can be obtained through proving your ownership of a particular website. Let us go through the process step by step:
+The rationale behind this step lies in the fact that our authentication service relies on making HTTPS requests, and it would be necessary to obtain an SSL certificate to ensure it happens. In general case, HTTPS is a much safer protocol than HTTP, so we believe implementing this step is necessary. As for the services we are using, whether the static web hosting on S3 bucket or the Elastic BeanStalk, they both use HTTP protocol. In such a case, we need to purchase our own domain name. An SSL certificate can be obtained through proving your ownership of a particular website. Let us go through the process step by step:
 
 1. **Buy a Domain:**
-   - Purchase a domain from AWS Route 53 or other domain registrars.([Registering Domain Name]([https://aws.amazon.com/elasticbeanstalk/](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html)))
+   - Purchase a domain from AWS Route 53 or other domain registrars. ([Registering Domain Name]([https://aws.amazon.com/elasticbeanstalk/](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html)))
 
 2. **Hosted Zone Configuration:**
-   - A hosted zone in Route 53 is where you manage your domain's DNS records. Usually this is managed automatically by AWS. Be aware of its existence.
+   - A hosted zone in Route 53 is where you manage your domain's DNS records. Usually, this is managed automatically by AWS. Be aware of its existence.
 
 ### Adding SSL Certificate and DNS Configuration
 
@@ -398,7 +398,7 @@ The rationale behind this step lies in the fact that our authentication service 
 Contributors names and contact info
 
 Name: Blake  
-Contact:
+Contact: blake.grudzien@emory.edu
 
 Name: Ryan
 Contact: rmeng6@emory.edu
