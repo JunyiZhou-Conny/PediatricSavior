@@ -100,10 +100,10 @@ The component leverages React's `useState` hook to manage various states:
 - `isLoading`: Indicates whether the chatbot is generating a response.
 - `loading`: Tracks the initialization status of the chatbot.
 
-#### Key Functionalities
+#### Key Functionalities (TBD:save existing complete/non-complete chat history into the db)
 - **Message Handling**: Users can send messages through an input form, which are then processed by a backend server. Responses from the chatbot, including text and images, are fetched and displayed in the chat window.
 - **Image Fetching**: If a response includes an image reference, the component fetches and displays this image as part of the conversation. The chatbot's backend logic determines when an image is relevant to the conversation, tagging the response with an image ID.
-- **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation.
+- **Conversation Initialization and Reset**: Provides functionality to reset the chat to a clean state and reinitialize the conversation. (TBD: more about the importance/meaning for having this reset button)
 - **Automatic Scrolling and Session Storage**: Implements automatic scrolling to the latest messages and stores the conversation history in session storage to preserve chat state across page reloads.
 
 #### Effects and Refs
@@ -111,7 +111,7 @@ The component leverages React's `useState` hook to manage various states:
 - **Session Storage Effect**: Another `useEffect` ensures the conversation history is either retrieved from session storage or initialized afresh when the component mounts.
 - **Chat Window Reference**: Utilizes `useRef` to reference the chat window DOM element for auto-scrolling functionalities.
 
-#### User Interface
+#### User Interface (TBD:save button to save existing complete/non-complete chat history into the db)
 - **Chat Window**: Displays messages as either text or images, with visual differentiation between user and bot messages.
 - **Input Form**: Includes text input for messages, a submit button to send messages, and a reset button to clear the chat history.
 - **Loading Indicators**: Displays visual indicators during chatbot response generation and initialization, enhancing the interactive experience.
@@ -158,7 +158,7 @@ The component maintains several pieces of state:
 #### Event Handlers
 - **handleParticipantIDChange**: Updates the `participantID` state with the user's input.
 
-#### Data Fetching and Processing
+#### Data Fetching and Processing (TBD: chat history fetching mechanism from db; future features to be added (based on current assumption/limitation); developers' guide to this functionality)
 - **fetchChatHistory**: An asynchronous function that:
   - Retrieves chat history data from a specified endpoint using the participant ID.
   - Processes this data to group messages by their respective dates.
