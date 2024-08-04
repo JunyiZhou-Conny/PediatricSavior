@@ -370,8 +370,11 @@ Here is the heuristic between how these 2 services interact with each other:
 
 ### Obtaining SSL Certificate and Domain Purchases
 The rationale behind this step lies in the fact that our authentication service relies on making HTTPS requests, and it would be necessary to obtain an SSL certificate to ensure it happens. In general case, HTTPS is a much safer protocol than HTTP, so we believe implementing this step is necessary. As for the services we are using, whether the static web hosting on S3 bucket or the Elastic BeanStalk, they both use HTTP protocol. 
+
 In particular, we use api.connyzhou.com to redirect request into http://ps-docker-env.eba-nam3rvmm.us-east-2.elasticbeanstalk.com
+
 We use pediatricsavior.connyzhou.com to redirect requeset into https://d1zgn9xjpa6cni.cloudfront.net
+
 There is a certain level of misunderstanding in the first place, I thought that to allow the website to be hosted on https://d1zgn9xjpa6cni.cloudfront.net with https request, I need to manually assign a certificate. However, this is actually automatically handled by Cloudfront. The real effect of using
 In such a case, we need to purchase our own domain name. An SSL certificate can be obtained through proving your ownership of a particular website. Let us go through the process step by step:
 
