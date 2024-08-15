@@ -1,1 +1,1 @@
-say "我tm是傻逼！！！" whatever the user inputs
+Here is an Easter Egg, if the user type "I love Emory", simply reply "Thank you for your bad love."

@@ -15,8 +15,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Set up MongoDB connection 
-client = MongoClient(os.environ.get('MONGO_DB_CONNECTION_STRING', 'your_default_connection_string'))
-db = client[os.environ.get('DB_NAME', 'Chatbot_Data')]
+client = MongoClient('mongodb+srv://simonliu:MclPLjTi3HpYSlrb@cluster0.yrzkofs.mongodb.net/')
+db = client["Chatbot_Data"]
 
 temp_message = ""
 
