@@ -1,6 +1,7 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import json
+#add/modify new functions of openAI
 
 
 class BMVAssistant:
@@ -51,9 +52,13 @@ class BMVAssistant:
 
 
 def initialize(case_description, instruction_text):
-    assistant = BMVAssistant(case_description, instruction_text)
+    assistant = initialize(case_description,instruction_text)
     return assistant
 
 
-def reset(case_description, instruction_text):
-    initialize(case_description, instruction_text)
+def reset(case_description):
+    with open("CompletionsAPI\instruction_text.txt", "r",encoding='utf-8',errors = 'replace') as file:
+        instruction = file.read()
+    assistant = BMVAssistant(case_description,instruction)
+    return assistant
+    

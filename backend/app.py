@@ -16,7 +16,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Set up MongoDB connection
-client = MongoClient(os.environ.get('MONGO_DB_CONNECTION_STRING', 'your_default_connection_string'))
+client = MongoClient("mongodb+srv://simonliu:MclPLjTi3HpYSlrb@cluster0.yrzkofs.mongodb.net/")
 db = client[os.environ.get('DB_NAME', 'Chatbot_Data')]
 
 temp_message = ""
@@ -25,7 +25,7 @@ temp_message = ""
 bmv_assistant = None
 case_description = None
 global_participant_id = None
-with open("./CompletionsAPI/instruction_text.txt", "r") as file:
+with open("./CompletionsAPI/instruction_text.txt", "r",encoding="utf-8") as file:
     instruction_text = file.read()
 
 
@@ -48,8 +48,8 @@ def save_instruction_text():
 @app.route('/reset-conversation', methods=['POST'])
 def reset_conversation():
     print('resetting conversation')
-    global bmv_assistant, case_description, instruction_text
-    bmv_assistant = reset(case_description, instruction_text)
+    global bmv_assistant, case_description
+    bmv_assistant = reset(case_description)
     return '', 204  # No Content response
 
 
