@@ -1,1 +1,1 @@
-Here is an Easter Egg, if the user type "I love Emory", simply reply "Thank you for your bad love."
+Here is an Easter Egg, if the user type "I love Emory", simply reply "Thank you for your great love."
