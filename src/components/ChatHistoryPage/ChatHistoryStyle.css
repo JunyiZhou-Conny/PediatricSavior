@@ -1,4 +1,100 @@
-.id-search-box{
-  margin: 40px;
-  margin-top: 10px;
+.chat-history-container {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 90%;
+}
+
+.cases-table-container {
+    width: 90%; /* Ensure the table container takes full width */
+    overflow-x: auto; /* Add horizontal scroll for small screens */
+}
+
+.cases-table {
+    width: 90%; /* Make sure the table takes full width of its container */
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.recent-cases-title {
+    text-align: side;
+    margin-bottom: 20px;
+    font-size: 24px; /* Adjust size as needed */
+    color: white; /* Adjust color as needed */
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.cases-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.cases-table th, .cases-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.cases-table th {
+    background-color: #e6e6e6;  /* Slightly darker grey for header */
+    font-weight: bold;
+}
+
+.cases-table tr:nth-child(even) {
+    background-color: #ffffff;  /* White background for even rows */
+}
+
+.cases-table tr:nth-child(odd) {
+    background-color: #f2f2f2;  /* Light grey background for odd rows */
+}
+
+.conversation-view {
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.conversation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chat-window {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.message.human {
+    background-color: #e6f3ff;
+    text-align: right;
+}
+
+.message.ai {
+    background-color: #f0f0f0;
+    text-align: left;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
 }

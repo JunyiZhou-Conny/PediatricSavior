@@ -85,18 +85,79 @@ def get_conversation_history_from_db(participant_id):
         print(f"An error occurred while fetching data: {e}")
         return []
 
+@app.route('/get-last-cases', methods=['GET'])
+def get_last_cases():
+    try:
+        pipeline = [
+            {'$sort': {'timestamp': -1}},
+            {'$group': {
+                '_id': '$participantID',
+                'lastConversation': {'$first': '$$ROOT'}
+            }},
+            {'$project': {
+                '_id': 0,
+                'participantID': '$lastConversation.participantID',
+                'timestamp': '$lastConversation.timestamp'
+            }},
+            {'$sort': {'timestamp': -1}},
+            {'$limit': 10}
+        ]
+        
+        last_cases = list(db.conversations.aggregate(pipeline))
+        return jsonify(last_cases)
+    except Exception as e:
+        app.logger.error(f"Error fetching last cases: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/check-participant-id/<participant_id>', methods=['GET'])
+def check_participant_id(participant_id):
+    try:
+        # Check if the participant ID exists in the database
+        conversation_exists = db.conversations.find_one({"participantID": participant_id}) is not None
+        return jsonify({"exists": conversation_exists}), 200
+    except Exception as e:
+        app.logger.error(f"Error checking participant ID: {e}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/get-conversation-history/<participant_id>', methods=['GET'])
-def get_history(participant_id):
-    if not participant_id:
-        return jsonify({'error': 'Participant ID is required'}), 400
+def get_conversation_history(participant_id):
+    try:
+        conversations = list(db.conversations.find(
+            {"participantID": participant_id},
+            {'_id': 0}
+        ).sort("timestamp", -1))
+        
+        if not conversations:
+            return jsonify({"error": "No conversation history found"}), 404
+        
+        return jsonify({"conversationHistory": conversations})
+    except Exception as e:
+        app.logger.error(f"Error fetching conversation history: {e}")
+        return jsonify({"error": str(e)}), 500
 
-    history = get_conversation_history_from_db(participant_id)
-    if not history:
-        return jsonify({'error': 'No conversation history found for this ID'}), 404
+# @app.route('/get-conversation-history/<participant_id>', methods=['GET'])
+# def get_history(participant_id):
+#     if not participant_id:
+#         return jsonify({'error': 'Participant ID is required'}), 400
 
-    return jsonify({'conversationHistory': history}), 200
+#     history = get_conversation_history_from_db(participant_id)
+#     if not history:
+#         return jsonify({'error': 'No conversation history found for this ID'}), 204
 
+#     return jsonify({'conversationHistory': history}), 200
+
+# @app.route('/check-participant-id/<participant_id>', methods=['GET'])
+# def check_participant_id(participant_id):
+#     if not participant_id:
+#         return jsonify({'error': 'Participant ID is required'}), 400
+
+#     # Check if the participant ID exists in the database
+#     participant_exists = db.conversations.find_one({"participantID": participant_id}) is not None
+
+#     if participant_exists:
+#         return jsonify({'valid': True}), 200
+#     else:
+#         return jsonify({'valid': False}), 404
 
 @app.route('/set-participant-id', methods=['POST'])
 def set_participant_id():

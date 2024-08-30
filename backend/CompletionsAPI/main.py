@@ -31,7 +31,7 @@ class BMVAssistant:
     def submit_message(self, user_message):
         message = {"role": "user", "content": user_message}
         self.chat_history.append(message)
-        self.chat_history.append({"role": "system", "content": self.instruction_and_data})
+        #self.chat_history.append({"role": "system", "content": self.instruction_and_data})
         self.chat_history_without_system_message.append(message)
 
     def generate_response(self, streaming):

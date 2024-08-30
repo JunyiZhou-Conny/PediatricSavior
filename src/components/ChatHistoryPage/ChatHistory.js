@@ -1,114 +1,144 @@
-import React, { useState, useEffect, useRef } from 'react';
-//import './ChatbotUi.css'; // Assuming this is your styling
-import './ChatHistoryStyle.css'; // Additional styling if needed
+import React, { useState, useEffect } from 'react';
+import './ChatHistoryStyle.css';
 
-export default function GetChatHistory() {
+export default function ChatHistory() {
     const [participantID, setParticipantID] = useState('');
     const [conversations, setConversations] = useState([]);
-    const [conv_list, setConv_list] = useState([]);
-    const [currentConversationIndex, setCurrentConversationIndex] = useState(0);
+    const [recentCases, setRecentCases] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const chatWindowRef = useRef(null);
+
+    useEffect(() => {
+        fetchRecentCases();
+    }, []);
+
+    const fetchRecentCases = async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetch('http://localhost:4999/get-last-cases');
+            if (!response.ok) throw new Error('Failed to fetch recent cases');
+            const data = await response.json();
+            setRecentCases(data);
+        } catch (error) {
+            console.error('Error fetching recent cases:', error);
+            setError('Failed to load recent cases');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleInputChange = (e) => {
         setParticipantID(e.target.value);
-        setError(''); // Reset error message on new input
+        setError('');
     };
 
-    const fetchHistory = () => {
+    const fetchHistory = async (id = participantID) => {
         setIsLoading(true);
-        if (!participantID) {
-            setError('Please enter a valid participant ID.');
-            return;
-        }
-        fetch(`http://localhost:4999/get-conversation-history/${participantID}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('No history found for this ID');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (!data.conversationHistory || data.conversationHistory.length === 0) {
-                    throw new Error('No conversation history available');
-                }
-                console.log(data)
-                setConv_list(data.conversationHistory)
-                setCurrentConversationIndex(0); // Reset to the first conversation
-                setConversations(data.conversationHistory[currentConversationIndex]);
-                setIsLoading(false);
-                console.log(conversations)
-            })
-            .catch(error => {
-                console.error('Error fetching conversation history:', error);
-                setError(error.message);
+        setError('');
+        setIsSearching(true);
+
+        try {
+            const response = await fetch(`http://localhost:4999/get-conversation-history/${id}`);
+            if (!response.ok) throw new Error('Error fetching conversation history');
+
+            const data = await response.json();
+            if (!data.conversationHistory || data.conversationHistory.length === 0) {
+                setError('Invalid ID. Please enter a valid participant ID');
                 setConversations([]);
-                setCurrentConversationIndex(0);
-                setIsLoading(false);
-            });
-    };
-
-    const handlePrev = () => {
-        setCurrentConversationIndex(prev => Math.max(0, prev - 1));
-        setConversations(conv_list[currentConversationIndex])
-    };
-
-    const handleNext = () => {
-      setIsLoading(true)
-      console.log("# of conversations: " + conv_list.length)
-      console.log("Index before change: " + currentConversationIndex)
-      setCurrentConversationIndex(prev => {
-          const newIndex = Math.min(conv_list.length, prev + 1); // Assuming you want to stay within the bounds
-          console.log("Index after change: " + newIndex); // Now newIndex holds the updated value
-  
-          // Perform operations that depend on the updated index
-          setConversations(conv_list[newIndex]); // Now using the correct, updated index value
-  
-          return newIndex; // Return the new index to update the state
-      });
-      setIsLoading(false); // This might need to move or be handled differently based on when loading is truly complete
-  };
-
-    useEffect(() => {
-        const chatWindow = chatWindowRef.current;
-        if (chatWindow) {
-            chatWindow.scrollTop = chatWindow.scrollHeight;
+            } else {
+                setConversations(data.conversationHistory);
+                setParticipantID(id);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('Invalid ID. Please enter a valid participant ID');
+            setConversations([]);
+        } finally {
+            setIsLoading(false);
         }
-    }, [conversations, currentConversationIndex]);
+    };
+
+    const handleGoBack = () => {
+        setIsSearching(false);
+        setParticipantID('');
+        setConversations([]);
+        setError('');
+    };
+
+    const handleCaseClick = (id) => {
+        fetchHistory(id);
+    };
 
     return (
-        <div>
-            <div className="input-area">
-                <input
-                    className='id-search-box'
-                    type="text"
-                    value={participantID}
-                    onChange={handleInputChange}
-                    placeholder="Enter Participant ID"
-                />
-                <button onClick={fetchHistory}>Fetch History</button>
-            </div>
-            {error && <div className="error-message">{error}</div>}
-            {/* {conv_list.length > 0 && (
-                <div className="navigation">
-                    <button onClick={handlePrev} disabled={currentConversationIndex === 0}>Prev</button>
-                    <button onClick={handleNext} disabled={currentConversationIndex === conv_list.length}>Next</button>
-                </div>
-            )} */}
-            <div className="chat-window" ref={chatWindowRef}>
-                {isLoading ? (
-                    <div>Loading conversation history...</div>
-                ) : conv_list.length > 0 ? (
-                    conversations.history.map((msg, index) => (
-                        <div key={index} className={`message ${msg.sender}`}>
-                            {msg.type === 'text' ? <div className="formatted-text">{msg.text}</div> : <img src={msg.text} alt="Chatbot response" className="chat-image" />}
+        <div className="chat-history-container">
+            {!isSearching ? (
+                <>
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            value={participantID}
+                            onChange={handleInputChange}
+                            placeholder="Enter Participant ID"
+                        />
+                        <button onClick={() => fetchHistory()}>Search</button>
+                    </div>
+                    <h2 className="recent-cases-title">Recent Cases</h2>
+                    <table className="cases-table">
+                        <thead>
+                            <tr>
+                                <th>Participant ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {recentCases.map((caseItem) => (
+                                <tr key={caseItem.participantID}>
+                                    <td>{caseItem.participantID}</td>
+                                    <td>{new Date(caseItem.timestamp).toLocaleDateString()}</td>
+                                    <td>{new Date(caseItem.timestamp).toLocaleTimeString()}</td>
+                                    <td>
+                                        <button onClick={() => handleCaseClick(caseItem.participantID)}>
+                                            View History
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </>
+            ) : (
+                <div className="conversation-view">
+                    <div className="conversation-header">
+                        <h2>Conversation ID: {participantID}</h2>
+                        <button onClick={handleGoBack}>Go Back</button>
+                    </div>
+                    {error ? (
+                        <div className="error-message">{error}</div>
+                    ) : isLoading ? (
+                        <div>Loading...</div>
+                    ) : conversations.length > 0 ? (
+                        <div className="chat-window">
+                            {conversations.map((conv, index) => (
+                                <div key={index} className="conversation-group">
+                                    <h3>Time: {new Date(conv.timestamp).toLocaleString()}</h3>
+                                    {conv.history.map((msg, msgIndex) => (
+                                        <div key={msgIndex} className={`message ${msg.sender}`}>
+                                            {msg.type === 'text' ? (
+                                                <div className="formatted-text">{msg.text}</div>
+                                            ) : (
+                                                <img src={msg.text} alt="Chatbot response" className="chat-image" />
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
                         </div>
-                    ))
-                ) : (
-                    <div>No history available</div>
-                )}
-            </div>
+                    ) : null}
+                </div>
+            )}
         </div>
     );
 }
