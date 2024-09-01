@@ -57,7 +57,7 @@ def initialize(case_description, instruction_text):
 
 
 def reset(case_description):
-    with open("CompletionsAPI\instruction_text.txt", "r",encoding='utf-8',errors = 'replace') as file:
+    with open("./backend/CompletionsAPI/instruction_text.txt", "r",encoding='utf-8',errors = 'replace') as file:
         instruction = file.read()
     assistant = BMVAssistant(case_description,instruction)
     return assistant

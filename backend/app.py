@@ -25,7 +25,7 @@ temp_message = ""
 bmv_assistant = None
 case_description = None
 global_participant_id = None
-with open("./CompletionsAPI/instruction_text.txt", "r",encoding="utf-8") as file:
+with open("./backend/CompletionsAPI/instruction_text.txt", "r",encoding="utf-8") as file:
     instruction_text = file.read()
 
 
@@ -40,7 +40,7 @@ def get_instruction_text():
 def save_instruction_text():
     data = request.get_json()
     text = data['text']
-    with open('CompletionsAPI/instruction_text.txt', 'w') as file:
+    with open('./backend/CompletionsAPI/instruction_text.txt', 'w') as file:
         file.write(text)
     return {'status': 'File saved successfully'}
 
