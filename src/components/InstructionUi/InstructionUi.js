@@ -6,7 +6,7 @@ const InstructionUi = () => {
     const [editText, setEditText] = useState('');
 
     useEffect(() => {
-        fetch('/api/instruction-text')
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/instruction-text`)
             .then(response => response.text())
             .then(text => {
                 setInstructionText(text);
@@ -16,7 +16,7 @@ const InstructionUi = () => {
     }, []);
 
     const handleSave = () => {
-        fetch('/api/save-instruction-text', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/save-instruction-text`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

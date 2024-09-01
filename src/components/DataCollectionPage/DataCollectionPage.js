@@ -182,7 +182,7 @@ const App = () => {
       phases: phases
     };
 
-    fetch('/submit-data', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-data`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const ParticipantIDPopup = ({ onSubmit, onClose }) => {
 // participantID is mandatory to continue with the conversation
 const handleSubmit = () => {
   if (participantID.trim()) { 
-    fetch('/set-participant-id', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/set-participant-id`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

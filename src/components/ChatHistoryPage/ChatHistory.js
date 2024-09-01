@@ -16,7 +16,7 @@ export default function ChatHistory() {
     const fetchRecentCases = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('/get-last-cases');
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/get-last-cases`);
             if (!response.ok) throw new Error('Failed to fetch recent cases');
             const data = await response.json();
             setRecentCases(data);
@@ -39,7 +39,7 @@ export default function ChatHistory() {
         setIsSearching(true);
 
         try {
-            const response = await fetch(`/get-conversation-history/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/get-conversation-history/${id}`);
             if (!response.ok) throw new Error('Error fetching conversation history');
 
             const data = await response.json();

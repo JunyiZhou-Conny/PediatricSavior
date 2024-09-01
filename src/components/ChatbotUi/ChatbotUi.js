@@ -13,7 +13,7 @@ export default function ChatbotUi(){
 
     const handleResetConversation = () => {
         // Call backend to reset the conversation
-        fetch('/reset-conversation', {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/reset-conversation`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export default function ChatbotUi(){
 
     const fetchImage = (id) => {
       // Example fetch request to your backend endpoint that serves the image
-      fetch(`/get-image/${id}`)
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/get-image/${id}`)
           .then(response => response.json())
           .then(data => {
               const botMessage = { id: Date.now(), text: data.image, sender: 'bot', type: 'image' };
@@ -73,7 +73,7 @@ export default function ChatbotUi(){
       const userMessage = { id: Date.now(), text: userInput, sender: 'user', type: 'text' };
       setMessages(prevMessages => [...prevMessages, userMessage]);
       //Send user input to backend and wait for the response
-      fetch('/submit-user-input', {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-user-input`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function ChatbotUi(){
   };
   
   const fetchMessage = () => {
-    fetch('/get-message')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/get-message`)
         .then(response => response.json())
         .then(data => {
             const messageText = data.message;
@@ -121,7 +121,7 @@ export default function ChatbotUi(){
   
   const initializeChat = () => {
     setLoading(true);
-    fetch('/init-conversation', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/init-conversation`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ export default function ChatbotUi(){
     const submitChatHistory = () => {
         const history = sessionStorage.getItem('abc');
         if (history) {
-            fetch('/submit-chat-history', { // Adjust URL as needed
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-chat-history`, { // Adjust URL as needed
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
