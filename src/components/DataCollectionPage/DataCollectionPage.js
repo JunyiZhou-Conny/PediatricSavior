@@ -182,7 +182,7 @@ const App = () => {
       phases: phases
     };
 
-    fetch('http://localhost:4999/submit-data', {
+    fetch('/submit-data', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

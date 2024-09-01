@@ -13,7 +13,7 @@ export default function ChatbotUi(){
 
     const handleResetConversation = () => {
         // Call backend to reset the conversation
-        fetch('http://localhost:4999/reset-conversation', {
+        fetch('/reset-conversation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export default function ChatbotUi(){
 
     const fetchImage = (id) => {
       // Example fetch request to your backend endpoint that serves the image
-      fetch(`http://localhost:4999/get-image/${id}`)
+      fetch(`/get-image/${id}`)
           .then(response => response.json())
           .then(data => {
               const botMessage = { id: Date.now(), text: data.image, sender: 'bot', type: 'image' };
@@ -73,7 +73,7 @@ export default function ChatbotUi(){
       const userMessage = { id: Date.now(), text: userInput, sender: 'user', type: 'text' };
       setMessages(prevMessages => [...prevMessages, userMessage]);
       //Send user input to backend and wait for the response
-      fetch('http://localhost:4999/submit-user-input', {
+      fetch('/submit-user-input', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function ChatbotUi(){
   };
   
   const fetchMessage = () => {
-    fetch('http://localhost:4999/get-message')
+    fetch('/get-message')
         .then(response => response.json())
         .then(data => {
             const messageText = data.message;
@@ -121,7 +121,7 @@ export default function ChatbotUi(){
   
   const initializeChat = () => {
     setLoading(true);
-    fetch('http://localhost:4999/init-conversation', {
+    fetch('/init-conversation', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ export default function ChatbotUi(){
     const submitChatHistory = () => {
         const history = sessionStorage.getItem('abc');
         if (history) {
-            fetch('http://localhost:4999/submit-chat-history', { // Adjust URL as needed
+            fetch('/submit-chat-history', { // Adjust URL as needed
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
