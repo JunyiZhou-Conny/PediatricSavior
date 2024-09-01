@@ -12,7 +12,7 @@ root.render(
     <Auth0Provider
       domain="dev-og4xau6hi3ojdb13.us.auth0.com"
       clientId="VueIKtPmGrBKV70G43fFS65wRdJpsSNy"
-      redirectUri={'https://d1zgn9xjpa6cni.cloudfront.net'}
+      redirectUri={window.location.origin}
     >
       <App />
     </Auth0Provider>

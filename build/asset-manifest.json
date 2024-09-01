@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.2caee58b.css",
-    "main.js": "/static/js/main.81fffe8d.js",
+    "main.js": "/static/js/main.98dd5640.js",
     "static/media/haru-cs370.png": "/static/media/haru-cs370.3a9fce92db6a503a272a.png",
     "static/media/simon-cs370.JPG": "/static/media/simon-cs370.87e0842fe5e952071d66.JPG",
     "static/media/HeroSection_Front_Image.jpeg": "/static/media/HeroSection_Front_Image.41e21a6b95da47d2bf37.jpeg",
@@ -11,10 +11,10 @@
     "static/media/img1.png": "/static/media/img1.2c9e387f20822088b126.png",
     "index.html": "/index.html",
     "main.2caee58b.css.map": "/static/css/main.2caee58b.css.map",
-    "main.81fffe8d.js.map": "/static/js/main.81fffe8d.js.map"
+    "main.98dd5640.js.map": "/static/js/main.98dd5640.js.map"
   },
   "entrypoints": [
     "static/css/main.2caee58b.css",
-    "static/js/main.81fffe8d.js"
+    "static/js/main.98dd5640.js"
   ]
 }
