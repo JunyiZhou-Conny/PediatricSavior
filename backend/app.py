@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timezone
 from bson import json_util
 import base64
+from werkzeug.utils import secure_filename
 
 load_dotenv()
 
@@ -273,7 +274,65 @@ def get_image(id):
             return jsonify({"error": "Image not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/get_images', methods=['GET'])
+def get_images():
+    collection = db['image']
+    try:
+        documents = collection.find({})
+        images = []
+        for doc in documents:
+            encoded_image = base64.b64encode(doc['image']).decode('utf-8')
+            images.append({
+                "id": doc['id'],
+                "url": f"data:image/jpeg;base64,{encoded_image}"
+            })
+        return jsonify({"images": images}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+@app.route('/upload_image', methods=['POST'])
+def upload_image():
+    collection = db['image']
+    
+    if 'image' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    
+    try:
+        # Save the file to memory instead of disk, and store it in MongoDB as binary data
+        filename = secure_filename(file.filename)
+        file_data = file.read()
+
+        # Create a document to store in MongoDB
+        image_document = {
+            "id": collection.count_documents({}) + 1,  # Simple auto-incrementing id
+            "filename": filename,
+            "image": file_data
+        }
+
+        # Insert the document into the MongoDB collection
+        collection.insert_one(image_document)
+
+        return jsonify({"id": image_document["id"], "filename": filename}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/delete_image/<int:id>', methods=['DELETE'])
+def delete_image(id):
+    collection = db['image']
+    try:
+        result = collection.delete_one({"id": id})
+        if result.deleted_count == 1:
+            return jsonify({"success": True, "message": "Image deleted successfully"}), 200
+        else:
+            return jsonify({"error": "Image not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=4999)
