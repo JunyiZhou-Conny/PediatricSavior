@@ -8,6 +8,7 @@ export default function ChatbotUi(){
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Loading for text generation
     const [loading, setLoading] = useState(false); //Loading for initalization
+    const [participantID, setParticipantID] = useState('');
 
 
 
@@ -17,7 +18,8 @@ export default function ChatbotUi(){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ participantID: participantID })
         }).then(response => {
             if (response.ok) {
                 console.log('Conversation reset successfully');
@@ -31,6 +33,31 @@ export default function ChatbotUi(){
         .catch(error => console.error('Error resetting the conversation:', error));
     };
     
+    const handleParticipantIDReset = () => {
+        const wantNewID = window.confirm("Do you want to enter a new participant ID?");
+        if (wantNewID) {
+            const newID = window.prompt("Please enter the new participant ID:");
+            if (newID) {
+                setParticipantID(newID);
+                // Send the new participant ID to the backend
+                fetch(`${process.env.REACT_APP_BACKEND_URL}/set-participant-id`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ participantID: newID })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Participant ID set:', data);
+                    handleResetConversation();
+                })
+                .catch(error => console.error('Error setting participant ID:', error));
+            }
+        } else {
+            handleResetConversation();
+        }
+    };
 
     const fetchImage = (id) => {
       // Example fetch request to your backend endpoint that serves the image
@@ -126,7 +153,7 @@ export default function ChatbotUi(){
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({})
+        body: JSON.stringify({ participantID: participantID })
     })
     .then(response => response.json())
     .then(data => {
@@ -134,7 +161,7 @@ export default function ChatbotUi(){
     })
     .then(
         setTimeout(() => {
-            setLoading(false); // Stop showing the loading bar after 5 seconds
+            setLoading(false);
         }, 5000))
     .then(data => {
         const botMessage = { id: Date.now(), text: 'Please type "Begin Simulation" to begin', sender: 'bot', type: 'text' };
@@ -143,7 +170,7 @@ export default function ChatbotUi(){
     .catch(error => {
         console.error('Error initializing chat:', error);
     });
-    };
+};
 
     const submitChatHistory = () => {
         const history = sessionStorage.getItem('abc');
@@ -201,6 +228,7 @@ export default function ChatbotUi(){
                 ) : (
                     <>
                         <button type="button" className='reset-button'onClick={handleResetConversation}>Reset</button>
+                        <button type="button" className='reset-button' onClick={handleParticipantIDReset}>ParticipanID Reset</button>
                         <input type="text" className='user-input'value={userInput} onChange={handleUserInput} placeholder="Say something..." />
                         <button type="submit" >Send</button>
                         <button type="button" className='save-conversation-button'onClick={submitChatHistory}>Save</button> 

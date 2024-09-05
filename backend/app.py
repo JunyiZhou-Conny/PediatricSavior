@@ -26,22 +26,22 @@ temp_message = ""
 bmv_assistant = None
 case_description = None
 global_participant_id = None
-with open("./backend/CompletionsAPI/instruction_text.txt", "r",encoding="utf-8") as file:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+INSTRUCTION_FILE = os.path.join(BASE_DIR, "CompletionsAPI", "instruction_text.txt")
+with open(INSTRUCTION_FILE, "r", encoding="utf-8", errors='replace') as file:
     instruction_text = file.read()
 
 
 @app.route('/api/instruction-text', methods=['GET'])
 def get_instruction_text():
-    directory_path = './CompletionsAPI/'
-    filename = 'instruction_text.txt'
-    return send_from_directory(directory_path, filename)
+    return send_from_directory(os.path.dirname(INSTRUCTION_FILE), os.path.basename(INSTRUCTION_FILE))
 
 
 @app.route('/api/save-instruction-text', methods=['POST'])
 def save_instruction_text():
     data = request.get_json()
     text = data['text']
-    with open('./backend/CompletionsAPI/instruction_text.txt', 'w') as file:
+    with open(INSTRUCTION_FILE, 'w') as file:
         file.write(text)
     return {'status': 'File saved successfully'}
 
@@ -101,7 +101,6 @@ def get_last_cases():
                 'timestamp': '$lastConversation.timestamp'
             }},
             {'$sort': {'timestamp': -1}},
-            {'$limit': 10}
         ]
         
         last_cases = list(db.conversations.aggregate(pipeline))

@@ -1,6 +1,7 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import json
+import os
 #add/modify new functions of openAI
 
 
@@ -57,7 +58,9 @@ def initialize(case_description, instruction_text):
 
 
 def reset(case_description):
-    with open("./backend/CompletionsAPI/instruction_text.txt", "r",encoding='utf-8',errors = 'replace') as file:
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    INSTRUCTION_FILE = os.path.join(BASE_DIR, "CompletionsAPI", "instruction_text.txt")
+    with open(INSTRUCTION_FILE, "r", encoding='utf-8', errors='replace') as file:
         instruction = file.read()
     assistant = BMVAssistant(case_description,instruction)
     return assistant

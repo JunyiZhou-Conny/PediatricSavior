@@ -94,18 +94,24 @@ export default function ChatHistory() {
                             </tr>
                         </thead>
                         <tbody>
-                            {recentCases.map((caseItem) => (
-                                <tr key={caseItem.participantID}>
-                                    <td>{caseItem.participantID}</td>
-                                    <td>{new Date(caseItem.timestamp).toLocaleDateString()}</td>
-                                    <td>{new Date(caseItem.timestamp).toLocaleTimeString()}</td>
-                                    <td>
-                                        <button onClick={() => handleCaseClick(caseItem.participantID)}>
-                                            View History
-                                        </button>
-                                    </td>
+                        {recentCases.length > 0 ? (
+                                recentCases.map((caseItem) => (
+                                    <tr key={caseItem.participantID}>
+                                        <td>{caseItem.participantID}</td>
+                                        <td>{new Date(caseItem.timestamp).toLocaleDateString()}</td>
+                                        <td>{new Date(caseItem.timestamp).toLocaleTimeString()}</td>
+                                        <td>
+                                            <button onClick={() => handleCaseClick(caseItem.participantID)}>
+                                                View History
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" style={{textAlign: 'center'}}>No past cases available</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                     </table>
                 </>
