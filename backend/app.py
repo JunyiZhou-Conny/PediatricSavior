@@ -16,6 +16,10 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def home():
+    return 'Backend API is running. Use the appropriate endpoints for API functionality.'
+
 # Set up MongoDB connection
 client = MongoClient("mongodb+srv://simonliu:MclPLjTi3HpYSlrb@cluster0.yrzkofs.mongodb.net/")
 db = client[os.environ.get('DB_NAME', 'Chatbot_Data')]
