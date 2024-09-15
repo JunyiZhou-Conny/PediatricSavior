@@ -11,6 +11,15 @@ export default function ChatbotUi(){
     const [participantID, setParticipantID] = useState('');
 
 
+    const formatMessage = (text) => {
+        // Replace /n with <br> for new lines
+        let formattedText = text.replace(/\/n/g, '<br>');
+    
+        // Replace ***text*** with <b>text</b> for bold
+        formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+    
+        return formattedText;
+    };
 
     const handleResetConversation = () => {
         // Call backend to reset the conversation
@@ -121,8 +130,13 @@ export default function ChatbotUi(){
     fetch(`${process.env.REACT_APP_BACKEND_URL}/get-message`)
         .then(response => response.json())
         .then(data => {
-            const messageText = data.message;
+            // const messageText = data.message;
             //const formattedText = `<pre>${messageText}</pre>`;
+            let messageText = data.message;
+            
+            // Format the message text with newlines and bold
+            messageText = formatMessage(messageText);
+            console.log(messageText)
             const botMessage = { id: Date.now(), text: messageText, sender: 'bot', type: 'text' };
 
             const match = messageText.match(/Related image found, image id is (\d+)/);
@@ -217,7 +231,7 @@ export default function ChatbotUi(){
             <div className="chat-window" ref={chatWindowRef}>
                 {messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.sender}`}>
-                        {msg.type === 'text' ? <div className="formatted-text">{msg.text}</div> : <img src={msg.text} alt="Chatbot response" className="chat-image"/>}
+                        {msg.type === 'text' ? <div className="formatted-text" dangerouslySetInnerHTML={{ __html: msg.text }} /> : <img src={msg.text} alt="Chatbot response" className="chat-image" />}
                     </div>
                 ))}
                 {isLoading && <div className="loading-message">Generating response </div>}

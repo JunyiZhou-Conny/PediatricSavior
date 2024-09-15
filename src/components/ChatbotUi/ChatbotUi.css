@@ -1,5 +1,5 @@
 /* Chat window styling */
-.chat-window {
+  .chat-window {
     flex-grow: 1;
     padding: 30px;
     overflow-y: auto;
@@ -8,9 +8,8 @@
     flex-direction: column;
     gap: 10px;
     background-color: #355997;
-    /*white-space: pre-wrap; /* Preserves whitespace and wraps text */
-    /*word-wrap: break-word; /* Prevents long text strings from overflowing */
-    
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+    word-wrap: break-word; /* Prevents long text strings from overflowing */
   }
 
   .chat-input {
