@@ -10,6 +10,8 @@ from datetime import datetime, timezone
 from bson import json_util
 import base64
 from werkzeug.utils import secure_filename
+from bson import ObjectId
+from collections import OrderedDict
 
 load_dotenv()
 
@@ -336,6 +338,51 @@ def delete_image(id):
             return jsonify({"error": "Image not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/get_cases', methods=['GET'])
+def get_cases():
+    collection = db['case']
+    try:
+        cases = list(collection.find({}))
+        for case in cases:
+            case['_id'] = str(case['_id'])  # Convert BSON ObjectId to string
+        return jsonify({"cases": cases}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/get_case/<id>', methods=['GET'])
+def get_case(id):
+    collection = db['case']
+    try:
+        case = collection.find_one({"_id": ObjectId(id)})
+        if case:
+            case['_id'] = str(case['_id'])  # Convert ObjectId to string
+            
+            # Convert phases dictionary to a list of key-value pairs
+            phases_list = [{"key": k, "value": v} for k, v in case.items()]
+
+            # Return the case as usual but include the list of phases
+            case['phases'] = phases_list  # Attach the ordered list of phases
+            return jsonify({"data": phases_list}), 200
+        else:
+            return jsonify({"error": "Case not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/update_case/<id>', methods=['PUT'])
+def update_case(id):
+    collection = db['case']
+    try:
+        data = request.json  # Assuming case data comes as JSON
+        print(data)
+        result = collection.update_one({"_id": ObjectId(id)}, {"$set": data})
+        if result.modified_count == 1:
+            return jsonify({"success": True, "message": "Case updated successfully"}), 200
+        else:
+            return jsonify({"error": "Case not found or no changes made"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(port=4999)

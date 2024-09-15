@@ -1,0 +1,134 @@
+/* Container for the entire case editor */
+.case-editor-container {
+    padding: 30px;
+    background-color: #f0f2f5;
+    border-radius: 12px;
+    width: 80%;
+    margin: 40px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titles */
+h3, h4 {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+}
+
+/* Main section title styling */
+h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    color: #007bff;
+    text-transform: capitalize;
+}
+
+/* Subsection title styling */
+h4 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    text-transform: capitalize;
+}
+
+/* Container for individual field sections */
+.field-container {
+    margin: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Section container styling */
+.section-container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for nested subsections */
+.subsection {
+    padding-left: 20px;
+    border-left: 4px solid #007bff;
+    margin-top: 10px;
+}
+
+/* Textbox styling for input fields */
+.text-box {
+    width: 80%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Button styling for Save and Cancel buttons */
+.save-button, .cancel-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    margin-right: 15px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+/* Save button styling */
+.save-button {
+    margin-left: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+/* Cancel button styling */
+.cancel-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.cancel-button:hover {
+    background-color: #c82333;
+}
+
+/* Case list container */
+.case-list {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Case list item */
+.case-item {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.case-item:hover {
+    background-color: #e9ecef;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+}

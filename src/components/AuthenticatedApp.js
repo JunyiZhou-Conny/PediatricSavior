@@ -8,6 +8,7 @@ import LogoutButton from './Auth/LogOut/LogOut';
 import ProfileWindow from './Auth/Profile/ProfileWindow';
 import ParticipantIDPopup from './ParticipantIDPopup/ParticipantIDPopup';
 import ImageUpload from './ImageUpload/ImageUpload';
+import CaseEditor from './CaseEditor/CaseEditor';
 
 // post login functions
 const AuthenticatedApp = ({
@@ -59,7 +60,9 @@ const AuthenticatedApp = ({
           {isUserAdmin && <SideButton value={'Instruction Editor'}
                                       onClick={() => setActiveInterface('Instruction Editor')} />} 
           {isUserAdmin && <SideButton value={'Image Upload'} 
-                                      onClick={() => setActiveInterface('ImageUpload')} />}                           
+                                      onClick={() => setActiveInterface('ImageUpload')} />}   
+          {isUserAdmin && <SideButton value={'Case Editor'} 
+                                      onClick={() => setActiveInterface('CaseEditor')} />}                         
           <LogoutButton className='LogoutButton'/>
         </div>
         <div className="chat-container">
@@ -68,6 +71,7 @@ const AuthenticatedApp = ({
           {isUserAdmin && activeInterface === 'ChatHistory' && <ChatHistory />}
           {isUserAdmin && activeInterface === 'Instruction Editor' && <InstructionUi />}
           {isUserAdmin && activeInterface === 'ImageUpload' && <ImageUpload />}
+          {isUserAdmin && activeInterface === 'CaseEditor' && <CaseEditor />}
         </div>
       </div>
     </div>
