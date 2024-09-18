@@ -2,6 +2,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import json
 import os
+import time
 #add/modify new functions of openAI
 
 
@@ -41,6 +42,19 @@ class BMVAssistant:
             messages=self.chat_history,
             stream=streaming
         )
+    
+    def stream_response(self):
+        openai_response = self.generate_response(streaming=True)
+        full_message = ''
+        for chunk in openai_response:
+            text = chunk.choices[0].delta.content
+            if text != None and len(chunk.choices) > 0:
+                full_message += text  # Accumulate chunks of message
+                text = text.replace("\n", "\\n")
+                yield f"data: {text}\n\n"
+        yield "event: stream_close\ndata: Stream completed.\n\n"
+        self.chat_history.append({"role": "assistant", "content": full_message})
+        print('Bot Response Appended to History')
 
     def get_response(self, print_output=False):
         response = self.generate_response(streaming=False)
@@ -53,15 +67,17 @@ class BMVAssistant:
 
 
 def initialize(case_description, instruction_text):
-    assistant = initialize(case_description,instruction_text)
+    assistant = BMVAssistant(case_description,instruction_text)
     return assistant
 
 
 def reset(case_description):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     INSTRUCTION_FILE = os.path.join(BASE_DIR, "CompletionsAPI", "instruction_text.txt")
+    print(INSTRUCTION_FILE)
     with open(INSTRUCTION_FILE, "r", encoding='utf-8', errors='replace') as file:
         instruction = file.read()
+        print('instruction updated')
     assistant = BMVAssistant(case_description,instruction)
     return assistant
     

@@ -11,7 +11,6 @@ from bson import json_util
 import base64
 from werkzeug.utils import secure_filename
 from bson import ObjectId
-from collections import OrderedDict
 
 load_dotenv()
 
@@ -141,30 +140,6 @@ def get_conversation_history(participant_id):
         app.logger.error(f"Error fetching conversation history: {e}")
         return jsonify({"error": str(e)}), 500
 
-# @app.route('/get-conversation-history/<participant_id>', methods=['GET'])
-# def get_history(participant_id):
-#     if not participant_id:
-#         return jsonify({'error': 'Participant ID is required'}), 400
-
-#     history = get_conversation_history_from_db(participant_id)
-#     if not history:
-#         return jsonify({'error': 'No conversation history found for this ID'}), 204
-
-#     return jsonify({'conversationHistory': history}), 200
-
-# @app.route('/check-participant-id/<participant_id>', methods=['GET'])
-# def check_participant_id(participant_id):
-#     if not participant_id:
-#         return jsonify({'error': 'Participant ID is required'}), 400
-
-#     # Check if the participant ID exists in the database
-#     participant_exists = db.conversations.find_one({"participantID": participant_id}) is not None
-
-#     if participant_exists:
-#         return jsonify({'valid': True}), 200
-#     else:
-#         return jsonify({'valid': False}), 404
-
 @app.route('/set-participant-id', methods=['POST'])
 def set_participant_id():
     global global_participant_id
@@ -182,12 +157,12 @@ def init_conversation():
     print("Received init-conversation request with data:", request.json)
     global bmv_assistant, case_description, instruction_text
     case_description = next(db['case'].aggregate([{'$sample': {'size': 1}}]), None)
-    if bmv_assistant is None:
-        bmv_assistant = initialize(case_description, instruction_text)
-        print("Conversation initialized")
-        return jsonify({"message": "Conversation initialized"}), 200
-    else:
-        return jsonify({"error": "Invalid request", "details": str(request.json)}), 400
+    #if bmv_assistant is None:
+    bmv_assistant = initialize(case_description, instruction_text)
+    print("Conversation initialized")
+    return jsonify({"message": "Conversation initialized"}), 200
+    #else:
+    #    return jsonify({"error": "Invalid request", "details": str(request.json)}), 400
 
 
 @app.route('/submit-data', methods=['POST'])
@@ -211,6 +186,14 @@ def submit_user_input():
         return jsonify({"error": "No input provided"}), 400
 
     bmv_assistant.submit_message(user_input)
+    return {'message': 'User message submitted successfully'}, 200
+
+@app.route('/stream-chat', methods=['GET'])
+@cross_origin()
+def stream_chat():
+    return Response(bmv_assistant.stream_response(), content_type='text/event-stream')
+
+
     last_message = bmv_assistant.get_response()
     temp_message = last_message
     #print(last_message)

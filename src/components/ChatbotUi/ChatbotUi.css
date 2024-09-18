@@ -114,6 +114,10 @@ button {
   background-color: rgb(213, 204, 204);
 }
 
-.chat-bot-form{
+.chat-bot-form {
   background-color: transparent;
+  position: relative;
+  bottom: 0;        /* Aligns the element at the bottom of the page */
+  left: 0;          /* Aligns the element to the left */
+  transform: translateY(80px);
 }

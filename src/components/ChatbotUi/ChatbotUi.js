@@ -13,7 +13,8 @@ export default function ChatbotUi(){
 
     const formatMessage = (text) => {
         // Replace /n with <br> for new lines
-        let formattedText = text.replace(/\/n/g, '<br>');
+        let formattedText = text.replace(/\n/g, '<br>');
+        formattedText = formattedText.replace(/\\n/g, '<br>');
     
         // Replace ***text*** with <b>text</b> for bold
         formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
@@ -100,64 +101,135 @@ export default function ChatbotUi(){
       setUserInput(e.target.value);
     };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (userInput.trim() === "") {
-          return;
-      }
-      setIsLoading(true); // Start loading
-      const userMessage = { id: Date.now(), text: userInput, sender: 'user', type: 'text' };
-      setMessages(prevMessages => [...prevMessages, userMessage]);
-      //Send user input to backend and wait for the response
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-user-input`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ text: userInput })
-      })
-      .then(response => response.json())
-      .then(data => {
-          // After receiving the response from submit, fetch the message
-          fetchMessage();
-      })
-      .catch(error => console.error('There was an error!', error))
-      .finally(() => setIsLoading(false));
-      setUserInput('');
-  };
-  
-  const fetchMessage = () => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/get-message`)
-        .then(response => response.json())
-        .then(data => {
-            // const messageText = data.message;
-            //const formattedText = `<pre>${messageText}</pre>`;
-            let messageText = data.message;
-            
-            // Format the message text with newlines and bold
-            messageText = formatMessage(messageText);
-            console.log(messageText)
-            const botMessage = { id: Date.now(), text: messageText, sender: 'bot', type: 'text' };
+//     const handleSubmit = (e) => {
+//       e.preventDefault();
+//       if (userInput.trim() === "") {
+//           return;
+//       }
+//       setIsLoading(true); // Start loading
+//       const userMessage = { id: Date.now(), text: userInput, sender: 'user', type: 'text' };
+//       setMessages(prevMessages => [...prevMessages, userMessage]);
+//       //Send user input to backend and wait for the response
+//       fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-user-input`, {
+//           method: 'POST',
+//           headers: {
+//               'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify({ text: userInput })
+//       })
+//       .then(response => response.json())
+//       .then(data => {
+//           // After receiving the response from submit, fetch the message
+//           fetchMessage();
+//       })
+//       .catch(error => console.error('There was an error!', error))
+//       .finally(() => setIsLoading(false));
+//       setUserInput('');
+//   };
 
-            const match = messageText.match(/Related image found, image id is (\d+)/);
-            const instruction_match = messageText.match(/Instruction image found, image id is (\d+)/);
-            if (match) {
-                console.log("User image search requested")
-                const imageId = match[1]; // Extract the ID from the message
-                fetchImage(imageId); // Call fetchImage with the extracted ID
-            } else if (instruction_match) {
-                console.log("Bot instruction image search requested")
-                setMessages(prevMessages => [...prevMessages, botMessage]);
-                const imageId = instruction_match[1];
-                fetchImage(imageId);
-            } else {
-                console.log("Normal Response")
-                // If no specific pattern is detected, just add the message as usual
-                setMessages(prevMessages => [...prevMessages, botMessage]);
-            }
-        })
-        .catch(error => console.error('There was an error fetching the message!', error));
-  };
+const handleSubmit = (e) => {
+    e.preventDefault();
+    if (userInput.trim() === "") {
+        return;
+    }
+    const userMessage = { id: Date.now(), text: userInput, sender: 'user', type: 'text' };
+    setMessages(prevMessages => [...prevMessages, userMessage]);
+    setUserInput(''); // Clear input field
+
+    let fullMessage = ''; // To store the full message
+
+    // First, send the POST request with the user input
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-user-input`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: userInput })  // Adjust this payload according to your backend's expected format
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to submit user input");
+        }
+
+        // Now initiate the EventSource for streaming the response
+        const eventSource = new EventSource(`${process.env.REACT_APP_BACKEND_URL}/stream-chat`);
+
+        eventSource.onmessage = (event) => {
+            console.log("Streaming Started")
+            // Check if a bot message exists to update
+            setMessages(prevMessages => {
+                const lastMessageIndex = prevMessages.length - 1;
+                // If the last message is from the 'bot' and it is being streamed, update it
+                if (prevMessages[lastMessageIndex]?.sender === 'bot' && prevMessages[lastMessageIndex]?.isStreamed) {
+                    const updatedMessages = [...prevMessages];
+                    // Update the last bot message with the new chunk of data
+                    let text = event.data
+                    console.log(text)
+                    let formatText = formatMessage(text)
+                    console.log(formatText)
+                    updatedMessages[lastMessageIndex].text += formatText;
+                    return updatedMessages;
+                } else {
+                    // If no bot message exists, initialize a new message
+                    const botMessage = { id: Date.now(), text: event.data, sender: 'bot', isStreamed: true, type: 'text' };
+                    return [...prevMessages, botMessage];
+                }
+            });
+        };
+        
+        eventSource.addEventListener('stream_close', (event) => {
+            setMessages(prevMessages => {
+                const lastMessageIndex = prevMessages.length - 1;
+        
+                if (prevMessages[lastMessageIndex]?.sender === 'bot') {
+                    const updatedMessages = [...prevMessages];
+                    updatedMessages[lastMessageIndex].isStreamed = false;  // Mark the stream as completed
+                    console.log(updatedMessages[lastMessageIndex].text)
+                    processMessage(updatedMessages[lastMessageIndex].text)
+                    return updatedMessages;
+                }
+                return prevMessages;
+            });
+            eventSource.close();  // Close the EventSource connection
+            console.log("Stream closed:");
+        });
+
+        eventSource.onerror = (error) => {
+            console.error('Error with streaming:', error);
+            eventSource.close();
+        };
+
+    })
+    .catch(error => {
+        console.error("Error submitting input or starting stream:", error);
+    });
+};
+
+
+  
+  const processMessage = ( messageText ) => {
+        // Format the message text with newlines and bold
+        messageText = formatMessage(messageText);
+        console.log(messageText)
+        const botMessage = { id: Date.now(), text: messageText, sender: 'bot', type: 'text' };
+
+        const match = messageText.match(/Related image found, image id is (\d+)/);
+        const instruction_match = messageText.match(/Instruction image found, image id is (\d+)/);
+        if (match) {
+            console.log("User image search requested")
+            const imageId = match[1]; // Extract the ID from the message
+            fetchImage(imageId); // Call fetchImage with the extracted ID
+        } else if (instruction_match) {
+            console.log("Bot instruction image search requested")
+            setMessages(prevMessages => [...prevMessages, botMessage]);
+            const imageId = instruction_match[1];
+            fetchImage(imageId);
+        } else {
+            console.log("Normal Response")
+            // If no specific pattern is detected, just add the message as usual
+        }
+        
+    };
 
   
   const initializeChat = () => {
