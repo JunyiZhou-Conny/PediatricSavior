@@ -44,15 +44,19 @@ export default function ChatHistory() {
 
             const data = await response.json();
             if (!data.conversationHistory || data.conversationHistory.length === 0) {
-                setError('Invalid ID. Please enter a valid participant ID');
+                setError('No conversation history found for this ID');
                 setConversations([]);
             } else {
-                setConversations(data.conversationHistory);
+                // Sort conversations by timestamp, newest first
+                const sortedConversations = data.conversationHistory.sort((a, b) => 
+                    new Date(b.timestamp) - new Date(a.timestamp)
+                );
+                setConversations(sortedConversations);
                 setParticipantID(id);
             }
         } catch (error) {
             console.error('Error:', error);
-            setError('Invalid ID. Please enter a valid participant ID');
+            setError('Error fetching conversation history');
             setConversations([]);
         } finally {
             setIsLoading(false);

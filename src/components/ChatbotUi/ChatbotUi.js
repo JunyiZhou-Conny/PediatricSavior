@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef  } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import './ChatbotUi.css';
 
-export default function ChatbotUi(){
+export default function ChatbotUi({participantID}){
 
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Loading for text generation
     const [loading, setLoading] = useState(false); //Loading for initalization
-    const [participantID, setParticipantID] = useState('');
+    const [autoSaveTimeout, setAutoSaveTimeout] = useState(null);
 
 
     const formatMessage = (text) => {
@@ -258,24 +258,21 @@ const handleSubmit = (e) => {
     });
 };
 
-    const submitChatHistory = () => {
-        const history = sessionStorage.getItem('abc');
-        if (history) {
-            fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-chat-history`, { // Adjust URL as needed
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: history
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Chat history submitted successfully:', data);
-            }).then(data => {
-                alert('Chat history saved successfully!')
-            })
-            .catch(error => console.error('Error submitting Chat history:', error));
-        }
+    
+
+    const submitChatHistory = (history) => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-chat-history`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: history
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Chat history auto-saved successfully:', data);
+        })
+        .catch(error => console.error('Error auto-saving chat history:', error));
     };
   
     const chatWindowRef = useRef(null);
@@ -298,6 +295,33 @@ const handleSubmit = (e) => {
     }, []);
     const savedMessages = sessionStorage.getItem('abc')
 
+    useEffect(() => {
+        // Auto-save chat history whenever messages change
+        const autoSaveChatHistory = () => {
+            const history = JSON.stringify(messages);
+            sessionStorage.setItem('abc', history);
+            
+            // Debounce the API call to avoid too frequent requests
+            clearTimeout(autoSaveTimeout);
+            setAutoSaveTimeout(setTimeout(() => {
+                submitChatHistory(history);
+            }, 5000)); // Wait 5 seconds after last message before saving
+        };
+
+        autoSaveChatHistory();
+
+        return () => clearTimeout(autoSaveTimeout);
+    }, [messages]);
+
+    // Keep the manual save button
+    const handleManualSave = () => {
+        const history = sessionStorage.getItem('abc');
+        if (history) {
+            submitChatHistory(history);
+            alert('Chat history saved successfully!');
+        }
+    };
+
     return (
         <div>
             <div className="chat-window" ref={chatWindowRef}>
@@ -317,7 +341,7 @@ const handleSubmit = (e) => {
                         <button type="button" className='reset-button' onClick={handleParticipantIDReset}>ParticipanID Reset</button>
                         <input type="text" className='user-input'value={userInput} onChange={handleUserInput} placeholder="Say something..." />
                         <button type="submit" >Send</button>
-                        <button type="button" className='save-conversation-button'onClick={submitChatHistory}>Save</button> 
+                        <button type="button" className='save-conversation-button'onClick={handleManualSave}>Save</button> 
     
                     </>
                 )}

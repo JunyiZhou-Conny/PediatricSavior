@@ -11,6 +11,7 @@ from bson import json_util
 import base64
 from werkzeug.utils import secure_filename
 from bson import ObjectId
+import json
 
 load_dotenv()
 
@@ -63,21 +64,27 @@ def reset_conversation():
 @cross_origin()
 def store_conversation():
     global global_participant_id
-    """Store the conversation in the MongoDB collection."""
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No data provided'}), 400
     conversation_data = {
-        'participantID': global_participant_id,  #Store participantID with each conversation
-        'timestamp': datetime.now(timezone.utc),  # Store the current timestamp
+        'participantID': global_participant_id,
+        'timestamp': datetime.now(timezone.utc),
         'history': data
     }
     try:
-        # Insert the conversation data into the 'conversations' collection
-        db.conversations.insert_one(conversation_data)
-        return {'status': 'History uploaded successfully'}
+        result = db.conversations.update_one(
+            {'participantID': global_participant_id},
+            {'$set': conversation_data},
+            upsert=True
+        )
+        if result.upserted_id:
+            return jsonify({'status': 'History uploaded successfully'}), 201
+        else:
+            return jsonify({'status': 'History updated successfully'}), 200
     except Exception as e:
         print(f"An error occurred while inserting to MongoDB: {e}")
+        return jsonify({'error': str(e)}), 500
 
 
 def get_conversation_history_from_db(participant_id):
@@ -127,15 +134,27 @@ def check_participant_id(participant_id):
 @app.route('/get-conversation-history/<participant_id>', methods=['GET'])
 def get_conversation_history(participant_id):
     try:
-        conversations = list(db.conversations.find(
+        conversation = db.conversations.find_one(
             {"participantID": participant_id},
             {'_id': 0}
-        ).sort("timestamp", -1))
+        )
         
-        if not conversations:
+        if not conversation:
             return jsonify({"error": "No conversation history found"}), 404
         
-        return jsonify({"conversationHistory": conversations})
+        # Ensure the history is a list of messages
+        history = conversation.get('history', [])
+        if isinstance(history, str):
+            history = json.loads(history)
+        elif isinstance(history, dict):
+            history = history.get('history', [])
+        
+        formatted_conversation = {
+            "timestamp": conversation.get('timestamp'),
+            "history": history
+        }
+        
+        return jsonify({"conversationHistory": [formatted_conversation]})
     except Exception as e:
         app.logger.error(f"Error fetching conversation history: {e}")
         return jsonify({"error": str(e)}), 500
