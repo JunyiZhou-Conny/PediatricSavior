@@ -148,6 +148,28 @@ const CaseEditor = () => {
         setCaseData(null);
     };
 
+    // Add this new function to handle case deletion
+    const handleDeleteCase = async (caseId) => {
+        if (window.confirm("Are you sure you want to delete this case? This action cannot be undone.")) {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/delete_case/${caseId}`, {
+                    method: 'DELETE',
+                });
+                const data = await response.json();
+                if (data.success) {
+                    alert('Case deleted successfully!');
+                    fetchCases();  // Refresh the list of cases
+                } else {
+                    console.error('Deletion failed:', data.error);
+                    alert('Failed to delete the case. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error deleting case:', error);
+                alert('An error occurred while deleting the case. Please try again.');
+            }
+        }
+    };
+
     if (isLoading) {
         return <p>Loading data...</p>;
     }
@@ -172,9 +194,20 @@ const CaseEditor = () => {
             <h3>Available Cases</h3>
             <div className="case-list">
                 {cases.map((caseItem, index) => (
-                    <div key={index} className="case-item" onClick={() => fetchCase(caseItem._id)}>
-                        <p>Case ID: {caseItem._id}</p>
-                        <p>{caseItem['Scenario Outline'].substring(0, 100) + " ..."}</p>
+                    <div key={index} className="case-item">
+                        <div onClick={() => fetchCase(caseItem._id)}>
+                            <p>Case ID: {caseItem._id}</p>
+                            <p>{caseItem['Scenario Outline'].substring(0, 100) + " ..."}</p>
+                        </div>
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteCase(caseItem._id);
+                            }}
+                            className="delete-button"
+                        >
+                            Delete
+                        </button>
                     </div>
                 ))}
             </div>

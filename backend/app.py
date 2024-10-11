@@ -385,6 +385,17 @@ def update_case(id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/delete_case/<id>', methods=['DELETE'])
+def delete_case(id):
+    collection = db['case']
+    try:
+        result = collection.delete_one({"_id": ObjectId(id)})
+        if result.deleted_count == 1:
+            return jsonify({"success": True, "message": "Case deleted successfully"}), 200
+        else:
+            return jsonify({"error": "Case not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=4999)
