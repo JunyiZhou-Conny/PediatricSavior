@@ -62,11 +62,11 @@ const AuthenticatedApp = ({
           {isUserAdmin && <SideButton value={'Image Upload'} 
                                       onClick={() => setActiveInterface('ImageUpload')} />}   
           {isUserAdmin && <SideButton value={'Case Editor'} 
-                                      onClick={() => setActiveInterface('CaseEditor')} />}                         
+                                      onClick={() => setActiveInterface('CaseEditor')} />}                      
           <LogoutButton className='LogoutButton'/>
         </div>
         <div className="chat-container">
-          {activeInterface === 'ChatbotUi' && <ChatbotUi participantID={participantID} />}
+          {activeInterface === 'ChatbotUi' && <ChatbotUi participantID={participantID} isUserAdmin={isUserAdmin} />}
           {isUserAdmin && activeInterface === 'DataCollectUi' && <DataCollectionPage />}
           {isUserAdmin && activeInterface === 'ChatHistory' && <ChatHistory />}
           {isUserAdmin && activeInterface === 'Instruction Editor' && <InstructionUi />}

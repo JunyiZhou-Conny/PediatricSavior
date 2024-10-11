@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef  } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import './ChatbotUi.css';
 
-export default function ChatbotUi({participantID}){
+export default function ChatbotUi({participantID, isUserAdmin}){
 
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
@@ -323,7 +323,7 @@ const handleSubmit = (e) => {
     };
 
     return (
-        <div>
+        <div className="chatbot-ui">
             <div className="chat-window" ref={chatWindowRef}>
                 {messages.map((msg) => (
                     <div key={msg.id} className={`message ${msg.sender}`}>
@@ -337,16 +337,16 @@ const handleSubmit = (e) => {
                     <div className="loading-bar">Chatbot Initializing ... </div>
                 ) : (
                     <>
-                        <button type="button" className='reset-button'onClick={handleResetConversation}>Reset</button>
-                        <button type="button" className='reset-button' onClick={handleParticipantIDReset}>ParticipanID Reset</button>
-                        <input type="text" className='user-input'value={userInput} onChange={handleUserInput} placeholder="Say something..." />
-                        <button type="submit" >Send</button>
-                        <button type="button" className='save-conversation-button'onClick={handleManualSave}>Save</button> 
-    
+                        {isUserAdmin && (
+                            <button type="button" className='reset-button' onClick={handleResetConversation}>Reset</button>
+                        )}
+                        <button type="button" className='reset-button' onClick={handleParticipantIDReset}>ParticipantID Reset</button>
+                        <input type="text" className='user-input' value={userInput} onChange={handleUserInput} placeholder="Say something..." />
+                        <button type="submit">Send</button>
+                        <button type="button" className='save-conversation-button' onClick={handleManualSave}>Save</button> 
                     </>
                 )}
             </form>
         </div>
-      );
-      
+    );
 }
