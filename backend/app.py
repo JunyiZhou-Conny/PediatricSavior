@@ -397,5 +397,18 @@ def delete_case(id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/add_case', methods=['POST'])
+def add_case():
+    collection = db['case']
+    try:
+        data = request.json
+        result = collection.insert_one(data)
+        if result.inserted_id:
+            return jsonify({"success": True, "message": "Case added successfully", "id": str(result.inserted_id)}), 201
+        else:
+            return jsonify({"error": "Failed to add case"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == '__main__':
     app.run(port=4999)

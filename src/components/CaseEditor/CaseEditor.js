@@ -6,6 +6,37 @@ const CaseEditor = () => {
     const [activeCase, setActiveCase] = useState(null);  // Track the case being edited
     const [caseData, setCaseData] = useState(null);  // Holds data of the case being edited
     const [isLoading, setIsLoading] = useState(true);
+    const [isAddingCase, setIsAddingCase] = useState(false);
+    const [newCaseData, setNewCaseData] = useState({
+        'Scenario Outline': '',
+        'Patient Report': {
+            'Basic Information': '',
+            'History': '',
+            'Initial Exam': '',
+            'Labs': '',
+            'PMH': ''
+        },
+        'Phase 1': {
+            'Expected Actions': '',
+            'General Description': '',
+            'Vitals and Conditions': '',
+        },
+        'Phase 2': {
+            'Expected Actions': '',
+            'General Description': '',
+            'Vitals and Conditions': '',
+        },
+        'Phase 3': {
+            'Expected Actions': '',
+            'General Description': '',
+            'Vitals and Conditions': '',
+        },
+        'Final Phase': {
+            'Expected Actions': '',
+            'General Description': '',
+            'Vitals and Conditions': '',
+        }
+    });
 
     // Fetch the list of cases
     const fetchCases = async () => {
@@ -170,6 +201,80 @@ const CaseEditor = () => {
         }
     };
 
+    const handleAddCase = () => {
+        setIsAddingCase(true);
+        setNewCaseData({
+            'Scenario Outline': '',
+            'Patient Report': {
+                'Basic Information': '',
+                'History': '',
+                'Initial Exam': '',
+                'Labs': '',
+                'PMH': ''
+            },
+            'Phase 1': {
+                'Expected Actions': '',
+                'General Description': '',
+                'Vitals and Conditions': '',
+            },
+            'Phase 2': {
+                'Expected Actions': '',
+                'General Description': '',
+                'Vitals and Conditions': '',
+            },
+            'Phase 3': {
+                'Expected Actions': '',
+                'General Description': '',
+                'Vitals and Conditions': '',
+            },
+            'Final Phase': {
+                'Expected Actions': '',
+                'General Description': '',
+                'Vitals and Conditions': '',
+            }
+        });
+    };
+
+    const handleNewCaseInputChange = (e, key, nestedKey = null) => {
+        const value = e.target.value;
+        setNewCaseData(prevData => {
+            if (nestedKey) {
+                return {
+                    ...prevData,
+                    [key]: {
+                        ...prevData[key],
+                        [nestedKey]: value
+                    }
+                };
+            }
+            return { ...prevData, [key]: value };
+        });
+    };
+
+    const handleSubmitNewCase = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_case`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newCaseData),
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert('New case added successfully!');
+                setIsAddingCase(false);
+                fetchCases();  // Refresh the list of cases
+            } else {
+                console.error('Failed to add new case:', data.error);
+                alert('Failed to add new case. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error adding new case:', error);
+            alert('An error occurred while adding the new case. Please try again.');
+        }
+    };
+
     if (isLoading) {
         return <p>Loading data...</p>;
     }
@@ -192,25 +297,86 @@ const CaseEditor = () => {
     return (
         <div className="case-editor-container">
             <h3>Available Cases</h3>
-            <div className="case-list">
-                {cases.map((caseItem, index) => (
-                    <div key={index} className="case-item">
-                        <div onClick={() => fetchCase(caseItem._id)}>
-                            <p>Case ID: {caseItem._id}</p>
-                            <p>{caseItem['Scenario Outline'].substring(0, 100) + " ..."}</p>
+            <button onClick={handleAddCase} className="add-case-button">Add New Case</button>
+            {isAddingCase ? (
+                <div className="add-case-form">
+                    <h4>Add New Case</h4>
+                    <input
+                        type="text"
+                        value={newCaseData['Scenario Outline']}
+                        onChange={(e) => handleNewCaseInputChange(e, 'Scenario Outline')}
+                        placeholder="Scenario Outline"
+                    />
+                    <h5>Patient Report</h5>
+                    <textarea
+                        value={newCaseData['Patient Report']['Basic Information']}
+                        onChange={(e) => handleNewCaseInputChange(e, 'Patient Report', 'Basic Information')}
+                        placeholder="Basic Information"
+                    />
+                    <textarea
+                        value={newCaseData['Patient Report']['History']}
+                        onChange={(e) => handleNewCaseInputChange(e, 'Patient Report', 'History')}
+                        placeholder="History"
+                    />
+                    <textarea
+                        value={newCaseData['Patient Report']['Initial Exam']}
+                        onChange={(e) => handleNewCaseInputChange(e, 'Patient Report', 'Initial Exam')}
+                        placeholder="Initial Exam"
+                    />
+                    <textarea
+                        value={newCaseData['Patient Report']['Labs']}
+                        onChange={(e) => handleNewCaseInputChange(e, 'Patient Report', 'Labs')}
+                        placeholder="Labs"
+                    />
+                    <textarea
+                        value={newCaseData['Patient Report']['PMH']}
+                        onChange={(e) => handleNewCaseInputChange(e, 'Patient Report', 'PMH')}
+                        placeholder="PMH"
+                    />
+                    {['Phase 1', 'Phase 2', 'Phase 3', 'Final Phase'].map((phase) => (
+                        <div key={phase}>
+                            <h5>{phase}</h5>
+                            <textarea
+                                value={newCaseData[phase]['Expected Actions']}
+                                onChange={(e) => handleNewCaseInputChange(e, phase, 'Expected Actions')}
+                                placeholder="Expected Actions"
+                            />
+                            <textarea
+                                value={newCaseData[phase]['General Description']}
+                                onChange={(e) => handleNewCaseInputChange(e, phase, 'General Description')}
+                                placeholder="General Description"
+                            />
+                            <textarea
+                                value={newCaseData[phase]['Vitals and Conditions']}
+                                onChange={(e) => handleNewCaseInputChange(e, phase, 'Vitals and Conditions')}
+                                placeholder="Vitals and Conditions"
+                            />
                         </div>
-                        <button 
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleDeleteCase(caseItem._id);
-                            }}
-                            className="delete-button"
-                        >
-                            Delete
-                        </button>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                    <button onClick={handleSubmitNewCase}>Submit New Case</button>
+                    <button onClick={() => setIsAddingCase(false)}>Cancel</button>
+                </div>
+            ) : (
+                <div className="case-list">
+                    {cases.map((caseItem, index) => (
+                        <div key={index} className="case-item">
+                            <div onClick={() => fetchCase(caseItem._id)}>
+                                <p>Case ID: {caseItem._id}</p>
+                                <p>{caseItem['Scenario Outline'].substring(0, 100) + " ..."}</p>
+                            </div>
+                            <button 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteCase(caseItem._id);
+                                }}
+                                className="delete-button"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
