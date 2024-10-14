@@ -7,7 +7,7 @@ import time
 
 
 class BMVAssistant:
-    def __init__(self, json_file, instruction_text=None):
+    def __init__(self, json_file, instruction_text=None, reinforce=False):
         load_dotenv()
         self.client = OpenAI()
 
@@ -29,6 +29,7 @@ class BMVAssistant:
         self.instruction_and_data = f"Instructions: \n {self.instruction} \n Case Description: \n{self.data}"
         self.chat_history = [{"role": "system", "content": self.instruction_and_data}]
         self.chat_history_without_system_message = []
+        self.reinforce = reinforce
 
     def submit_message(self, user_message):
         message = {"role": "user", "content": user_message}
@@ -36,9 +37,17 @@ class BMVAssistant:
         #self.chat_history.append({"role": "system", "content": self.instruction_and_data})
         self.chat_history_without_system_message.append(message)
 
+    def submit_knowledge(self, knowledge):
+        message = {"role": "system", "content": knowledge}
+        self.chat_history.append(message)
+        #self.chat_history.append({"role": "system", "content": self.instruction_and_data})
+        self.chat_history_without_system_message.append(message)
+        print('Knowledge Appended to History')
+        print(self.chat_history)
+
     def generate_response(self, streaming):
         return self.client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model="gpt-4o",
             messages=self.chat_history,
             stream=streaming
         )

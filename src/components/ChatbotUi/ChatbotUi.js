@@ -10,6 +10,14 @@ export default function ChatbotUi({participantID, isUserAdmin}){
     const [loading, setLoading] = useState(false); //Loading for initalization
     const [autoSaveTimeout, setAutoSaveTimeout] = useState(null);
 
+    const deleteLastMessage = () => {
+        setMessages(prevMessages => {
+            if (prevMessages.length === 0) {
+                return prevMessages; // If no messages, return as is
+            }
+            return prevMessages.slice(0, -1); // Remove the last message
+        });
+    };
 
     const formatMessage = (text) => {
         // Replace /n with <br> for new lines
@@ -74,12 +82,68 @@ export default function ChatbotUi({participantID, isUserAdmin}){
       fetch(`${process.env.REACT_APP_BACKEND_URL}/get-image/${id}`)
           .then(response => response.json())
           .then(data => {
-              const botMessage = { id: Date.now(), text: data.image, sender: 'bot', type: 'image' };
+              const botMessage = { id: Date.now(), text: data.image, sender: 'bot', type: 'image', style: { width: '50%' } };
               setMessages(prevMessages => [...prevMessages, botMessage]);
           })
           .catch(error => console.error('Error fetching the image:', error))
           .finally(() => setIsLoading(false));
   };
+
+  const fetchKnowledge = (overview) => {
+    // Fetch knowledge and initiate response streaming
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/get-knowledge/${overview}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch knowledge");
+            }
+
+            // Now initiate the EventSource for streaming the response
+            const eventSource = new EventSource(`${process.env.REACT_APP_BACKEND_URL}/stream-chat`);
+
+            eventSource.onmessage = (event) => {
+                console.log("Streaming Started for Knowledge Fetch");
+                // Check if a bot message exists to update
+                setMessages(prevMessages => {
+                    const lastMessageIndex = prevMessages.length - 1;
+                    if (prevMessages[lastMessageIndex]?.sender === 'bot' && prevMessages[lastMessageIndex]?.isStreamed) {
+                        const updatedMessages = [...prevMessages];
+                        let text = event.data;
+                        let formatText = formatMessage(text);
+                        updatedMessages[lastMessageIndex].text += formatText;
+                        return updatedMessages;
+                    } else {
+                        const botMessage = { id: Date.now(), text: event.data, sender: 'bot', isStreamed: true, type: 'text' };
+                        return [...prevMessages, botMessage];
+                    }
+                });
+            };
+
+            eventSource.addEventListener('stream_close', (event) => {
+                setMessages(prevMessages => {
+                    const lastMessageIndex = prevMessages.length - 1;
+
+                    if (prevMessages[lastMessageIndex]?.sender === 'bot') {
+                        const updatedMessages = [...prevMessages];
+                        updatedMessages[lastMessageIndex].isStreamed = false; // Mark the stream as completed
+                        console.log(updatedMessages[lastMessageIndex].text);
+                        return updatedMessages;
+                    }
+                    return prevMessages;
+                });
+                eventSource.close(); // Close the EventSource connection
+                console.log("Stream closed:");
+            });
+
+            eventSource.onerror = (error) => {
+                console.error('Error with streaming:', error);
+                eventSource.close();
+            };
+        })
+        .catch(error => {
+            console.error("Error fetching knowledge or starting stream:", error);
+        });
+};
+
 
     const ExampleComponent = ({fetchMessage}) => {
       return (
@@ -101,31 +165,6 @@ export default function ChatbotUi({participantID, isUserAdmin}){
       setUserInput(e.target.value);
     };
 
-//     const handleSubmit = (e) => {
-//       e.preventDefault();
-//       if (userInput.trim() === "") {
-//           return;
-//       }
-//       setIsLoading(true); // Start loading
-//       const userMessage = { id: Date.now(), text: userInput, sender: 'user', type: 'text' };
-//       setMessages(prevMessages => [...prevMessages, userMessage]);
-//       //Send user input to backend and wait for the response
-//       fetch(`${process.env.REACT_APP_BACKEND_URL}/submit-user-input`, {
-//           method: 'POST',
-//           headers: {
-//               'Content-Type': 'application/json',
-//           },
-//           body: JSON.stringify({ text: userInput })
-//       })
-//       .then(response => response.json())
-//       .then(data => {
-//           // After receiving the response from submit, fetch the message
-//           fetchMessage();
-//       })
-//       .catch(error => console.error('There was an error!', error))
-//       .finally(() => setIsLoading(false));
-//       setUserInput('');
-//   };
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -164,9 +203,7 @@ const handleSubmit = (e) => {
                     const updatedMessages = [...prevMessages];
                     // Update the last bot message with the new chunk of data
                     let text = event.data
-                    console.log(text)
                     let formatText = formatMessage(text)
-                    console.log(formatText)
                     updatedMessages[lastMessageIndex].text += formatText;
                     return updatedMessages;
                 } else {
@@ -215,16 +252,24 @@ const handleSubmit = (e) => {
 
         const match = messageText.match(/Related image found, image id is (\d+)/);
         const instruction_match = messageText.match(/Instruction image found, image id is (\d+)/);
+        const knowledge_match = messageText.match(/external knowledge detected, the term is (.*)/);
         if (match) {
             console.log("User image search requested")
             const imageId = match[1]; // Extract the ID from the message
             fetchImage(imageId); // Call fetchImage with the extracted ID
         } else if (instruction_match) {
             console.log("Bot instruction image search requested")
-            setMessages(prevMessages => [...prevMessages, botMessage]);
+            // setMessages(prevMessages => [...prevMessages, botMessage]);
             const imageId = instruction_match[1];
             fetchImage(imageId);
-        } else {
+        }  
+
+        if (knowledge_match) {
+            console.log("knowledge base query requested")
+            const overview = knowledge_match[1];
+            deleteLastMessage();
+            fetchKnowledge(overview);
+        }else {
             console.log("Normal Response")
             // If no specific pattern is detected, just add the message as usual
         }

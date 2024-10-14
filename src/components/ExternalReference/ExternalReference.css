@@ -1,0 +1,117 @@
+/* Container for the knowledge management interface */
+.knowledge-management-container {
+    max-width: 800px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Headings for better visual hierarchy */
+h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form container */
+.entry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Input fields for adding/editing knowledge entries */
+.input-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Focus effect on input fields */
+.input-field:focus {
+    border-color: #355997; /* Highlight border when focused */
+    outline: none;
+    box-shadow: 0 0 5px rgba(53, 89, 151, 0.5);
+}
+
+/* Buttons for actions (Add, Edit, Delete) */
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #355997; /* Primary color */
+    color: #fff; /* White text */
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Hover and active effects for buttons */
+button:hover {
+    background-color: #2b4c84; /* Darker shade on hover */
+}
+
+button:active {
+    transform: scale(0.98); /* Slight shrink effect on click */
+}
+
+/* Styling for each entry in the list */
+.entry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.entry-item {
+    padding: 15px;
+    border: 1px solid #e1e1e1;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Entry hover effect for better user experience */
+.entry-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading and paragraph within the entry */
+.entry-item h4 {
+    margin: 0 0 10px;
+    color: #355997; /* Consistent color scheme */
+}
+
+.entry-item p {
+    margin: 0;
+    color: #555;
+}
+
+/* Controls for each entry (Edit and Delete buttons) */
+.entry-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Consistent button styles for Edit and Delete buttons */
+.entry-controls button {
+    padding: 8px 16px;
+}
+
+/* Delete button with a different color for better differentiation */
+.entry-controls .delete-button {
+    background-color: #f25f5c; /* Red for delete */
+}
+
+.entry-controls .delete-button:hover {
+    background-color: #d94e4c; /* Darker red on hover */
+}

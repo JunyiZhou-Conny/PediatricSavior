@@ -175,9 +175,14 @@ def set_participant_id():
 def init_conversation():
     print("Received init-conversation request with data:", request.json)
     global bmv_assistant, case_description, instruction_text
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    INSTRUCTION_FILE = os.path.join(BASE_DIR, "backend", "CompletionsAPI", "instruction_text.txt")
+    print(INSTRUCTION_FILE)
+    with open(INSTRUCTION_FILE, "r", encoding='utf-8', errors='replace') as file:
+        instruction = file.read()
     case_description = next(db['case'].aggregate([{'$sample': {'size': 1}}]), None)
-    #if bmv_assistant is None:
-    bmv_assistant = initialize(case_description, instruction_text)
+    # if bmv_assistant is None:
+    bmv_assistant = initialize(case_description, instruction)
     print("Conversation initialized")
     return jsonify({"message": "Conversation initialized"}), 200
     #else:
@@ -409,6 +414,62 @@ def add_case():
             return jsonify({"error": "Failed to add case"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/get_entries', methods=['GET'])
+def get_entries():
+    knowledge_collection = db['knowledge']
+    entries = list(knowledge_collection.find())
+    for entry in entries:
+        entry['_id'] = str(entry['_id'])  # Convert ObjectId to string for JSON serialization
+    return jsonify({'entries': entries})
+
+@app.route('/get-knowledge/<overview>', methods=['GET'])
+def get_knowledge(overview):
+    knowledge_collection = db['knowledge']
+    entry = knowledge_collection.find_one({"overview": overview})
+    detail = entry['detail']
+    bmv_assistant.submit_knowledge(detail)
+    print(detail)
+    return jsonify({'detail': detail})
+
+@app.route('/add_entry', methods=['POST'])
+def add_entry():
+    knowledge_collection = db['knowledge']
+    data = request.json
+    new_entry = {
+        'overview': data['overview'],
+        'detail': data['detail']
+    }
+    result = knowledge_collection.insert_one(new_entry)
+    new_entry['_id'] = str(result.inserted_id)
+    return jsonify({'entry': new_entry}), 201
+
+@app.route('/update_entry/<entry_id>', methods=['PUT'])
+def update_entry(entry_id):
+    knowledge_collection = db['knowledge']
+    data = request.json
+    result = knowledge_collection.update_one(
+        {'_id': ObjectId(entry_id)},
+        {'$set': {
+            'overview': data['overview'],
+            'detail': data['detail']
+        }}
+    )
+    if result.matched_count == 0:
+        return jsonify({'error': 'Entry not found'}), 404
+    updated_entry = knowledge_collection.find_one({'_id': ObjectId(entry_id)})
+    updated_entry['_id'] = str(updated_entry['_id'])
+    return jsonify({'entry': updated_entry}), 200
+
+@app.route('/delete_entry/<entry_id>', methods=['DELETE'])
+def delete_entry(entry_id):
+    print(entry_id)
+    knowledge_collection = db['knowledge']
+    result = knowledge_collection.delete_one({'_id': ObjectId(entry_id)})
+    if result.deleted_count == 1:
+            return jsonify({"success": True, "message": "Entry deleted successfully"}), 200
+    else:
+        return jsonify({"error": "Entry not found"}), 404
 
 if __name__ == '__main__':
     app.run(port=4999)

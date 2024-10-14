@@ -9,6 +9,7 @@ import ProfileWindow from './Auth/Profile/ProfileWindow';
 import ParticipantIDPopup from './ParticipantIDPopup/ParticipantIDPopup';
 import ImageUpload from './ImageUpload/ImageUpload';
 import CaseEditor from './CaseEditor/CaseEditor';
+import ExternalReference from './ExternalReference/ExternalReference';
 
 // post login functions
 const AuthenticatedApp = ({
@@ -62,7 +63,9 @@ const AuthenticatedApp = ({
           {isUserAdmin && <SideButton value={'Image Upload'} 
                                       onClick={() => setActiveInterface('ImageUpload')} />}   
           {isUserAdmin && <SideButton value={'Case Editor'} 
-                                      onClick={() => setActiveInterface('CaseEditor')} />}                      
+                                      onClick={() => setActiveInterface('CaseEditor')} />} 
+          {isUserAdmin && <SideButton value={'External Reference'}
+                                      onClick={() => setActiveInterface('External Reference')} />}                     
           <LogoutButton className='LogoutButton'/>
         </div>
         <div className="chat-container">
@@ -72,6 +75,7 @@ const AuthenticatedApp = ({
           {isUserAdmin && activeInterface === 'Instruction Editor' && <InstructionUi />}
           {isUserAdmin && activeInterface === 'ImageUpload' && <ImageUpload />}
           {isUserAdmin && activeInterface === 'CaseEditor' && <CaseEditor />}
+          {isUserAdmin && activeInterface === 'External Reference' && <ExternalReference />}
         </div>
       </div>
     </div>
