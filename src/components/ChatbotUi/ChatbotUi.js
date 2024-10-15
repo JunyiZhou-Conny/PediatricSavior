@@ -265,7 +265,7 @@ const handleSubmit = (e) => {
         }  
 
         if (knowledge_match) {
-            console.log("knowledge base query requested")
+            console.log("knowledge base query requested, matched knowledge", knowledge_match[1])
             const overview = knowledge_match[1];
             deleteLastMessage();
             fetchKnowledge(overview);

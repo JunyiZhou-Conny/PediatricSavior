@@ -38,6 +38,11 @@ with open(INSTRUCTION_FILE, "r", encoding="utf-8", errors='replace') as file:
     instruction_text = file.read()
 
 
+def get_mongo():
+    client = MongoClient("mongodb+srv://simonliu:MclPLjTi3HpYSlrb@cluster0.yrzkofs.mongodb.net/")
+    db = client[os.environ.get('DB_NAME', 'Chatbot_Data')]
+    return db
+
 @app.route('/api/instruction-text', methods=['GET'])
 def get_instruction_text():
     return send_from_directory(os.path.dirname(INSTRUCTION_FILE), os.path.basename(INSTRUCTION_FILE))
@@ -426,11 +431,15 @@ def get_entries():
 @app.route('/get-knowledge/<overview>', methods=['GET'])
 def get_knowledge(overview):
     knowledge_collection = db['knowledge']
-    overview = overview.upper()
-    entry = knowledge_collection.find_one({"overview": overview})
-    detail = entry['detail']
-    bmv_assistant.submit_knowledge(detail)
-    return jsonify({'detail': detail})
+    try:
+        overview = overview.upper()
+        print(overview)
+        entry = knowledge_collection.find_one({"overview": overview})
+        detail = entry['detail']
+        bmv_assistant.submit_knowledge(detail)
+        return jsonify({'detail': detail})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/add_entry', methods=['POST'])
 def add_entry():
