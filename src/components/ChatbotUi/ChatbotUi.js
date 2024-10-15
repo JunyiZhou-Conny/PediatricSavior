@@ -250,9 +250,9 @@ const handleSubmit = (e) => {
         console.log(messageText)
         const botMessage = { id: Date.now(), text: messageText, sender: 'bot', type: 'text' };
 
-        const match = messageText.match(/Related image found, image id is (\d+)/);
-        const instruction_match = messageText.match(/Instruction image found, image id is (\d+)/);
-        const knowledge_match = messageText.match(/external knowledge detected, the term is (.*)/);
+        const match = messageText.toLowerCase().match(/related image found, image id is (\d+)/);
+        const instruction_match = messageText.toLowerCase().match(/instruction image found, image id is (\d+)/);
+        const knowledge_match = messageText.toLowerCase().match(/external knowledge detected, the term is (.*)/);
         if (match) {
             console.log("User image search requested")
             const imageId = match[1]; // Extract the ID from the message

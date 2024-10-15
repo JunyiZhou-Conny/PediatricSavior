@@ -426,10 +426,10 @@ def get_entries():
 @app.route('/get-knowledge/<overview>', methods=['GET'])
 def get_knowledge(overview):
     knowledge_collection = db['knowledge']
+    overview = overview.upper()
     entry = knowledge_collection.find_one({"overview": overview})
     detail = entry['detail']
     bmv_assistant.submit_knowledge(detail)
-    print(detail)
     return jsonify({'detail': detail})
 
 @app.route('/add_entry', methods=['POST'])

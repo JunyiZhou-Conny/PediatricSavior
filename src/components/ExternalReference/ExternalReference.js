@@ -20,7 +20,8 @@ const KnowledgeManagement = () => {
     // Handle input change for adding/editing entries
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNewEntry((prevEntry) => ({ ...prevEntry, [name]: value }));
+        const updatedValue = name === 'overview' ? value.toUpperCase() : value;
+        setNewEntry((prevEntry) => ({ ...prevEntry, [name]: updatedValue }));
     };
 
     // Create or Update Entry
