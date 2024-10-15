@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef  } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import './ChatbotUi.css';
 
-export default function ChatbotUi({participantID, isUserAdmin}){
+export default function ChatbotUi({isUserAdmin}){
 
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false); // Loading for text generation
     const [loading, setLoading] = useState(false); //Loading for initalization
     const [autoSaveTimeout, setAutoSaveTimeout] = useState(null);
-
+    const [participantID, setParticipantID] = useState('');
     const deleteLastMessage = () => {
         setMessages(prevMessages => {
             if (prevMessages.length === 0) {
