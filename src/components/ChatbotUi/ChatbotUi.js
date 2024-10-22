@@ -284,7 +284,6 @@ const handleSubmit = (e) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ participantID: participantID })
     })
     .then(response => response.json())
     .then(data => {

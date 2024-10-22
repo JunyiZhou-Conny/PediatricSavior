@@ -15,18 +15,21 @@ class BMVAssistant:
         if instruction_text is not None:
             self.instruction = instruction_text
         else:
-            with open("backend/CompletionsAPI/instruction_text.txt", "r") as file:
+            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            with open(os.path.join(BASE_DIR, "CompletionsAPI", "instruction_text.txt"), "r") as file:
                 self.instruction = file.read()
 
-        # load data file
-        if isinstance(json_file, str):
-            with open(json_file, 'r') as file:
-                self.data = json.load(file)
-        else:
-            self.data = json_file
+        # # load data file
+        # if isinstance(json_file, str):
+        #     with open(json_file, 'r') as file:
+        #         self.data = json.load(file)
+        # else:
+        self.data = json_file
+        print(json_file)
 
         # initialization
         self.instruction_and_data = f"Instructions: \n {self.instruction} \n Case Description: \n{self.data}"
+        # print(self.instruction_and_data)
         self.chat_history = [{"role": "system", "content": self.instruction_and_data}]
         self.chat_history_without_system_message = []
         self.reinforce = reinforce
@@ -38,6 +41,7 @@ class BMVAssistant:
         self.chat_history_without_system_message.append(message)
 
     def submit_knowledge(self, knowledge):
+        knowledge += "Phrase your response to the user using the above provided external knowledge."
         message = {"role": "system", "content": knowledge}
         self.chat_history.append(message)
         #self.chat_history.append({"role": "system", "content": self.instruction_and_data})

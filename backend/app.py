@@ -61,6 +61,13 @@ def save_instruction_text():
 def reset_conversation():
     print('resetting conversation')
     global bmv_assistant, case_description
+    try:
+        case_description = next(db['case'].aggregate([{'$sample': {'size': 1}}]), None)
+        if not case_description:
+            raise ValueError("No cases found in the database.")
+    except Exception as e:
+        print(f"Database error: {e}")
+        return jsonify({"error": "Failed to retrieve case description."}), 500
     bmv_assistant = reset(case_description)
     return '', 204  # No Content response
 
@@ -176,22 +183,42 @@ def set_participant_id():
 
 
 @app.route('/init-conversation', methods=['POST'])
-@cross_origin()
+@cross_origin()  # Restrict CORS to a known domain
 def init_conversation():
-    print("Received init-conversation request with data:", request.json)
-    global bmv_assistant, case_description, instruction_text
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    INSTRUCTION_FILE = os.path.join(BASE_DIR, "backend", "CompletionsAPI", "instruction_text.txt")
-    print(INSTRUCTION_FILE)
-    with open(INSTRUCTION_FILE, "r", encoding='utf-8', errors='replace') as file:
-        instruction = file.read()
-    case_description = next(db['case'].aggregate([{'$sample': {'size': 1}}]), None)
-    # if bmv_assistant is None:
-    bmv_assistant = initialize(case_description, instruction)
-    print("Conversation initialized")
-    return jsonify({"message": "Conversation initialized"}), 200
-    #else:
-    #    return jsonify({"error": "Invalid request", "details": str(request.json)}), 400
+    try:
+        print("Received init-conversation request with data:", request.json)
+
+        global bmv_assistant, case_description, instruction_text
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        INSTRUCTION_FILE = os.path.join(BASE_DIR, "CompletionsAPI", "instruction_text.txt")
+
+        # Load instruction text safely
+        try:
+            with open(INSTRUCTION_FILE, "r", encoding='utf-8', errors='replace') as file:
+                instruction = file.read()
+        except FileNotFoundError:
+            return jsonify({"error": "Instruction file not found."}), 500
+
+        # Sample case description from the database
+        try:
+            case_description = next(db['case'].aggregate([{'$sample': {'size': 1}}]), None)
+            print(case_description)
+            if not case_description:
+                raise ValueError("No cases found in the database.")
+        except Exception as e:
+            print(f"Database error: {e}")
+            return jsonify({"error": "Failed to retrieve case description."}), 500
+
+        # Initialize the assistant if not already initialized
+        bmv_assistant = BMVAssistant(case_description,instruction_text)
+        print("Conversation initialized")
+
+        return jsonify({"message": "Conversation initialized"}), 200
+
+    except Exception as e:
+        print(f"Error initializing conversation: {e}")
+        return jsonify({"error": str(e)}), 500
+
 
 
 @app.route('/submit-data', methods=['POST'])
